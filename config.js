@@ -1,7 +1,7 @@
 // HEPGEN-JS SETTINGS (please configure)
 // ------------------------------------------------------
 
-var call_id = Math.random().toString(36).substring(7);
+var call_id = Math.random().toString(36).substring(7) + '@127.0.0.1';
 
 var config = {
         
@@ -47,7 +47,7 @@ var config = {
                           dstPort: 0,
                           correlation_id: call_id
                   },
-                  payload: 'SYSLOG: Processing OPTIONS from Call-Id: '+call_id
+                  payload: 'SYSLOG: Processing OPTIONS request from nodejs using Call-Id: '+call_id
           },
           {
                 // SIP Response
