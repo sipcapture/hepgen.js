@@ -12,6 +12,7 @@ var config = {
         // the Messages to send
         MESSAGES: [
         {
+                // SIP Request
     		  rcinfo: {
     			  type: 'HEP',
     			  version: 3,
@@ -30,6 +31,26 @@ var config = {
             payload: 'OPTIONS sip:127.0.0.1 SIP/2.0\nCall-ID: '+call_id+'@127.0.0.1\nCSeq: 9999 OPTIONS\nFrom: <sip:nodejs@127.0.0.1>;tag=2628881569\nTo: <sip:nodejs@127.0.0.1>\nVia: SIP/2.0/UDP 127.0.0.1:48495;branch=z9hG4bK9b82aa8fb4c7705466a3456dfff7f384333332\nMax-Forwards: 70\nUser-Agent: HEPGEN-UAC\nContent-Length: 0\r\n\r\n'
           },
           {
+                // Session Log
+                  rcinfo: {
+                          type: 'HEP',
+                          version: 3,
+                          payload_type: 'SIP',
+                          captureId: '2001',
+                          capturePass: 'myHep',
+                          ip_family: 2,
+                          protocol: 17,
+                          proto_type: 100,
+                          srcIp: '192.168.1.1',
+                          dstIp: '192.168.1.2',
+                          srcPort: 0,
+                          dstPort: 0,
+                          correlation_id: call_id
+                  },
+                  payload: 'SYSLOG: Processing OPTIONS from Call-Id: '+call_id
+          },
+          {
+                // SIP Response
     		  rcinfo: {
     			  type: 'HEP',
     			  version: 3,
