@@ -76,6 +76,12 @@ messages.forEach(function preHep(message) {
 	rcinfo.time_usec = datenow - (rcinfo.time_sec*1000);
 
 	if (debug) console.log(rcinfo);
-	sendHEP3(msg,rcinfo);
+	if (message.pause && message.pause > 0) {
+		setTimeout(function() {
+		    sendHEP3(msg,rcinfo);
+		}, message.pause);
+	} else {
+		sendHEP3(msg,rcinfo);
+	}
 });
 
