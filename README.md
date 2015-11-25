@@ -1,6 +1,8 @@
 # HEPGEN.JS
 Barebone HEP Packet Generator for SIP-less Devs
 
+![](http://i.imgur.com/Z3xYbDh.png)
+
 ### Configure
 Edit ```config.js``` and create your HEP scenario with the following structure:
 ```
