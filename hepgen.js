@@ -3,12 +3,19 @@
 var HEPjs = require('hep-js');
 var dgram = require('dgram');
 
-var _config_ = require("./config");
-var messages = _config_.MESSAGES;
-
-var version = 'v0.1';
+var version = 'v0.1.1';
 var debug = false;
 var stats = {rcvd: 0, parsed: 0, hepsent: 0, err: 0, heperr: 0 }; 
+
+if(process.argv.indexOf("-d") != -1){
+    debug = true; 
+}
+
+var _config_ = require("./config");
+if(process.argv.indexOf("-c") != -1){
+    _config_ = require(process.argv[process.argv.indexOf("-c") + 1]); 
+}
+var messages = _config_.MESSAGES;
 
 /* UDP Socket Handler */
 
@@ -47,6 +54,7 @@ var sendHEP3 = function(msg,rcinfo){
 					count--;
 					if (count == 0) {
 				  	   socket.close();
+				  	   console.log(stats);
 				  	   console.log('Done! Exiting...');
 					     process.exit(0);
 					}
