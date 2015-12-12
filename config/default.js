@@ -4,7 +4,7 @@
 var call_id = Math.random().toString(36).substring(7) + '@127.0.0.1';
 
 var config = {
-        
+        NAME: 'SIP Session + All Reports',
         HEP_SERVER: '127.0.0.1',
         HEP_PORT: 9070,
         HEP_ID: '2001',
