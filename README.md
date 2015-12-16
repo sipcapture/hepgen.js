@@ -41,5 +41,9 @@ npm install
 npm start
 ```
 
+### Debug
+```
+node hepgen.js -d -c "./config/default"
+```
 
 
