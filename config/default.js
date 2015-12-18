@@ -28,7 +28,7 @@ var config = {
     	  		dstPort: 5060
     		    },
     		    pause: 0,
-            	    payload: 'INVITE sip:nodejs@127.0.0.1 SIP/2.0\nCall-ID: '+call_id+'\nCSeq: 1 INVITE\nFrom: <sip:nodejs@127.0.0.1>;tag=2628881569\nTo: <sip:nodejs@127.0.0.1>\nVia: SIP/2.0/UDP 127.0.0.1:48495;branch=z9hG4bK9b82aa8fb4c7705466a3456dfff7f384333332\nMax-Forwards: 70\nAllow: INVITE, ACK, CANCEL, BYE\nUser-Agent: HEPGEN-UAC\nContent-Length: 0\n\nContent-Type: application/sdp\nContent-Length: 287\n\nv=0\no=nodejs-Session 1028236597 1930329353 IN IP4 127.126.124.123s=nodejs\nc=IN IP4 127.126.124.123\nt=0 0\nm=audio 5072 RTP/AVP 18 0 8 101\na=fmtp:101 0-15\na=rtpmap:18 G729/8000\na=rtpmap:0 PCMU/8000\na=rtpmap:8 PCMA/8000\na=rtpmap:101 telephone-event/8000\na=ptime:20\na=sendrecv\r\n\r\n'
+            	    payload: 'INVITE sip:nodejs@127.0.0.1 SIP/2.0\nCall-ID: '+call_id+'\nCSeq: 1 INVITE\nFrom: <sip:nodejs@127.0.0.1>;tag=2628881569\nTo: <sip:nodejs@127.0.0.1>\nVia: SIP/2.0/UDP 127.0.0.1:48495;branch=z9hG4bK9b82aa8fb4c7705466a3456dfff7f384333332\nMax-Forwards: 70\nAllow: INVITE, ACK, CANCEL, BYE\nUser-Agent: HEPGEN-UAC\nContent-Type: application/sdp\nContent-Length: 287\n\nv=0\no=nodejs-Session 1028236597 1930329353 IN IP4 127.126.124.123s=nodejs\nc=IN IP4 127.126.124.123\nt=0 0\nm=audio 5072 RTP/AVP 18 0 8 101\na=fmtp:101 0-15\na=rtpmap:18 G729/8000\na=rtpmap:0 PCMU/8000\na=rtpmap:8 PCMA/8000\na=rtpmap:101 telephone-event/8000\na=ptime:20\na=sendrecv\r\n\r\n'
         },
         {
                 // SIP Response 100 Trying
