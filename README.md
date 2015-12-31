@@ -28,7 +28,7 @@ var config = {
         ]
 }
 ```
-See [config.json](https://github.com/lmangani/hepgen.js/blob/master/config.js) for a working example using SIP OPTIONS and a fictional Syslog
+See [config.json](https://github.com/sipcapture/hepgen.js/blob/master/config/default.js) for a working example using SIP OPTIONS and a fictional Syslog
 
 
 ### Install
