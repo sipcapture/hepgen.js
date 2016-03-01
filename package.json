@@ -1,7 +1,7 @@
 {
   "name": "hepgen-js",
   "description": "HEP Message Generator",
-  "author": "lmangani",
+  "author": "lorenzo.mangani@gmail.com",
   "dependencies": {
     "hep-js": "sipcapture/hep-js"
   },
@@ -9,6 +9,6 @@
     "unsafe-perm":true
   },
   "scripts": {
-    "start": "node hepgen.js"
+    "start": "nodejs hepgen.js"
   }
 }
