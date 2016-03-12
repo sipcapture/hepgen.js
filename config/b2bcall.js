@@ -594,7 +594,7 @@ var config = {
 	'To: <sip:'+callee+'@'+peer_ip+'>\n'+
 	'CSeq: 10 INVITE\n'+
 	'Call-ID: '+call_id+'_b2b-1\n'+
-	'User-Agent: INUM\n'+
+	'User-Agent: HEPeer\n'+
 	'Content-Length: 0\n'+
 	'\r\n\r\n'
 
@@ -624,7 +624,7 @@ var config = {
 	'To: <sip:'+callee+'@'+peer_ip+'>\n'+
 	'CSeq: 10 INVITE\n'+
 	'Call-ID: '+call_id+'_b2b-1\n'+
-	'User-Agent: INUM\n'+
+	'User-Agent: HEPeer\n'+
 	'Content-Length: 0\n'+
 	'P-Src-Ip: '+peer_ip+'\n'+
 	'P-Src-Port: 5060\n'+
@@ -659,7 +659,7 @@ var config = {
 	'To: <sip:'+callee+'@'+peer_ip+'>\n'+
 	'CSeq: 10 INVITE\n'+
 	'Call-ID: '+call_id+'_b2b-1\n'+
-	'User-Agent: INUM\n'+
+	'User-Agent: HEPeer\n'+
 	'Content-Length: 0\n'+
 	'\r\n\r\n'
 
@@ -688,7 +688,7 @@ var config = {
 	'To: <sip:'+callee+'@'+peer_ip+'>\n'+
 	'CSeq: 10 INVITE\n'+
 	'Call-ID: '+call_id+'_b2b-1\n'+
-	'User-Agent: INUM\n'+
+	'User-Agent: HEPeer\n'+
 	'Content-Length: 0\n'+
 	'P-Src-Ip: '+peer_ip+'\n'+
 	'P-Src-Port: 5060\n'+
@@ -726,7 +726,7 @@ var config = {
 	'To: <sip:'+callee+'@'+peer_ip+'>;tag=as6db2fc4d\n'+
 	'Call-ID: '+call_id+'_b2b-1\n'+
 	'CSeq: 10 INVITE\n'+
-	'User-Agent: iNum\n'+
+	'User-Agent: HEPeer\n'+
 	'Allow: INVITE, ACK, CANCEL, OPTIONS, BYE, REFER, SUBSCRIBE, NOTIFY\n'+
 	'Supported: replaces\n'+
 	'Contact: <sip:'+callee+'@'+peer_ip+':7070>\n'+
@@ -780,7 +780,7 @@ var config = {
 	'To: <sip:'+callee+'@'+peer_ip+'>;tag=as6db2fc4d\n'+
 	'Call-ID: '+call_id+'_b2b-1\n'+
 	'CSeq: 10 INVITE\n'+
-	'User-Agent: iNum\n'+
+	'User-Agent: HEPeer\n'+
 	'Allow: INVITE, ACK, CANCEL, OPTIONS, BYE, REFER, SUBSCRIBE, NOTIFY\n'+
 	'Supported: replaces\n'+
 	'Contact: <sip:'+callee+'@'+peer_ip+':7070>\n'+
@@ -838,7 +838,7 @@ var config = {
 	'To: <sip:'+callee+'@'+domain+';user=phone>;tag=7DB80AAE-56E458BB0008256B-B7852700\n'+
 	'Call-ID: '+call_id+'\n'+
 	'CSeq: 441 INVITE\n'+
-	'User-Agent: iNum\n'+
+	'User-Agent: HEPeer\n'+
 	'Allow: INVITE, ACK, CANCEL, OPTIONS, BYE, REFER, SUBSCRIBE, NOTIFY\n'+
 	'Supported: replaces\n'+
 	'Content-Type: application/sdp\n'+
@@ -1392,7 +1392,7 @@ var config = {
 	'To: <sip:'+callee+'@'+peer_ip+'>;tag=as6db2fc4d\n'+
 	'Call-ID: '+call_id+'_b2b-1\n'+
 	'CSeq: 11 BYE\n'+
-	'User-Agent: iNum\n'+
+	'User-Agent: HEPeer\n'+
 	'Allow: INVITE, ACK, CANCEL, OPTIONS, BYE, REFER, SUBSCRIBE, NOTIFY\n'+
 	'Supported: replaces\n'+
 	'Contact: <sip:'+callee+'@'+peer_ip+':7070>\n'+
@@ -1429,7 +1429,7 @@ var config = {
 	'To: <sip:'+callee+'@'+peer_ip+'>;tag=as6db2fc4d\n'+
 	'Call-ID: '+call_id+'_b2b-1\n'+
 	'CSeq: 11 BYE\n'+
-	'User-Agent: iNum\n'+
+	'User-Agent: HEPeer\n'+
 	'Allow: INVITE, ACK, CANCEL, OPTIONS, BYE, REFER, SUBSCRIBE, NOTIFY\n'+
 	'Supported: replaces\n'+
 	'Contact: <sip:'+callee+'@'+peer_ip+':7070>\n'+
