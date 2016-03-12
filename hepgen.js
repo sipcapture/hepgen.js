@@ -3,7 +3,7 @@
 var HEPjs = require('hep-js');
 var dgram = require('dgram');
 
-var version = 'v0.1.1';
+var version = 'v0.1.2';
 var debug = false;
 var stats = {rcvd: 0, parsed: 0, hepsent: 0, err: 0, heperr: 0 }; 
 
@@ -71,6 +71,7 @@ var sendHEP3 = function(msg,rcinfo){
 
 
 var count = messages.length;
+var pause = 0;
 messages.forEach(function preHep(message) {
 
 	var rcinfo = message.rcinfo;
@@ -85,9 +86,15 @@ messages.forEach(function preHep(message) {
 
 	if (debug) console.log(rcinfo);
 	if (message.pause && message.pause > 0) {
+		pause += message.pause;
 		setTimeout(function() {
+		    // delayed ts
+		    var datenow = new Date().getTime();
+		    rcinfo.time_sec = Math.floor( datenow / 1000);
+		    rcinfo.time_usec = datenow - (rcinfo.time_sec*1000);
 		    sendHEP3(msg,rcinfo);
-		}, message.pause);
+		    process.stdout.write("rcvd: "+stats.rcvd+", parsed: "+stats.parsed+", hepsent: "+stats.hepsent+", err: "+stats.err+", heperr: "+stats.heperr+"\r");
+		}, pause);
 	} else {
 		sendHEP3(msg,rcinfo);
 	}
