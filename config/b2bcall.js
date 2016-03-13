@@ -7,7 +7,7 @@ var rand = function(maximum,minimum){
 
 var call_id = Math.random().toString(36).substring(7) + '@127.0.0.1';
 var caller = 'hepgenjs';
-var caller_e164 = '+1234567'+rand(100,999);
+var caller_e164 = '+'+rand(1,99)+'555'+rand(100000,999999);
 var callee = rand(101,199);
 var domain = 'sipcapture.org';
 var priv_ip = '192.168.10.'+rand(10,200);
@@ -21,7 +21,7 @@ var useragent = 'HEPGEN.JS@sipcapture.org';
 // tag
 
 var config = {
-        NAME: 'SIP Session + All Reports',
+        NAME: 'SIP B2BUA Session + Logs',
         HEP_SERVER: '127.0.0.1',
         HEP_PORT: 9060,
         HEP_ID: '2001',
