@@ -1083,7 +1083,7 @@ var config = {
                           protocol: 17,
                           proto_type: 5,
                           srcIp: pub_ip,
-                          dstIp: 'peer_ip,
+                          dstIp: peer_ip,
                           srcPort: 0,
                           dstPort: 0,
                           correlation_id: call_id
