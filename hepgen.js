@@ -3,7 +3,7 @@
 var HEPjs = require('hep-js');
 var dgram = require('dgram');
 
-var version = 'v0.1.2';
+var version = 'v0.1.3';
 var debug = false;
 var stats = {rcvd: 0, parsed: 0, hepsent: 0, err: 0, heperr: 0 }; 
 
@@ -16,6 +16,14 @@ if(process.argv.indexOf("-c") != -1){
     _config_ = require(process.argv[process.argv.indexOf("-c") + 1]); 
 }
 var messages = _config_.MESSAGES;
+
+if(process.argv.indexOf("-s") != -1){
+    _config_.HEP_SERVER = process.argv[process.argv.indexOf("-s") + 1]; 
+}
+if(process.argv.indexOf("-p") != -1){
+    _config_.HEP_PORT = process.argv[process.argv.indexOf("-p") + 1]; 
+}
+
 
 /* UDP Socket Handler */
 
