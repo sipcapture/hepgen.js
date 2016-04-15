@@ -162,7 +162,7 @@ var config = {
                           capturePass: 'myHep',
                           ip_family: 2,
                           protocol: 17,
-                          proto_type: 33,
+                          proto_type: 99,
                           srcIp: '192.168.1.1',
                           dstIp: '192.168.1.2',
                           srcPort: 0,
