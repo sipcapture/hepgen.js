@@ -90,7 +90,7 @@ messages.forEach(function preHep(message) {
 	var hrTime = process.hrtime();
 	var datenow = new Date().getTime();
 	rcinfo.time_sec = Math.floor( datenow / 1000);
-	rcinfo.time_usec = datenow - (rcinfo.time_sec*1000);
+	rcinfo.time_usec = (datenow - (rcinfo.time_sec*1000))*1000;
 
 	if (debug) console.log(rcinfo);
 	if (message.pause && message.pause > 0) {
@@ -99,7 +99,7 @@ messages.forEach(function preHep(message) {
 		    // delayed ts
 		    var datenow = new Date().getTime();
 		    rcinfo.time_sec = Math.floor( datenow / 1000);
-		    rcinfo.time_usec = datenow - (rcinfo.time_sec*1000);
+		    rcinfo.time_usec = (datenow - (rcinfo.time_sec*1000))*1000;
 		    sendHEP3(msg,rcinfo);
 		    process.stdout.write("rcvd: "+stats.rcvd+", parsed: "+stats.parsed+", hepsent: "+stats.hepsent+", err: "+stats.err+", heperr: "+stats.heperr+"\r");
 		}, pause);
