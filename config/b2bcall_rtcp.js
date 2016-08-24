@@ -1404,6 +1404,8 @@ var config = {
 	'From: <sip:'+caller_e164+'@'+domain+'>;tag=06DE7CEB-56E458BB000864AD-B855F700\r\n'+
 	'To: <sip:'+callee+'@'+peer_ip+'>;tag=as6db2fc4d\r\n'+
 	'CSeq: 11 BYE\r\n'+
+	'X-RTP-Stat: CS=0;PS=1433;ES=1525;OS=229280;SP=0/0;SO=0;QS=-;PR=1522;ER=1525;OR=243520;CR=0;SR=0;QR=-;PL=0,0;BL=0;LS=0;RB=0/0;SB=-/-;EN=PCMA,FAX;DE=PCMA;JI=23,2;DL=20,20,21;IP='+pub_ip+':7082,'+peer_ip':25132\r\n'+
+	'X-RTP-Stat-Add: DQ=31;DSS=0;DS=0;PLCS=288;JS=1\r\n'+
 	'Call-ID: '+call_id+'_b2b-1\r\n'+
 	'Route: <sip:127.0.0.1;r2=on;lr=on;ftag=06DE7CEB-56E458BB000864AD-B855F700;lb=yes>, <sip:'+pub_ip+';r2=on;lr=on;ftag=06DE7CEB-56E458BB000864AD-B855F700;lb=yes>, <sip:'+peer_ip+';lr;ftag=06DE7CEB-56E458BB000864AD-B855F700>\r\n'+
 	'Content-Length: 0\r\n'+
@@ -1438,6 +1440,8 @@ var config = {
 	'From: <sip:'+caller_e164+'@'+domain+'>;tag=06DE7CEB-56E458BB000864AD-B855F700\r\n'+
 	'To: <sip:'+callee+'@'+peer_ip+'>;tag=as6db2fc4d\r\n'+
 	'CSeq: 11 BYE\r\n'+
+	'X-RTP-Stat: CS=0;PS=1433;ES=1525;OS=229280;SP=0/0;SO=0;QS=-;PR=1522;ER=1525;OR=243520;CR=0;SR=0;QR=-;PL=0,0;BL=0;LS=0;RB=0/0;SB=-/-;EN=PCMA,FAX;DE=PCMA;JI=23,2;DL=20,20,21;IP='+pub_ip+':7082,'+peer_ip':25132\r\n'+
+	'X-RTP-Stat-Add: DQ=31;DSS=0;DS=0;PLCS=288;JS=1\r\n'+
 	'Call-ID: '+call_id+'_b2b-1\r\n'+
 	'Route: <sip:'+peer_ip+';lr;ftag=06DE7CEB-56E458BB000864AD-B855F700>\r\n'+
 	'Content-Length: 0\r\n'+
@@ -1473,6 +1477,8 @@ var config = {
 	'To: <sip:'+callee+'@'+peer_ip+'>;tag=as6db2fc4d\r\n'+
 	'Call-ID: '+call_id+'_b2b-1\r\n'+
 	'CSeq: 11 BYE\r\n'+
+	'X-RTP-Stat: CS=0;PS=1433;ES=1525;OS=229280;SP=0/0;SO=0;QS=-;PR=1522;ER=1525;OR=243520;CR=0;SR=0;QR=-;PL=0,0;BL=0;LS=0;RB=0/0;SB=-/-;EN=PCMA,FAX;DE=PCMA;JI=23,2;DL=20,20,21;IP='+pub_ip+':7082,'+peer_ip':25132\r\n'+
+	'X-RTP-Stat-Add: DQ=31;DSS=0;DS=0;PLCS=288;JS=1\r\n'+
 	'User-Agent: HEPeer\r\n'+
 	'Allow: INVITE, ACK, CANCEL, OPTIONS, BYE, REFER, SUBSCRIBE, NOTIFY\r\n'+
 	'Supported: replaces\r\n'+
@@ -1510,6 +1516,8 @@ var config = {
 	'To: <sip:'+callee+'@'+peer_ip+'>;tag=as6db2fc4d\r\n'+
 	'Call-ID: '+call_id+'_b2b-1\r\n'+
 	'CSeq: 11 BYE\r\n'+
+	'X-RTP-Stat: CS=0;PS=1433;ES=1525;OS=229280;SP=0/0;SO=0;QS=-;PR=1522;ER=1525;OR=243520;CR=0;SR=0;QR=-;PL=0,0;BL=0;LS=0;RB=0/0;SB=-/-;EN=PCMA,FAX;DE=PCMA;JI=23,2;DL=20,20,21;IP='+pub_ip+':7082,'+peer_ip':25132\r\n'+
+	'X-RTP-Stat-Add: DQ=31;DSS=0;DS=0;PLCS=288;JS=1\r\n'+
 	'User-Agent: HEPeer\r\n'+
 	'Allow: INVITE, ACK, CANCEL, OPTIONS, BYE, REFER, SUBSCRIBE, NOTIFY\r\n'+
 	'Supported: replaces\r\n'+
