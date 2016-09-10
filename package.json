@@ -2,6 +2,7 @@
   "name": "hepgen-js",
   "description": "HEP Message Generator",
   "author": "lorenzo.mangani@gmail.com",
+  "private": true,
   "dependencies": {
     "hep-js": "sipcapture/hep-js"
   },
@@ -10,5 +11,10 @@
   },
   "scripts": {
     "start": "nodejs hepgen.js"
+  },
+
+  "licenses": {
+    "type": "MIT",
+    "url": "https://github.com/sipcapture/hepgen.js/blob/master/LICENSE"
   }
 }
