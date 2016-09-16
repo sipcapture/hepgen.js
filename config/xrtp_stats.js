@@ -11,9 +11,9 @@ var caller_e164 = '+49221'+rand(100000,999999);
 var callee      = '+49228'+rand(100000,999999);
 var domain      = 'sipcapture.org';
 var priv_ip     = '192.168.10.'+rand(10,200);
-var priv_nat    ='10.20.30.40';
+var priv_nat    = '10.20.30.40';
 var pub_ip      = '20.30.40.50';
-var peer_ip     ='55.66.77.'+rand(80,88);
+var peer_ip     = '55.66.77.'+rand(80,88);
 var localhost   = '127.0.0.1';
 var useragent   = 'hepgen';
 
