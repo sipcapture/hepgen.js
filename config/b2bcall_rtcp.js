@@ -29,8 +29,8 @@ var callee = rand(101,199);
 var domain = 'sipcapture.org';
 var priv_ip = '192.168.10.'+rand(10,200);
 var priv_nat = randomIp();
-var pub_ip= randomIp();
-var peer_ip=randomIp();
+var pub_ip = randomIp();
+var peer_ip = randomIp();
 var localhost = '127.0.0.1';
 
 var useragent = 'HEPGEN.JS@sipcapture.org';
