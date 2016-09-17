@@ -5,15 +5,32 @@ var rand = function(maximum,minimum){
 	return Math.floor(Math.random() * (maximum - minimum + 1)) + minimum;
 }
 
+var randomByte = function() {
+  return Math.round(Math.random()*256);
+}
+
+var randomIp = function() {
+  var ip = randomByte() +'.' +
+           randomByte() +'.' +
+           randomByte() +'.' +
+           randomByte();
+  if (isPrivate(ip)) return randomIp();
+  return ip;
+}
+
+var isPrivate = function(ip) {
+  return /^10\.|^192\.168\.|^172\.16\.|^172\.17\.|^172\.18\.|^172\.19\.|^172\.20\.|^172\.21\.|^172\.22\.|^172\.23\.|^172\.24\.|^172\.25\.|^172\.26\.|^172\.27\.|^172\.28\.|^172\.29\.|^172\.30\.|^172\.31\./.test(ip);
+}
+
 var call_id = Math.random().toString(36).substring(7) + '@127.0.0.1';
 var caller = 'hepgenjs';
 var caller_e164 = '+'+rand(1,99)+'555'+rand(100000,999999);
 var callee = rand(101,199);
 var domain = 'sipcapture.org';
 var priv_ip = '192.168.10.'+rand(10,200);
-var priv_nat ='10.20.30.40';
-var pub_ip= '20.30.40.50';
-var peer_ip='55.66.77.'+rand(80,88);
+var priv_nat = randomIp();
+var pub_ip= randomIp();
+var peer_ip=randomIp();
 var localhost = '127.0.0.1';
 
 var useragent = 'HEPGEN.JS@sipcapture.org';
