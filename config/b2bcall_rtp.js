@@ -120,7 +120,7 @@ var config = {
     		srcPort: 5062,
     	  	dstPort: 5060
     	},
-        pause: 250,
+        pause: 100,
     	payload:
 	'SIP/2.0 100 Trying\r\n'+
 	'Via: SIP/2.0/UDP 127.0.0.1;branch=z9hG4bK008.4171ec66f99b948ab62008e62a6491c1.0\r\n'+
@@ -1070,7 +1070,7 @@ var config = {
                           dstPort: 0,
                           correlation_id: call_id
                   },
-    		  pause: 400,
+    		  pause: 2500,
 		  payload: '{"CORRELATION_ID":"'+call_id+'","RTP_SIP_CALL_ID":"'+call_id+'","DELTA":11.983,"JITTER":0.011,"REPORT_TS":'+new Date().getTime()/1000+',"TL_BYTE":0,"SKEW":0.000,"TOTAL_PK":1512,"EXPECTED_PK":1512,"PACKET_LOSS":0,"SEQ":0,"MAX_JITTER":0.210,"MAX_DELTA":20.124,"MAX_SKEW":0.221,"MEAN_JITTER":0.305,"MIN_MOS":3.932, "MEAN_MOS":3.932, "MOS":3.932,"RFACTOR":77.100,"MIN_RFACTOR":77.100,"MEAN_RFACTOR":77.100,"SRC_IP":"'+peer_ip+'", "SRC_PORT":26872, "DST_IP":"'+peer_ip+'","DST_PORT":51354,"SRC_MAC":"00-30-48-7E-5D-C6","DST_MAC":"00-12-80-D7-38-5E","OUT_ORDER":0,"SSRC_CHG":0,"CODEC_PT":9, "CLOCK":8000,"CODEC_NAME":"g722","DIR":0,"REPORT_NAME":"'+peer_ip+':26872","PARTY":0,"TYPE":"PERIODIC"}'
 }, {
                 // RTCP Report
@@ -1089,7 +1089,7 @@ var config = {
                           dstPort: 0,
                           correlation_id: call_id
                   },
-    		  pause: 5000,
+    		  pause: 2500,
 		  payload: '{"CORRELATION_ID":"'+call_id+'","RTP_SIP_CALL_ID":"'+call_id+'","DELTA":19.983,"JITTER":0.017,"REPORT_TS":'+new Date().getTime()/1000+',"TL_BYTE":0,"SKEW":0.000,"TOTAL_PK":1511,"EXPECTED_PK":1512,"PACKET_LOSS":1,"SEQ":0,"MAX_JITTER":0.010,"MAX_DELTA":20.024,"MAX_SKEW":0.172,"MEAN_JITTER":0.005,"MIN_MOS":4.032, "MEAN_MOS":4.032, "MOS":4.032,"RFACTOR":80.200,"MIN_RFACTOR":80.200,"MEAN_RFACTOR":80.200,"SRC_IP":"'+pub_ip+'", "SRC_PORT":26872, "DST_IP":"'+peer_ip+'","DST_PORT":51354,"SRC_MAC":"00-30-48-7E-5D-C6","DST_MAC":"00-12-80-D7-38-5E","OUT_ORDER":0,"SSRC_CHG":0,"CODEC_PT":9, "CLOCK":8000,"CODEC_NAME":"g722","DIR":0,"REPORT_NAME":"'+pub_ip+':26872","PARTY":0,"TYPE":"PERIODIC"}'
 }, {
                 // RTCP Report
@@ -1108,7 +1108,7 @@ var config = {
                           dstPort: 0,
                           correlation_id: call_id
                   },
-    		  pause: 400,
+    		  pause: 2500,
 		  payload: '{"CORRELATION_ID":"'+call_id+'","RTP_SIP_CALL_ID":"'+call_id+'","DELTA":11.983,"JITTER":0.011,"REPORT_TS":'+new Date().getTime()/1000+',"TL_BYTE":0,"SKEW":0.000,"TOTAL_PK":1512,"EXPECTED_PK":1512,"PACKET_LOSS":0,"SEQ":0,"MAX_JITTER":0.210,"MAX_DELTA":20.124,"MAX_SKEW":0.221,"MEAN_JITTER":0.305,"MIN_MOS":3.932, "MEAN_MOS":3.932, "MOS":3.932,"RFACTOR":77.100,"MIN_RFACTOR":77.100,"MEAN_RFACTOR":77.100,"SRC_IP":"'+peer_ip+'", "SRC_PORT":26872, "DST_IP":"'+peer_ip+'","DST_PORT":51354,"SRC_MAC":"00-30-48-7E-5D-C6","DST_MAC":"00-12-80-D7-38-5E","OUT_ORDER":0,"SSRC_CHG":0,"CODEC_PT":9, "CLOCK":8000,"CODEC_NAME":"g722","DIR":0,"REPORT_NAME":"'+peer_ip+':26872","PARTY":0,"TYPE":"PERIODIC"}'
 }, {
                 // RTCP Report
@@ -1127,7 +1127,7 @@ var config = {
                           dstPort: 0,
                           correlation_id: call_id
                   },
-    		  pause: 5000,
+    		  pause: 2500,
 		  payload: '{"CORRELATION_ID":"'+call_id+'","RTP_SIP_CALL_ID":"'+call_id+'","DELTA":19.983,"JITTER":0.017,"REPORT_TS":'+new Date().getTime()/1000+',"TL_BYTE":0,"SKEW":0.000,"TOTAL_PK":1511,"EXPECTED_PK":1512,"PACKET_LOSS":1,"SEQ":0,"MAX_JITTER":0.010,"MAX_DELTA":20.024,"MAX_SKEW":0.172,"MEAN_JITTER":0.005,"MIN_MOS":4.032, "MEAN_MOS":4.032, "MOS":4.032,"RFACTOR":80.200,"MIN_RFACTOR":80.200,"MEAN_RFACTOR":80.200,"SRC_IP":"'+pub_ip+'", "SRC_PORT":26872, "DST_IP":"'+peer_ip+'","DST_PORT":51354,"SRC_MAC":"00-30-48-7E-5D-C6","DST_MAC":"00-12-80-D7-38-5E","OUT_ORDER":0,"SSRC_CHG":0,"CODEC_PT":9, "CLOCK":8000,"CODEC_NAME":"g722","DIR":0,"REPORT_NAME":"'+pub_ip+':26872","PARTY":0,"TYPE":"PERIODIC"}'
 }, {
                 // RTCP Report
@@ -1147,7 +1147,7 @@ var config = {
                           correlation_id: call_id+'_b2b-1',
 			  mos: 440
                   },
-    		  pause: 1000,
+    		  pause: 2500,
 		  payload: '{"CORRELATION_ID":"'+call_id+'", "RTP_SIP_CALL_ID":"'+call_id+'","MOS":4.409,"RFACTOR":93.200,"DIR":0,"REPORT_NAME":"'+peer_ip+'","PARTY":0,"TYPE":"PERIODIC"}'
 }, {
                 // RTCP Report
@@ -1268,7 +1268,7 @@ var config = {
                 srcPort: 5062,
                 dstPort: 5060
         },
-        pause: 250,
+        pause: 100,
         payload:
 	'SIP/2.0 100 Trying\r\n'+
 	'Via: SIP/2.0/UDP 127.0.0.1;branch=z9hG4bKef7.abfc04310a6de51d3c2cd97b1a12fe11.0\r\n'+
@@ -1475,7 +1475,7 @@ var config = {
                 srcPort: 5080,
                 dstPort: 5060
         },
-        pause: 5000,
+        pause: 150,
         payload:
 	'BYE sip:'+callee+'@'+peer_ip+':7070 SIP/2.0\r\n'+
 	'Via: SIP/2.0/UDP 127.0.0.1:5080;branch=z9hG4bK3.dYFaLV;rport\r\n'+
