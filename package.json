@@ -1,20 +1,41 @@
 {
-  "name": "hepgen-js",
+  "name": "hepgen",
+  "version": "1.0.1",
   "description": "HEP Message Generator",
   "author": "lorenzo.mangani@gmail.com",
   "private": true,
   "dependencies": {
-    "hep-js": "sipcapture/hep-js"
+    "hep-js": "^1.0.12"
   },
   "config": {
-    "unsafe-perm":true
+    "unsafe-perm": true
   },
   "scripts": {
     "start": "nodejs hepgen.js"
   },
-
   "licenses": {
     "type": "MIT",
     "url": "https://github.com/sipcapture/hepgen.js/blob/master/LICENSE"
-  }
+  },
+  "main": "hepgen.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/sipcapture/hepgen.js.git"
+  },
+  "keywords": [
+    "hep",
+    "generator",
+    "simulator",
+    "test",
+    "ci",
+    "sip",
+    "homer",
+    "sipcapture"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sipcapture/hepgen.js/issues"
+  },
+  "homepage": "https://github.com/sipcapture/hepgen.js#readme"
 }
