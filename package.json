@@ -1,11 +1,11 @@
 {
   "name": "hepgen",
-  "version": "1.0.1",
+  "version": "1.0.4",
   "description": "HEP Message Generator",
   "author": "lorenzo.mangani@gmail.com",
   "private": true,
   "dependencies": {
-    "hep-js": "^1.0.12"
+    "hep-js": "^1.0.14"
   },
   "config": {
     "unsafe-perm": true
