@@ -58,7 +58,7 @@ fs.readFile(args[0], 'utf8', function(err, contents) {
         MESSAGES: hepgen
     };
 
-    console.log("var config = " + JSON.stringify(config, null, 2));
+    console.log("var config = " + JSON.stringify(config, null, 2)+";module.exports = config;");
 });
 
 
