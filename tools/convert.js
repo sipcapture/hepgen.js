@@ -49,7 +49,7 @@ fs.readFile(args[0], 'utf8', function(err, contents) {
     });
 
     var config = {
-        NAME: 'SIP OPTIONS Ping',
+        NAME: 'HEPGEN '+args[0],
         HEP_SERVER: '127.0.0.1',
         HEP_PORT: 9060,
         HEP_ID: '2001',
@@ -58,7 +58,7 @@ fs.readFile(args[0], 'utf8', function(err, contents) {
         MESSAGES: hepgen
     };
 
-    console.log(JSON.stringify(config));
+    console.log("var config = " + JSON.stringify(config, null, 2));
 });
 
 
