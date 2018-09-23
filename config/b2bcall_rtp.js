@@ -149,8 +149,8 @@ var config = {
                           proto_type: 100,
                           srcIp: '127.0.0.1',
                           dstIp: '127.0.0.1',
-                          srcPort: 0,
-                          dstPort: 0,
+                          srcPort: 5060,
+                          dstPort: 5080,
                           correlation_id: call_id
                   },
                   pause: 100,
@@ -234,8 +234,8 @@ var config = {
                           proto_type: 100,
                           srcIp: localhost,
                           dstIp: localhost,
-                          srcPort: 0,
-                          dstPort: 0,
+                          srcPort: 5060,
+                          dstPort: 5080,
                           correlation_id: call_id
                   },
                   pause: 100,
@@ -1612,8 +1612,8 @@ var config = {
                           proto_type: 100,
                           srcIp: localhost,
                           dstIp: localhost,
-                          srcPort: 0,
-                          dstPort: 0,
+                          srcPort: 5060,
+                          dstPort: 5080,
                           correlation_id: call_id
                   },
                   pause: 100,
