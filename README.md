@@ -43,12 +43,12 @@ npm start
 
 ### Custom Config
 ```
-npm start -c "./config/options/"
+node hepgen.js -c "./config/options.js"
 ```
 
 ### Custom from PCAP TEXT
 ```
-npm start -s 127.0.0.1 -p 9063 -P "./path/to/SIP.pcap"
+node hepgen.js -s 127.0.0.1 -p 9063 -P "./path/to/SIP.pcap"
 ```
 
 ### Debug
