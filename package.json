@@ -5,7 +5,8 @@
   "author": "lorenzo.mangani@gmail.com",
   "private": true,
   "dependencies": {
-    "hep-js": "^1.0.14"
+    "hep-js": "^1.0.14",
+    "parsip": "^1.0.5"
   },
   "config": {
     "unsafe-perm": true

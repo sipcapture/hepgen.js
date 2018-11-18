@@ -46,6 +46,11 @@ npm start
 npm start -c "./config/options/"
 ```
 
+### Custom from PCAP TEXT
+```
+npm start -s 127.0.0.1 -p 9063 -P "./path/to/SIP.pcap"
+```
+
 ### Debug
 ```
 node hepgen.js -d
