@@ -2,28 +2,12 @@
 
 var HEPjs = require('hep-js');
 var dgram = require('dgram');
+const execSync = require('child_process').execSync;
+const exec = require('child_process').exec;
 
 var version = 'v0.1.4';
 var debug = false;
 var stats = {rcvd: 0, parsed: 0, hepsent: 0, err: 0, heperr: 0 }; 
-
-if(process.argv.indexOf("-d") != -1){
-    debug = true; 
-}
-
-var _config_ = require("./config/default");
-if(process.argv.indexOf("-c") != -1){
-    _config_ = require(process.argv[process.argv.indexOf("-c") + 1]); 
-}
-var messages = _config_.MESSAGES;
-
-if(process.argv.indexOf("-s") != -1){
-    _config_.HEP_SERVER = process.argv[process.argv.indexOf("-s") + 1]; 
-}
-if(process.argv.indexOf("-p") != -1){
-    _config_.HEP_PORT = process.argv[process.argv.indexOf("-p") + 1]; 
-}
-
 
 /* UDP Socket Handler */
 
@@ -77,17 +61,18 @@ var sendHEP3 = function(msg,rcinfo){
 	}
 }
 
-
-var count = messages.length;
-var pause = 0;
-
 function sleep(ms) {
   var start = new Date().getTime(), expire = start + ms;
   while (new Date().getTime() < expire) { }
   return;
 }
 
-messages.forEach(function preHep(message) {
+var count = 0;
+var pause = 0;
+
+const execHEP = function(messages) {
+  count = messages.length;
+  messages.forEach(function preHep(message) {
 
 	var rcinfo = message.rcinfo;
 	var msg = message.payload;
@@ -106,6 +91,8 @@ messages.forEach(function preHep(message) {
 
 	if (debug) console.log(rcinfo);
 
+	if (message.pause && (message.pause > 10000 || message.pause < 0 )) message.pause = 100;
+
 	if (message.pause && message.pause > 0) {
 		pause += message.pause;
 		setTimeout(function() {
@@ -121,5 +108,43 @@ messages.forEach(function preHep(message) {
 		process.stdout.write("rcvd: "+stats.rcvd+", parsed: "+stats.parsed+", hepsent: "+stats.hepsent+", err: "+stats.err+", heperr: "+stats.heperr+"\r");
 	}
 
-});
+  });
+}
+
+
+if(process.argv.indexOf("-d") != -1){
+    debug = true; 
+}
+
+var _config_ = require("./config/default");
+
+if(process.argv.indexOf("-c") != -1){
+    _config_ = require(process.argv[process.argv.indexOf("-c") + 1]); 
+	if(process.argv.indexOf("-s") != -1){
+	    _config_.HEP_SERVER = process.argv[process.argv.indexOf("-s") + 1]; 
+	}
+	if(process.argv.indexOf("-p") != -1){
+	    _config_.HEP_PORT = process.argv[process.argv.indexOf("-p") + 1]; 
+	}
+        execHEP(_config_.MESSAGES);
+}
+
+if(process.argv.indexOf("-P") != -1){
+
+    exec("nodejs tools/convert.js " + process.argv[process.argv.indexOf("-P") + 1], function (err, stdout, stderr) {
+	_config_ = JSON.parse(stdout);
+
+	if (!_config_.MESSAGES) { console.log('Error! No data!'); return; }
+
+	if(process.argv.indexOf("-s") != -1){
+	    _config_.HEP_SERVER = process.argv[process.argv.indexOf("-s") + 1]; 
+	}
+	if(process.argv.indexOf("-p") != -1){
+	    _config_.HEP_PORT = process.argv[process.argv.indexOf("-p") + 1]; 
+	}
+	execHEP(_config_.MESSAGES);
+     });
+
+}
+
 
