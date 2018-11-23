@@ -6,7 +6,7 @@ var args = process.argv.slice(2);
 var parSIP = require('parsip');
 
 if (!args || !args[0]) {
-	console.log('Missing input! Exiting');
+	console.log('{}');
 	process.exit(1);
 }
 
@@ -34,22 +34,22 @@ fs.readFile(args[0], 'utf8', function(err, contents) {
 		if (mSIP.call_id) {
 			if (!callids[mSIP.call_id]) { callids[mSIP.call_id] = Math.random().toString(36).substring(8) + mSIP.call_id }
 			// console.log('replacing call_id',mSIP.call_id, callids[mSIP.call_id]);
-			tmp[1] = tmp[1].split(mSIP.call_id).join(callids[mSIP.call_id]);
+			rawSIP = rawSIP.split(mSIP.call_id).join(callids[mSIP.call_id]);
 		};
 		if (mSIP.via_branch) {
 			if (!callids[mSIP.via_branch]) { callids[mSIP.via_branch] = Math.random().toString(36).substring(8) + mSIP.via_branch }
 			// console.log('replacing via_branch',mSIP.via_branch, callids[mSIP.via_branch]);
-			tmp[1] = tmp[1].split(mSIP.via_branch).join(callids[mSIP.via_branch])
+			rawSIP = rawSIP.split(mSIP.via_branch).join(callids[mSIP.via_branch])
 		};
 		if (mSIP.from_tag) {
 			if (!callids[mSIP.from_tag]) { callids[mSIP.from_tag] = Math.random().toString(36).substring(8) + mSIP.from_tag }
 			// console.log('replacing from_tag',mSIP.from_tag, callids[mSIP.from_tag]);
-			tmp[1] = tmp[1].split(mSIP.from_tag).join(callids[mSIP.from_tag])
+			rawSIP = rawSIP.split(mSIP.from_tag).join(callids[mSIP.from_tag])
 		};
 		if (mSIP.to_tag) {
 			if (!callids[mSIP.to_tag]) { callids[mSIP.to_tag] = Math.random().toString(36).substring(8) + mSIP.to_tag }
 			// console.log('replacing to_tag',mSIP.to_tag, callids[mSIP.to_tag]);
-			tmp[1] = tmp[1].split(mSIP.to_tag).join(callids[mSIP.to_tag])
+			rawSIP = rawSIP.split(mSIP.to_tag).join(callids[mSIP.to_tag])
 		};
 	  }
 	}
@@ -75,7 +75,7 @@ fs.readFile(args[0], 'utf8', function(err, contents) {
     	  	dstPort: to_port
 	    },
 	    pause: parseInt(time - cache.previous.time_sec +''+ time_micro- cache.previous.time_usec) || 0,
-            payload: tmp[1]
+            payload: rawSIP || tmp[1]
     	  };
    	  hepgen.push(block);
 	  cache.previous = { time_sec: time, time_usec: time_micro };
