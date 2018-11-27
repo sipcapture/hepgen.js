@@ -52,7 +52,7 @@ var sendHEP3 = function(msg,rcinfo){
 					}
 				});
 			} else { console.log('HEP Parsing error!'); stats.heperr++; }
-		} 
+		}
 		catch (e) {
 			console.log('HEP3 Error sending!');
 			console.log(e);
@@ -90,9 +90,7 @@ const execHEP = function(messages) {
 	rcinfo.time_usec = datenow - (rcinfo.time_sec*1000);
 
 	if (debug) console.log(rcinfo);
-
 	if (message.pause && (message.pause > 10000 || message.pause < 0 )) message.pause = 100;
-
 	if (message.pause && message.pause > 0) {
 		pause += message.pause;
 		setTimeout(function() {
@@ -107,13 +105,12 @@ const execHEP = function(messages) {
 		sendHEP3(msg,rcinfo);
 		process.stdout.write("rcvd: "+stats.rcvd+", parsed: "+stats.parsed+", hepsent: "+stats.hepsent+", err: "+stats.err+", heperr: "+stats.heperr+"\r");
 	}
-
   });
 }
 
 
 if(process.argv.indexOf("-d") != -1){
-    debug = true; 
+    debug = true;
 }
 
 var _config_ = require("./config/default");
@@ -131,19 +128,23 @@ if(process.argv.indexOf("-c") != -1){
 
 if(process.argv.indexOf("-P") != -1){
 
-    exec("nodejs tools/convert.js " + process.argv[process.argv.indexOf("-P") + 1], function (err, stdout, stderr) {
-	_config_ = JSON.parse(stdout);
 
-	if (!_config_.MESSAGES) { console.log('Error! No data!'); return; }
+	const { spawn } = require('child_process');
+	const top = spawn('nodejs', ['tools/convert.js', process.argv[process.argv.indexOf("-P") + 1]] );
+	var message = '';
 
-	if(process.argv.indexOf("-s") != -1){
-	    _config_.HEP_SERVER = process.argv[process.argv.indexOf("-s") + 1]; 
-	}
-	if(process.argv.indexOf("-p") != -1){
-	    _config_.HEP_PORT = process.argv[process.argv.indexOf("-p") + 1]; 
-	}
-	execHEP(_config_.MESSAGES);
-     });
+	top.stdout.on('data', (data) => {
+	  message += data;
+	});
+
+	top.stderr.on('data', (data) => {
+	  console.log('Error parsing input!');
+	});
+
+	top.on('close', (code) => {
+	  _config_ = JSON.parse(message);
+	  execHEP(_config_.MESSAGES);
+	});
 
 }
 
