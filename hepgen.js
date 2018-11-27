@@ -143,6 +143,12 @@ if(process.argv.indexOf("-P") != -1){
 
 	top.on('close', (code) => {
 	  _config_ = JSON.parse(message);
+	  if(process.argv.indexOf("-s") != -1){
+	    _config_.HEP_SERVER = process.argv[process.argv.indexOf("-s") + 1]; 
+  	  }
+	  if(process.argv.indexOf("-p") != -1){
+	    _config_.HEP_PORT = process.argv[process.argv.indexOf("-p") + 1]; 
+	  }
 	  execHEP(_config_.MESSAGES);
 	});
 
