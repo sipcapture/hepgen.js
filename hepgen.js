@@ -61,6 +61,32 @@ var sendHEP3 = function(msg,rcinfo){
 	}
 }
 
+var sendAPI = function(msg,rcinfo){
+	/* not implemented. push data to API using methods in rcinfo for POST/GET, URL, etc. msg must be JSON.	*/
+	/*
+		    rcinfo: {
+    			  type: 'API',
+    			  method: 'POST',
+			  url: 'http://some.api/post',
+			  other: 1234
+    		    },
+    		    pause: 0,
+            	    payload: { "this": "could be anything", count: 0 }
+        }
+	*/
+}
+
+var routeOUT = function(msg,rcinfo){
+  console.log('ROUTING',msg,rcinfo);
+	if (rcinfo.type === "HEP"){
+		sendHEP3(msg,rcinfo);
+	} else if(rcinfo.type === "API") {		
+		sendAPI(msg,rcinfo);
+	} else {
+		console.error('Unsupported Type!',rcinfo);	
+	}
+};
+
 function sleep(ms) {
   var start = new Date().getTime(), expire = start + ms;
   while (new Date().getTime() < expire) { }
@@ -73,7 +99,7 @@ var pause = 0;
 const execHEP = function(messages) {
   count = messages.length;
   messages.forEach(function preHep(message) {
-
+	  
 	var rcinfo = message.rcinfo;
 	var msg = message.payload;
 	if (debug) console.log(msg);
@@ -98,11 +124,11 @@ const execHEP = function(messages) {
 	            var datenow = new Date().getTime();
 		    rcinfo.time_sec = Math.floor( datenow / 1000);
 		    rcinfo.time_usec = datenow - (rcinfo.time_sec*1000);
-		    sendHEP3(msg,rcinfo);
+		    routeOUT(msg,rcinfo);
 		    process.stdout.write("rcvd: "+stats.rcvd+", parsed: "+stats.parsed+", hepsent: "+stats.hepsent+", err: "+stats.err+", heperr: "+stats.heperr+"\r");
 		}, pause);
 	} else {
-		sendHEP3(msg,rcinfo);
+		routeOUT(msg,rcinfo);
 		process.stdout.write("rcvd: "+stats.rcvd+", parsed: "+stats.parsed+", hepsent: "+stats.hepsent+", err: "+stats.err+", heperr: "+stats.heperr+"\r");
 	}
   });
