@@ -65,8 +65,8 @@ var config = {
             	    payload: {
 				  "streams": [
 				    {
-				      "labels": "{foo=\"bar\"}",
-				      "entries": [{ "ts": "2018-12-18T08:28:06.801064-04:00", "line": "baz" }]
+				      "labels": "{type=\"json\"}",
+				      "entries": [{ "ts": new Date().toISOString(), "line": "This is a cool log with Call-ID: "+call_id }]
 				    }
 				  ]
 			      }
