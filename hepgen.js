@@ -62,14 +62,14 @@ var sendHEP3 = function(msg,rcinfo){
 }
 
 var sendAPI = function(msg,rcinfo){
-	/* 	not yet implemented. 
-		PUSH non-HEP data to API using methods in rcinfo for Query parameters.	
+	/* 	PUSH non-HEP data to API using methods in rcinfo for Query parameters.	
 		The following MESSAGE format is proposed:
 
 		    rcinfo: {
     			  type: 'API',
     			  method: 'POST',
-			  url: 'http://some.api/post',
+			  hostname: 'http://some.api',
+			  path: '/post',
 			  port: 1234,
 			  headers: {
                             'Content-Type': 'application/json'
@@ -88,6 +88,33 @@ var sendAPI = function(msg,rcinfo){
 	
 	
 	*/
+	const http = require('http')
+	const options = {
+	  hostname: rcinfo.hostname,
+	  port: rcinfo.port,
+	  path: rcinfo.path,
+	  method: rcinfo.method,
+	  headers: {
+	    'Content-Type': 'application/json',
+	    'Content-Length': msg.length
+	  }
+	}
+
+	const req = http.request(options, (res) => {
+	  console.log(`API statusCode: ${res.statusCode}`)
+	  stats.hepsent++;
+	  res.on('data', (d) => {
+	    process.stdout.write(d)
+	  })
+	})
+
+	req.on('error', (error) => {
+	  console.error(error)
+	  stats.heperr++;
+	})
+	req.write(JSON.stringify(rcinfo.payload));
+	req.end();
+	
 }
 
 var routeOUT = function(msg,rcinfo){
