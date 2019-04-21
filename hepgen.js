@@ -34,6 +34,16 @@ var getSocket = function (type) {
 var socket = dgram.createSocket("udp4");
     socket = getSocket('udp4'); 
 
+var countDown = function(){
+	count--;
+	if (count == 0) {
+		if(socket) socket.close();
+		console.log(stats);
+		console.log('Done! Exiting...');
+		process.exit(0);
+	}	
+}
+
 var sendHEP3 = function(msg,rcinfo){
 	if (rcinfo) {
 		try {
@@ -43,13 +53,7 @@ var sendHEP3 = function(msg,rcinfo){
 			if (hep_message) {
 				socket.send(hep_message, 0, hep_message.length, _config_.HEP_PORT, _config_.HEP_SERVER, function(err) {
 					stats.hepsent++;
-					count--;
-					if (count == 0) {
-				  	   socket.close();
-				  	   console.log(stats);
-				  	   console.log('Done! Exiting...');
-					     process.exit(0);
-					}
+					countDown();
 				});
 			} else { console.log('HEP Parsing error!'); stats.heperr++; }
 		}
@@ -63,30 +67,7 @@ var sendHEP3 = function(msg,rcinfo){
 
 var sendAPI = function(msg,rcinfo){
 	/* 	PUSH non-HEP data to API using methods in rcinfo for Query parameters.	
-		The following MESSAGE format is proposed:
-
-		    rcinfo: {
-    			  type: 'API',
-    			  method: 'POST',
-			  hostname: 'http://some.api',
-			  path: '/post',
-			  port: 1234,
-			  headers: {
-                            'Content-Type': 'application/json'
-                          }
-    		    },
-    		    pause: 0,
-            	    payload: 	{
-				  "streams": [
-				    {
-				      "labels": "{foo=\"bar\"}",
-				      "entries": [{ "ts": "2018-12-18T08:28:06.801064-04:00", "line": "baz" }]
-				    }
-				  ]
-				}
-        	     }
-	
-	
+		For an example API message format, see config/log.js
 	*/
 	const http = require('http')
 	const options = {
@@ -103,6 +84,7 @@ var sendAPI = function(msg,rcinfo){
 	const req = http.request(options, (res) => {
 	  console.log(`API statusCode: ${res.statusCode}`)
 	  stats.hepsent++;
+	  countDown();
 	  res.on('data', (d) => {
 	    process.stdout.write(d)
 	  })
