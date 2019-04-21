@@ -63,10 +63,9 @@ var sendHEP3 = function(msg,rcinfo){
 
 var sendAPI = function(msg,rcinfo){
 	/* 	not yet implemented. 
-		push data to API using methods in rcinfo for POST/GET, URL, etc. msg must be JSON.	
-	*/
-	
-	/*
+		PUSH non-HEP data to API using methods in rcinfo for Query parameters.	
+		The following MESSAGE format is proposed:
+
 		    rcinfo: {
     			  type: 'API',
     			  method: 'POST',
@@ -77,8 +76,17 @@ var sendAPI = function(msg,rcinfo){
                           }
     		    },
     		    pause: 0,
-            	    payload: { "this": "could be anything", count: 0 }
-        }
+            	    payload: 	{
+				  "streams": [
+				    {
+				      "labels": "{foo=\"bar\"}",
+				      "entries": [{ "ts": "2018-12-18T08:28:06.801064-04:00", "line": "baz" }]
+				    }
+				  ]
+				}
+        	     }
+	
+	
 	*/
 }
 
