@@ -50,7 +50,27 @@ var config = {
                   },
     		          pause: 1000,
                   payload: '{ "this": { "is": "a JSON object" }, "int": 1234 }'
-          }
+          },
+          { 
+                  rcinfo: {
+    			  type: 'API',
+    			  method: 'POST',
+			  url: 'http://some.api/post',
+			  port: 1234,
+			  headers: {
+                            'Content-Type': 'application/json'
+                          }
+    		    },
+    		    pause: 0,
+            	    payload: {
+				  "streams": [
+				    {
+				      "labels": "{foo=\"bar\"}",
+				      "entries": [{ "ts": "2018-12-18T08:28:06.801064-04:00", "line": "baz" }]
+				    }
+				  ]
+			      }
+            }
       ]
 };
 
