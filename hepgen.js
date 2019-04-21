@@ -62,13 +62,19 @@ var sendHEP3 = function(msg,rcinfo){
 }
 
 var sendAPI = function(msg,rcinfo){
-	/* not implemented. push data to API using methods in rcinfo for POST/GET, URL, etc. msg must be JSON.	*/
+	/* 	not yet implemented. 
+		push data to API using methods in rcinfo for POST/GET, URL, etc. msg must be JSON.	
+	*/
+	
 	/*
 		    rcinfo: {
     			  type: 'API',
     			  method: 'POST',
 			  url: 'http://some.api/post',
-			  other: 1234
+			  port: 1234,
+			  headers: {
+                            'Content-Type': 'application/json'
+                          }
     		    },
     		    pause: 0,
             	    payload: { "this": "could be anything", count: 0 }
