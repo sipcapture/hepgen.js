@@ -34,6 +34,16 @@ var getSocket = function (type) {
 var socket = dgram.createSocket("udp4");
     socket = getSocket('udp4'); 
 
+var countDown = function(){
+	count--;
+	if (count == 0) {
+		if(socket) socket.close();
+		console.log(stats);
+		console.log('Done! Exiting...');
+		process.exit(0);
+	}	
+}
+
 var sendHEP3 = function(msg,rcinfo){
 	if (rcinfo) {
 		try {
@@ -43,13 +53,7 @@ var sendHEP3 = function(msg,rcinfo){
 			if (hep_message) {
 				socket.send(hep_message, 0, hep_message.length, _config_.HEP_PORT, _config_.HEP_SERVER, function(err) {
 					stats.hepsent++;
-					count--;
-					if (count == 0) {
-				  	   socket.close();
-				  	   console.log(stats);
-				  	   console.log('Done! Exiting...');
-					     process.exit(0);
-					}
+					countDown();
 				});
 			} else { console.log('HEP Parsing error!'); stats.heperr++; }
 		}
@@ -60,6 +64,51 @@ var sendHEP3 = function(msg,rcinfo){
 		}
 	}
 }
+
+var sendAPI = function(msg,rcinfo){
+	/* 	PUSH non-HEP data to API using methods in rcinfo for Query parameters.	
+		For an example API message format, see config/log.js
+	*/
+	const http = require('http')
+	const options = {
+	  hostname: rcinfo.hostname,
+	  port: rcinfo.port,
+	  path: rcinfo.path,
+	  method: rcinfo.method,
+	  headers: {
+	    'Content-Type': 'application/json',
+	    'Content-Length': JSON.stringify(msg).length
+	  }
+	}
+
+	const req = http.request(options, (res) => {
+	  console.log(`API statusCode: ${res.statusCode}`)
+	  stats.hepsent++;
+	  countDown();
+	  res.on('data', (d) => {
+	    process.stdout.write(d)
+	  })
+	})
+
+	req.on('error', (error) => {
+	  console.error(error)
+	  stats.heperr++;
+	})
+	req.write(JSON.stringify(msg));
+	req.end();
+	
+}
+
+var routeOUT = function(msg,rcinfo){
+  console.log('ROUTING',msg,rcinfo);
+	if (rcinfo.type === "HEP"){
+		sendHEP3(msg,rcinfo);
+	} else if(rcinfo.type === "API") {		
+		sendAPI(msg,rcinfo);
+	} else {
+		console.error('Unsupported Type!',rcinfo);	
+	}
+};
 
 function sleep(ms) {
   var start = new Date().getTime(), expire = start + ms;
@@ -73,7 +122,7 @@ var pause = 0;
 const execHEP = function(messages) {
   count = messages.length;
   messages.forEach(function preHep(message) {
-
+	  
 	var rcinfo = message.rcinfo;
 	var msg = message.payload;
 	if (debug) console.log(msg);
@@ -98,11 +147,11 @@ const execHEP = function(messages) {
 	            var datenow = new Date().getTime();
 		    rcinfo.time_sec = Math.floor( datenow / 1000);
 		    rcinfo.time_usec = datenow - (rcinfo.time_sec*1000);
-		    sendHEP3(msg,rcinfo);
+		    routeOUT(msg,rcinfo);
 		    process.stdout.write("rcvd: "+stats.rcvd+", parsed: "+stats.parsed+", hepsent: "+stats.hepsent+", err: "+stats.err+", heperr: "+stats.heperr+"\r");
 		}, pause);
 	} else {
-		sendHEP3(msg,rcinfo);
+		routeOUT(msg,rcinfo);
 		process.stdout.write("rcvd: "+stats.rcvd+", parsed: "+stats.parsed+", hepsent: "+stats.hepsent+", err: "+stats.err+", heperr: "+stats.heperr+"\r");
 	}
   });

@@ -50,7 +50,27 @@ var config = {
                   },
     		          pause: 1000,
                   payload: '{ "this": { "is": "a JSON object" }, "int": 1234 }'
-          }
+          },
+          { 
+                  rcinfo: {
+    			  type: 'API',
+    			  method: 'POST',
+			  url: 'http://some.api/post',
+			  port: 1234,
+			  headers: {
+                            'Content-Type': 'application/json'
+                          }
+    		    },
+    		    pause: 0,
+            	    payload: {
+				  "streams": [
+				    {
+				      "labels": "{type=\"json\"}",
+				      "entries": [{ "ts": new Date().toISOString(), "line": "This is a cool log with Call-ID: "+call_id }]
+				    }
+				  ]
+			      }
+            }
       ]
 };
 
