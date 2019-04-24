@@ -77,7 +77,7 @@ var sendAPI = function(msg,rcinfo){
 	  method: rcinfo.method,
 	  headers: {
 	    'Content-Type': 'application/json',
-	    'Content-Length': msg.length
+	    'Content-Length': JSON.stringify(msg).length
 	  }
 	}
 
@@ -94,7 +94,7 @@ var sendAPI = function(msg,rcinfo){
 	  console.error(error)
 	  stats.heperr++;
 	})
-	req.write(JSON.stringify(rcinfo.payload));
+	req.write(JSON.stringify(msg));
 	req.end();
 	
 }
