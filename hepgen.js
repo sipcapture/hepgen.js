@@ -1,5 +1,6 @@
-// HEP Packet Generator for Devs
+#!/usr/bin/env node
 
+// HEP Packet Generator for Devs
 var HEPjs = require('hep-js');
 var dgram = require('dgram');
 const execSync = require('child_process').execSync;
