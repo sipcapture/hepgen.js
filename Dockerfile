@@ -1,6 +1,6 @@
-FROM node:7.7
+FROM node:10
 MAINTAINER @qxip (twitter)
-RUN git clone https://github.com/sipcapture/hepgen.js.git
+RUN git clone https://github.com/sipcapture/hepgen.js
 WORKDIR hepgen.js
 RUN npm install
-ENTRYPOINT node hepgen.js
+CMD ["node", "hepgen.js"]
