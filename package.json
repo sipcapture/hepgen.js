@@ -1,6 +1,6 @@
 {
   "name": "hepgen",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "HEP Message Generator",
   "author": "lorenzo.mangani@gmail.com",
   "private": true,

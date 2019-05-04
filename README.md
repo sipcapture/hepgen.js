@@ -46,6 +46,11 @@ npm start
 node hepgen.js -c "./config/options.js"
 ```
 
+### Custom Config + Loki
+```
+node hepgen.js -a my.loki.host -c "./config/b2bcall_rtcp_logs.js"
+```
+
 ### Custom from PCAP TEXT
 ```
 node hepgen.js -s 127.0.0.1 -p 9063 -P "./path/to/SIP.pcap-txt"

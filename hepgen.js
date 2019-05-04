@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 // HEP Packet Generator for Devs
 var HEPjs = require('hep-js');
 var dgram = require('dgram');
@@ -70,10 +68,11 @@ var sendAPI = function(msg,rcinfo){
 	/* 	PUSH non-HEP data to API using methods in rcinfo for Query parameters.	
 		For an example API message format, see config/log.js
 	*/
+	if (debug) console.log('API DEBUG',_config_,rcinfo,msg);
 	const http = require('http')
 	const options = {
-	  hostname: rcinfo.hostname,
-	  port: rcinfo.port,
+	  hostname: rcinfo.hostname || _config_.API_SERVER || '127.0.0.1',
+	  port: rcinfo.port || _config_.API_PORT || 3100,
 	  path: rcinfo.path,
 	  method: rcinfo.method,
 	  headers: {
@@ -167,12 +166,19 @@ var _config_ = require("./config/default");
 
 if(process.argv.indexOf("-c") != -1){
     _config_ = require(process.argv[process.argv.indexOf("-c") + 1]); 
+	if(process.argv.indexOf("-d") != -1){
+		debug = true;
+	}
 	if(process.argv.indexOf("-s") != -1){
 	    _config_.HEP_SERVER = process.argv[process.argv.indexOf("-s") + 1]; 
 	}
 	if(process.argv.indexOf("-p") != -1){
 	    _config_.HEP_PORT = process.argv[process.argv.indexOf("-p") + 1]; 
 	}
+	if(process.argv.indexOf("-a") != -1){
+	    _config_.API_SERVER = process.argv[process.argv.indexOf("-a") + 1]; 
+	}
+	if (debug) console.log(_config_);
         execHEP(_config_.MESSAGES);
 }
 
