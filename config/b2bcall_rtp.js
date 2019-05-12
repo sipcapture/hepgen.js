@@ -1049,6 +1049,7 @@ var config = {
                           dstIp: peer_ip,
                           srcPort: 0,
                           dstPort: 0,
+                          mos: 403,
                           correlation_id: call_id
                   },
     		  pause: 400,
@@ -1068,6 +1069,7 @@ var config = {
                           dstIp: pub_ip,
                           srcPort: 0,
                           dstPort: 0,
+                          mos: 393,
                           correlation_id: call_id
                   },
     		  pause: 2500,
@@ -1087,6 +1089,7 @@ var config = {
                           dstIp: peer_ip,
                           srcPort: 0,
                           dstPort: 0,
+                          mos: 393,
                           correlation_id: call_id
                   },
     		  pause: 2500,
@@ -1106,6 +1109,7 @@ var config = {
                           dstIp: pub_ip,
                           srcPort: 0,
                           dstPort: 0,
+                          mos: 402,
                           correlation_id: call_id
                   },
     		  pause: 2500,
@@ -1125,6 +1129,7 @@ var config = {
                           dstIp: peer_ip,
                           srcPort: 0,
                           dstPort: 0,
+                          mos: 393,
                           correlation_id: call_id
                   },
     		  pause: 2500,
