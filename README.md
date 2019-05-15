@@ -1,4 +1,4 @@
-<img src="https://i.imgur.com/scqdu3p.png" width="400">
+<img src="https://user-images.githubusercontent.com/1423657/55069501-8348c400-5084-11e9-9931-fefe0f9874a7.png" width=200/>
 
 # HEPGEN.JS
 Barebone HEP Packet Generator for SIP-less Devs and Unit Testing
