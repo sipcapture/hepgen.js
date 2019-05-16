@@ -904,7 +904,7 @@ var config = {
 				 "Category":"call",
 				 "Account":caller,
 				 "Subject":caller,
-				 "Destination":callee,
+				 "Destination":callee.toString(),
 				 "SetupTime":new Date().toISOString(),
 				 "AnswerTime":new Date().toISOString(),
 				 "Usage":20
