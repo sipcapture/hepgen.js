@@ -37,8 +37,9 @@ npm install
 ```
 
 ### Run
+Replace `127.0.0.1` and `9060` with the actual IP and PORT of your HEP Server:
 ```
-npm start
+node hepgen.js -s 127.0.0.1 -p 9060 -c "./config/b2bcall_rtcp.js"
 ```
 
 ### Custom Config
