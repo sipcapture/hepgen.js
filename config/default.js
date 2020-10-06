@@ -16,7 +16,7 @@ var config = {
     		rcinfo: {
     			type: 'HEP',
     			version: 3,
-    			payload_type: 1,
+    			proto_type: 1,
     			captureId: '2001',
     			capturePass: 'myHep',
     			protocolFamily: 2,
@@ -36,7 +36,7 @@ var config = {
     		rcinfo: {
     			type: 'HEP',
     			version: 3,
-    			payload_type: 1,
+    			proto_type: 1,
     			captureId: '2001',
     			capturePass: 'myHep',
     			protocolFamily: 2,
@@ -56,7 +56,7 @@ var config = {
     		rcinfo: {
     			type: 'HEP',
     			version: 3,
-    			payload_type: 1,
+    			proto_type: 1,
     			captureId: '2001',
     			capturePass: 'myHep',
     			protocolFamily: 2,
@@ -76,7 +76,7 @@ var config = {
     		rcinfo: {
     			type: 'HEP',
     			version: 3,
-    			payload_type: 1,
+    			proto_type: 1,
     			captureId: '2001',
     			capturePass: 'myHep',
     			protocolFamily: 2,
@@ -96,7 +96,7 @@ var config = {
             rcinfo: {
                 type: 'HEP',
                 version: 3,
-                payload_type: 'SIP',
+                proto_type: 'SIP',
                 captureId: '2001',
                 capturePass: 'myHep',
                 protocolFamily: 2,
@@ -116,7 +116,7 @@ var config = {
     		rcinfo: {
     			type: 'HEP',
     			version: 3,
-    			payload_type: 1,
+    			proto_type: 1,
     			captureId: '2001',
     			capturePass: 'myHep',
     			protocolFamily: 2,
@@ -136,7 +136,7 @@ var config = {
     		rcinfo: {
     			type: 'HEP',
     			version: 3,
-    			payload_type: 1,
+    			proto_type: 1,
     			captureId: '2001',
     			capturePass: 'myHep',
     			protocolFamily: 2,
@@ -157,10 +157,10 @@ var config = {
           rcinfo: {
           type: 'HEP',
           version: 3,
-          payload_type: 'JSON',
+          payloadType: 'JSON',
           captureId: '2001',
           capturePass: 'myHep',
-          ip_family: 2,
+          protocolFamily: 2,
           protocol: 17,
           proto_type: 99,
           srcIp: '192.168.1.1',
@@ -178,12 +178,12 @@ var config = {
             rcinfo: {
                 type: 'HEP',
                 version: 3,
-                payload_type: 'JSON',
+                payloadType: 5,
                 captureId: '2001',
                 capturePass: 'myHep',
                 protocolFamily: 2,
                 protocol: 17,
-                payloadType: 5,
+                proto_type: 'JSON',
                 srcIp: '192.168.1.1',
                 dstIp: '192.168.1.2',
                 srcPort: 0,
