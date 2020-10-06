@@ -16,7 +16,7 @@ var config = {
     		rcinfo: {
     			type: 'HEP',
     			version: 3,
-    			payload_type: 1,
+    			proto_type: 1,
     			captureId: '2001',
     			capturePass: 'myHep',
     			protocolFamily: 10,
@@ -66,7 +66,7 @@ var config = {
     		rcinfo: {
     			type: 'HEP',
     			version: 3,
-    			payload_type: 1,
+    			proto_type: 1,
     			captureId: '2001',
     			capturePass: 'myHep',
     			protocolFamily: 10,
@@ -96,7 +96,7 @@ var config = {
     		rcinfo: {
     			type: 'HEP',
     			version: 3,
-    			payload_type: 1,
+    			proto_type: 1,
     			captureId: '2001',
     			capturePass: 'myHep',
     			protocolFamily: 10,
@@ -142,7 +142,7 @@ var config = {
     		rcinfo: {
     			type: 'HEP',
     			version: 3,
-    			payload_type: 1,
+    			proto_type: 1,
     			captureId: '2001',
     			capturePass: 'myHep',
     			protocolFamily: 10,
@@ -191,7 +191,7 @@ var config = {
     		rcinfo: {
     			type: 'HEP',
     			version: 3,
-    			payload_type: 1,
+    			proto_type: 1,
     			captureId: '2001',
     			capturePass: 'myHep',
     			protocolFamily: 10,
@@ -222,7 +222,7 @@ var config = {
     		rcinfo: {
     			type: 'HEP',
     			version: 3,
-    			payload_type: 1,
+    			proto_type: 1,
     			captureId: '2001',
     			capturePass: 'myHep',
     			protocolFamily: 10,
@@ -255,7 +255,7 @@ var config = {
     		rcinfo: {
     			type: 'HEP',
     			version: 3,
-    			payload_type: 1,
+    			proto_type: 1,
     			captureId: '2001',
     			capturePass: 'myHep',
     			protocolFamily: 10,
