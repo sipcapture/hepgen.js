@@ -19,9 +19,9 @@ var config = {
     			payload_type: 1,
     			captureId: '2001',
     			capturePass: 'myHep',
-    			ip_family: 10,
+    			protocolFamily: 10,
     			protocol: 17,
-    			proto_type: 1,
+    			payloadType: 1,
     			correlation_id: call_id,
     			srcIp: '2a01:4f8:160:7394::2',
     			dstIp: 'fe80::ca60:ff:fee9:47f0',
@@ -69,12 +69,12 @@ var config = {
     			payload_type: 1,
     			captureId: '2001',
     			capturePass: 'myHep',
-    			ip_family: 10,
+    			protocolFamily: 10,
     			protocol: 17,
-    			proto_type: 1,
+    			payloadType: 1,
     			correlation_id: call_id,
-			srcIp: 'fe80::ca60:ff:fee9:47f0',
-			dstIp: '2a01:4f8:160:7394::2',
+			    srcIp: 'fe80::ca60:ff:fee9:47f0',
+			    dstIp: '2a01:4f8:160:7394::2',
     			srcPort: 5070,
     	  		dstPort: 5060
     		},
@@ -99,12 +99,12 @@ var config = {
     			payload_type: 1,
     			captureId: '2001',
     			capturePass: 'myHep',
-    			ip_family: 10,
+    			protocolFamily: 10,
     			protocol: 17,
-    			proto_type: 1,
+    			payloadType: 1,
     			correlation_id: call_id,
-			srcIp: 'fe80::ca60:ff:fee9:47f0',
-                        dstIp: '2a01:4f8:160:7394::2',
+			    srcIp: 'fe80::ca60:ff:fee9:47f0',
+                dstIp: '2a01:4f8:160:7394::2',
     			srcPort: 5070,
     	  		dstPort: 5060
     		},
@@ -145,12 +145,12 @@ var config = {
     			payload_type: 1,
     			captureId: '2001',
     			capturePass: 'myHep',
-    			ip_family: 10,
+    			protocolFamily: 10,
     			protocol: 17,
-    			proto_type: 1,
+    			payloadType: 1,
     			correlation_id: call_id,
-			srcIp: 'fe80::ca60:ff:fee9:47f0',
-                        dstIp: '2a01:4f8:160:7394::2',
+			    srcIp: 'fe80::ca60:ff:fee9:47f0',
+                dstIp: '2a01:4f8:160:7394::2',
     			srcPort: 5070,
     	  		dstPort: 5060
     		},
@@ -160,18 +160,18 @@ var config = {
                 'From: "+31602146974" <sip:+31602146974@[21a0:m4m4:qx1p:s1p4::1234]>;tag=g4t6aU1XaFr5S\n'+
                 'To: <sip:+31612366699@lge.qxip.ipcx.nl;user=phone>;tag=127.0.0.1alUtKGp-01039+1+e15c0013+8c18051\n'+
                 'Via: SIP/2.0/UDP [2a01:4f8:160:7394:0:0:0:2];branch=z9hG4bK934d.2b60491d4b2268c90e588d8a91e4bba9.0\n'+
-	        'Call-ID: '+call_id+'\n'+
-	        'CSeq: 1 INVITE\n'+
-	        'User-Agent: HEPGEN-UAS\n'+
-	        'Allow: INVITE, ACK, CANCEL, OPTIONS, BYE, REFER, SUBSCRIBE, NOTIFY\n'+
-	        'Supported: replaces path, 100rel, timer\n'+
+	            'Call-ID: '+call_id+'\n'+
+	            'CSeq: 1 INVITE\n'+
+	            'User-Agent: HEPGEN-UAS\n'+
+	            'Allow: INVITE, ACK, CANCEL, OPTIONS, BYE, REFER, SUBSCRIBE, NOTIFY\n'+
+	            'Supported: replaces path, 100rel, timer\n'+
                 'Contact: <sip:Fr4nkV1ncentZ4ppa@[fe80::ca60:ff:fee9:47f0];transport=udp>;oai=yyyyBv6Taw8yS_bWr+owxY+5x_8sYTXY>\n'+
                 'Require: timer\n'+
                 'Server: Bluebol 5060 MGC-8 1.2.0.4.SP2.1\n'+
-	        'Content-Type: application/sdp\n'+
-	        'Content-Length: 285\n'+
+	            'Content-Type: application/sdp\n'+
+	            'Content-Length: 285\n'+
                 'Privacy: none\n\n'+
-	        'v=0\n'+
+	            'v=0\n'+
                 'o=- 3795340956 3795340956 IN IP6 oit.k1r0l.qxiphepgenipv6.ipcx.nl\n'+
                 's=-\n'+
                 'c=IN IP6 fe80::ca60:ff:fee9:7777\n'+
@@ -184,7 +184,7 @@ var config = {
                 'a=rtpmap:101 telephone-event/8000\n'+
                 'a=fmtp:101 0-15\n'+
                 'a=silenceSupp:off - - - -\n'+
-	        '\r\n\r\n'
+	            '\r\n\r\n'
         },
         {
             // SIP ACK
@@ -194,12 +194,12 @@ var config = {
     			payload_type: 1,
     			captureId: '2001',
     			capturePass: 'myHep',
-    			ip_family: 10,
+    			protocolFamily: 10,
     			protocol: 17,
-    			proto_type: 1,
+    			payloadType: 1,
     			correlation_id: call_id,
-			srcIp: '2a01:4f8:160:7394::2',
-                        dstIp: 'fe80::ca60:ff:fee9:47f0',
+			    srcIp: '2a01:4f8:160:7394::2',
+                dstIp: 'fe80::ca60:ff:fee9:47f0',
     			srcPort: 5060,
     	  		dstPort: 5070
     		},
@@ -225,12 +225,12 @@ var config = {
     			payload_type: 1,
     			captureId: '2001',
     			capturePass: 'myHep',
-    			ip_family: 10,
+    			protocolFamily: 10,
     			protocol: 17,
-    			proto_type: 1,
+    			payloadType: 1,
     			correlation_id: call_id,
-			srcIp: '2a01:4f8:160:7394::2',
-                        dstIp: 'fe80::ca60:ff:fee9:47f0',
+			    srcIp: '2a01:4f8:160:7394::2',
+                dstIp: 'fe80::ca60:ff:fee9:47f0',
     			srcPort: 5060,
     	  		dstPort: 5070
     		},
@@ -258,12 +258,12 @@ var config = {
     			payload_type: 1,
     			captureId: '2001',
     			capturePass: 'myHep',
-    			ip_family: 10,
+    			protocolFamily: 10,
     			protocol: 17,
-    			proto_type: 1,
+    			payloadType: 1,
     			correlation_id: call_id,
-			srcIp: 'fe80::ca60:ff:fee9:47f0',
-                        dstIp: '2a01:4f8:160:7394::2',
+			    srcIp: 'fe80::ca60:ff:fee9:47f0',
+                dstIp: '2a01:4f8:160:7394::2',
     			srcPort: 5070,
     	  		dstPort: 5060
     		},
@@ -271,18 +271,18 @@ var config = {
 	        payload:
 	        'SIP/2.0 200 OK\n'+
                 'Call-ID: '+call_id+'\n'+
-	        'CSeq: 1 BYE\n'+
+	            'CSeq: 1 BYE\n'+
                 'From: "+31602146974" <sip:+31602146974@[2a01:4f8:160:7394::2]>;tag=g4t6aU1XaFr5S\n'+
                 'To: <sip:+31612366699@lge.qxip.ipcx.nl;user=phone>;tag=127.0.0.1alUtKGp-01039+1+e15c0013+8c18051\n'+
                 'Via: SIP/2.0/UDP [2a01:4f8:160:7394::2];branch=z9hG4bK934d.2b60491d4b2268c90e588d8a91e4bba9.0\n'+
-	        'User-Agent: HEPGEN-UAS\n'+
-	        'Allow: INVITE, ACK, CANCEL, OPTIONS, BYE, REFER, SUBSCRIBE, NOTIFY\n'+
+	            'User-Agent: HEPGEN-UAS\n'+
+	            'Allow: INVITE, ACK, CANCEL, OPTIONS, BYE, REFER, SUBSCRIBE, NOTIFY\n'+
                 'Contact: <sip:Fr4nkV1ncentZ4ppa@[fe80::ca60:ff:fee9:47f0];transport=udp>;oai=yyyyBv6Taw8yS_bWr+owxY+5x_8sYTXY>\n'+
                 'Require: timer\n'+
                 'Server: Bluebol 5060 MGC-8 1.2.0.4.SP2.1\n'+
-	        'Content-Length: 0\n'+
+	            'Content-Length: 0\n'+
                 'Supported: replaces, path, 100rel, timer\n'+
-	        '\r\n\r\n'
+	            '\r\n\r\n'
         },
     ]
 };
