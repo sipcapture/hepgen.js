@@ -1,10 +1,12 @@
+#!/usr/bin/env node
+
 // HEP Packet Generator for Devs
 var HEPjs = require('hep-js');
 var dgram = require('dgram');
 const execSync = require('child_process').execSync;
 const exec = require('child_process').exec;
 
-var version = 'v0.1.4';
+var version = 'v1.0.6';
 var debug = false;
 var stats = {rcvd: 0, parsed: 0, hepsent: 0, err: 0, heperr: 0 }; 
 

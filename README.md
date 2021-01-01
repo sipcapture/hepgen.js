@@ -33,33 +33,33 @@ See [config.json](https://github.com/sipcapture/hepgen.js/blob/master/config/def
 
 ### Install
 ```
-npm install
+npm install -g hepgen.js
 ```
 
 ### Run
 Replace `127.0.0.1` and `9060` with the actual IP and PORT of your HEP Server:
 ```
-node hepgen.js -s 127.0.0.1 -p 9060 -c "./config/b2bcall_rtcp.js"
+hepgen.js -s 127.0.0.1 -p 9060 -c "./config/b2bcall_rtcp.js"
 ```
 
 ### Custom Config
 ```
-node hepgen.js -c "./config/options.js"
+hepgen.js -c "./config/options.js"
 ```
 
 ### Custom Config + Loki
 ```
-node hepgen.js -a my.loki.host -c "./config/b2bcall_rtcp_logs.js"
+hepgen.js -a my.loki.host -c "./config/b2bcall_rtcp_logs.js"
 ```
 
 ### Custom from PCAP TEXT
 ```
-node hepgen.js -s 127.0.0.1 -p 9063 -P "./path/to/SIP.pcap-txt"
+hepgen.js -s 127.0.0.1 -p 9063 -P "./path/to/SIP.pcap-txt"
 ```
 
 ### Debug
 ```
-node hepgen.js -d
+hepgen.js -d
 ```
 
 
