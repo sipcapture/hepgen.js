@@ -6,7 +6,7 @@ var rand = function(maximum,minimum){
 }
 
 var randomByte = function() {
-  return Math.round(Math.random()*256);
+  return Math.round(Math.random()*254);
 }
 
 var randomIp = function() {
@@ -47,7 +47,7 @@ var config = {
         MESSAGES: [
 
 
-{    
+{
  	rcinfo: {
     		type: 'HEP',
     		version: 3,
@@ -100,7 +100,7 @@ var config = {
 	'\r\n\r\n'
 
 
-}, {    
+}, {
 
  	rcinfo: {
     		type: 'HEP',
@@ -154,7 +154,7 @@ var config = {
                   payload: 'INFO: <script>: NATed request detected - R=sip:'+callee+'@'+domain+';user=phone ID='+call_id
 
 
-}, {    
+}, {
 
         rcinfo: {
                 type: 'HEP',
@@ -184,7 +184,7 @@ var config = {
 	'\r\n\r\n'
 
 
-}, {    
+}, {
 
         rcinfo: {
                 type: 'HEP',
@@ -239,7 +239,7 @@ var config = {
                   payload: 'INFO: <script>: Reply from Inbound - S=407 - Proxy Authentication Required M=INVITE IP=udp:127.0.0.1:5062 ID='+call_id
 
 
-}, {    
+}, {
 
         rcinfo: {
                 type: 'HEP',
@@ -270,7 +270,7 @@ var config = {
 	'\r\n\r\n'
 
 
-}, {    
+}, {
 
         rcinfo: {
                 type: 'HEP',
@@ -299,7 +299,7 @@ var config = {
 	'\r\n\r\n'
 
 
-}, {    
+}, {
 
         rcinfo: {
                 type: 'HEP',
@@ -354,7 +354,7 @@ var config = {
 	'\r\n\r\n'
 
 
-}, {    
+}, {
 
         rcinfo: {
                 type: 'HEP',
@@ -392,7 +392,7 @@ var config = {
 	'\r\n\r\n'
 
 
-}, {    
+}, {
 
         rcinfo: {
                 type: 'HEP',
@@ -426,7 +426,7 @@ var config = {
 	'\r\n\r\n'
 
 
-}, {    
+}, {
 
         rcinfo: {
                 type: 'HEP',
@@ -453,10 +453,10 @@ var config = {
 	'CSeq: 441 INVITE\r\n'+
 	'Server: SIP Proxy\r\n'+
 	'Content-Length: 0\r\n'+
-	'\r\n\r\n' 
+	'\r\n\r\n'
 
 
-}, {    
+}, {
 
         rcinfo: {
                 type: 'HEP',
@@ -494,7 +494,7 @@ var config = {
 
 
 
-}, {    
+}, {
 
         rcinfo: {
                 type: 'HEP',
@@ -530,7 +530,7 @@ var config = {
 	'\r\n\r\n'
 
 
-}, {    
+}, {
 
         rcinfo: {
                 type: 'HEP',
@@ -585,7 +585,7 @@ var config = {
 	'a=rtcp:31955\r\n'+
 	'\r\n\r\n'
 
-}, {    
+}, {
 
         rcinfo: {
                 type: 'HEP',
@@ -616,7 +616,7 @@ var config = {
 	'\r\n\r\n'
 
 
-}, {    
+}, {
 
         rcinfo: {
                 type: 'HEP',
@@ -650,7 +650,7 @@ var config = {
 	'\r\n\r\n'
 
 
-}, {    
+}, {
 
         rcinfo: {
                 type: 'HEP',
@@ -680,7 +680,7 @@ var config = {
 	'Content-Length: 0\r\n'+
 	'\r\n\r\n'
 
-}, {    
+}, {
 
         rcinfo: {
                 type: 'HEP',
@@ -714,7 +714,7 @@ var config = {
 	'\r\n\r\n'
 
 
-}, {    
+}, {
 
         rcinfo: {
                 type: 'HEP',
@@ -769,7 +769,7 @@ var config = {
 
 
 
-}, {    
+}, {
 
         rcinfo: {
                 type: 'HEP',
@@ -827,7 +827,7 @@ var config = {
 
 
 
-}, {    
+}, {
 
         rcinfo: {
                 type: 'HEP',
@@ -880,7 +880,7 @@ var config = {
 	'a=rtcp:31957\r\n'+
 	'\r\n\r\n'
 
-}, {    
+}, {
 
         rcinfo: {
                 type: 'HEP',
@@ -918,7 +918,7 @@ var config = {
 	'\r\n\r\n'
 
 
-}, {    
+}, {
 
         rcinfo: {
                 type: 'HEP',
@@ -956,7 +956,7 @@ var config = {
 	'Content-Length: 0\r\n'+
 	'\r\n\r\n'
 
-}, {    
+}, {
 
         rcinfo: {
                 type: 'HEP',
@@ -991,7 +991,7 @@ var config = {
 
 
 
-}, {    
+}, {
 
         rcinfo: {
                 type: 'HEP',
@@ -1110,7 +1110,7 @@ var config = {
 
 /* END RTCP */
 
-}, {    
+}, {
         rcinfo: {
                 type: 'HEP',
                 version: 3,
@@ -1146,7 +1146,7 @@ var config = {
 	'\r\n\r\n'
 
 
-}, {    
+}, {
 
         rcinfo: {
                 type: 'HEP',
@@ -1190,7 +1190,7 @@ var config = {
 	'\r\n\r\n'
 
 
-}, {    
+}, {
 
         rcinfo: {
                 type: 'HEP',
@@ -1224,7 +1224,7 @@ var config = {
 	'\r\n\r\n'
 
 
-}, {    
+}, {
 
         rcinfo: {
                 type: 'HEP',
@@ -1254,7 +1254,7 @@ var config = {
 	'\r\n\r\n'
 
 
-}, {    
+}, {
 
         rcinfo: {
                 type: 'HEP',
@@ -1293,7 +1293,7 @@ var config = {
 	'\r\n\r\n'
 
 
-}, {    
+}, {
 
         rcinfo: {
                 type: 'HEP',
@@ -1328,7 +1328,7 @@ var config = {
 	'\r\n\r\n'
 
 
-}, {    
+}, {
 
         rcinfo: {
                 type: 'HEP',
@@ -1364,7 +1364,7 @@ var config = {
 
 
 
-}, {    
+}, {
 
         rcinfo: {
                 type: 'HEP',
@@ -1397,7 +1397,7 @@ var config = {
 	'\r\n\r\n'
 
 
-}, {    
+}, {
 
         rcinfo: {
                 type: 'HEP',
@@ -1429,7 +1429,7 @@ var config = {
 	'\r\n\r\n'
 
 
-}, {    
+}, {
 
         rcinfo: {
                 type: 'HEP',
@@ -1465,7 +1465,7 @@ var config = {
 	'\r\n\r\n'
 
 
-}, {    
+}, {
 
         rcinfo: {
                 type: 'HEP',
@@ -1505,7 +1505,7 @@ var config = {
 
 
 
-}, {    
+}, {
 
         rcinfo: {
                 type: 'HEP',

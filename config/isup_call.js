@@ -6,7 +6,7 @@ var rand = function(maximum,minimum){
 }
 
 var randomByte = function() {
-  return Math.round(Math.random()*256);
+  return Math.round(Math.random()*254);
 }
 
 var randomIp = function() {
@@ -84,7 +84,7 @@ var config = {
         srcIp: int1_stp,
         dstIp: ext1_stp,
         srcPort: 7234,
-        dstPort: 2904 
+        dstPort: 2904
     },
     pause: 250,
     payload: acm
@@ -104,7 +104,7 @@ var config = {
         srcIp: int1_stp,
         dstIp: ext1_stp,
         srcPort: 7234,
-        dstPort: 2904 
+        dstPort: 2904
     },
     pause: 250,
     payload: cpg_progress
@@ -124,7 +124,7 @@ var config = {
         srcIp: int1_stp,
         dstIp: ext1_stp,
         srcPort: 7234,
-        dstPort: 2904 
+        dstPort: 2904
     },
     pause: 250,
     payload: cpg_alerting
@@ -164,7 +164,7 @@ var config = {
         srcIp: int1_stp,
         dstIp: ext1_stp,
         srcPort: 7234,
-        dstPort: 2904 
+        dstPort: 2904
     },
     pause: 250,
     payload: rlc
