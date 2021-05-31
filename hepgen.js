@@ -6,9 +6,9 @@ var dgram = require('dgram');
 const execSync = require('child_process').execSync;
 const exec = require('child_process').exec;
 
-var version = 'v1.0.6';
+var version = 'v1.0.8';
 var debug = false;
-var stats = {rcvd: 0, parsed: 0, hepsent: 0, err: 0, heperr: 0 }; 
+var stats = {rcvd: 0, parsed: 0, hepsent: 0, err: 0, heperr: 0 };
 
 /* UDP Socket Handler */
 
@@ -33,7 +33,7 @@ var getSocket = function (type) {
 }
 
 var socket = dgram.createSocket("udp4");
-    socket = getSocket('udp4'); 
+    socket = getSocket('udp4');
 
 var countDown = function(){
 	count--;
@@ -42,7 +42,7 @@ var countDown = function(){
 		console.log(stats);
 		console.log('Done! Exiting...');
 		process.exit(0);
-	}	
+	}
 }
 
 var sendHEP3 = function(msg,rcinfo){
@@ -67,7 +67,7 @@ var sendHEP3 = function(msg,rcinfo){
 }
 
 var sendAPI = function(msg,rcinfo){
-	/* 	PUSH non-HEP data to API using methods in rcinfo for Query parameters.	
+	/* 	PUSH non-HEP data to API using methods in rcinfo for Query parameters.
 		For an example API message format, see config/log.js
 	*/
 	if (debug) console.log('API DEBUG',_config_,rcinfo,msg);
@@ -98,17 +98,17 @@ var sendAPI = function(msg,rcinfo){
 	})
 	req.write(JSON.stringify(msg));
 	req.end();
-	
+
 }
 
 var routeOUT = function(msg,rcinfo){
   console.log('ROUTING',msg,rcinfo);
 	if (rcinfo.type === "HEP"){
 		sendHEP3(msg,rcinfo);
-	} else if(rcinfo.type === "API") {		
+	} else if(rcinfo.type === "API") {
 		sendAPI(msg,rcinfo);
 	} else {
-		console.error('Unsupported Type!',rcinfo);	
+		console.error('Unsupported Type!',rcinfo);
 	}
 };
 
@@ -124,13 +124,13 @@ var pause = 0;
 const execHEP = function(messages) {
   count = messages.length;
   messages.forEach(function preHep(message) {
-	  
+
 	var rcinfo = message.rcinfo;
 	var msg = message.payload;
 	if (debug) console.log(msg);
 	stats.rcvd++;
 
-	if (message.sleep) { 
+	if (message.sleep) {
 		console.log('sleeping '+message.sleep+' ms...');
 		sleep( message.sleep );
 	}
@@ -167,18 +167,18 @@ if(process.argv.indexOf("-d") != -1){
 var _config_ = require("./config/default");
 
 if(process.argv.indexOf("-c") != -1){
-    _config_ = require(process.argv[process.argv.indexOf("-c") + 1]); 
+    _config_ = require(process.argv[process.argv.indexOf("-c") + 1]);
 	if(process.argv.indexOf("-d") != -1){
 		debug = true;
 	}
 	if(process.argv.indexOf("-s") != -1){
-	    _config_.HEP_SERVER = process.argv[process.argv.indexOf("-s") + 1]; 
+	    _config_.HEP_SERVER = process.argv[process.argv.indexOf("-s") + 1];
 	}
 	if(process.argv.indexOf("-p") != -1){
-	    _config_.HEP_PORT = process.argv[process.argv.indexOf("-p") + 1]; 
+	    _config_.HEP_PORT = process.argv[process.argv.indexOf("-p") + 1];
 	}
 	if(process.argv.indexOf("-a") != -1){
-	    _config_.API_SERVER = process.argv[process.argv.indexOf("-a") + 1]; 
+	    _config_.API_SERVER = process.argv[process.argv.indexOf("-a") + 1];
 	}
 	if (debug) console.log(_config_);
         execHEP(_config_.MESSAGES);
@@ -202,14 +202,12 @@ if(process.argv.indexOf("-P") != -1){
 	top.on('close', (code) => {
 	  _config_ = JSON.parse(message);
 	  if(process.argv.indexOf("-s") != -1){
-	    _config_.HEP_SERVER = process.argv[process.argv.indexOf("-s") + 1]; 
+	    _config_.HEP_SERVER = process.argv[process.argv.indexOf("-s") + 1];
   	  }
 	  if(process.argv.indexOf("-p") != -1){
-	    _config_.HEP_PORT = process.argv[process.argv.indexOf("-p") + 1]; 
+	    _config_.HEP_PORT = process.argv[process.argv.indexOf("-p") + 1];
 	  }
 	  execHEP(_config_.MESSAGES);
 	});
 
 }
-
-

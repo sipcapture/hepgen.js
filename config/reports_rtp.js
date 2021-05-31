@@ -6,7 +6,7 @@ var rand = function(maximum,minimum){
 }
 
 var randomByte = function() {
-  return Math.round(Math.random()*256);
+  return Math.round(Math.random()*254);
 }
 
 
