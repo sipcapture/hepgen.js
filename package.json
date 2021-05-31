@@ -1,6 +1,6 @@
 {
   "name": "hepgen.js",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "HEP Message Generator",
   "author": "lorenzo.mangani@gmail.com",
   "dependencies": {
@@ -18,7 +18,8 @@
     "url": "https://github.com/sipcapture/hepgen.js/blob/master/LICENSE"
   },
   "bin": {
-    "hepgen.js": "./hepgen.js"
+    "hepgen.js": "./hepgen.js",
+    "pcap2hepgen.js": "./tools/pcap2hepgen.js"
   },
   "main": "hepgen.js",
   "devDependencies": {},

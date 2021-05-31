@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 /* PCAP TEXT to HEPGEN Convertor */
 /* Modules import */
 const os = require('os');

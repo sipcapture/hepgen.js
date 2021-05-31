@@ -1,8 +1,10 @@
 // HEPGEN-JS SETTINGS (please configure)
 // ------------------------------------------------------
 
-var rand = function(maximum,minimum){
-	return Math.floor(Math.random() * (maximum - minimum + 1)) + minimum;
+var rand = function(maximum,minimum,even){
+	var final = Math.floor(Math.random() * (maximum - minimum + 1)) + minimum;
+	if (even && final % 2 != 0) final++;
+	return final;
 }
 
 var randomByte = function() {
@@ -35,6 +37,8 @@ var peer_ip='55.66.77.'+rand(80,88);
 var localhost = '127.0.0.1';
 
 var useragent = 'HEPGEN.JS@sipcapture.org';
+
+var rtpports = { src: rand(7000,8000,0), dst: rand(10000,20000,0) };
 
 console.log("CALLID: "+call_id);
 
@@ -1047,8 +1051,8 @@ var config = {
                           proto_type: 34,
                           srcIp: pub_ip,
                           dstIp: peer_ip,
-                          srcPort: 0,
-                          dstPort: 0,
+                          srcPort: rtpports.src || 7000,
+                          dstPort: rtpports.dst || 10000,
                           mos: 403,
                           correlation_id: call_id
                   },
@@ -1067,8 +1071,8 @@ var config = {
                           proto_type: 34,
                           srcIp: peer_ip,
                           dstIp: pub_ip,
-                          srcPort: 0,
-                          dstPort: 0,
+                          srcPort: rtpports.src || 7000,
+                          dstPort: rtpports.dst || 10000,
                           mos: 393,
                           correlation_id: call_id
                   },
@@ -1087,8 +1091,8 @@ var config = {
                           proto_type: 34,
                           srcIp: pub_ip,
                           dstIp: peer_ip,
-                          srcPort: 0,
-                          dstPort: 0,
+                          srcPort: rtpports.src || 7000,
+                          dstPort: rtpports.dst || 10000,
                           mos: 393,
                           correlation_id: call_id
                   },
@@ -1107,8 +1111,8 @@ var config = {
                           proto_type: 34,
                           srcIp: peer_ip,
                           dstIp: pub_ip,
-                          srcPort: 0,
-                          dstPort: 0,
+                          srcPort: rtpports.src || 7000,
+                          dstPort: rtpports.dst || 10000,
                           mos: 402,
                           correlation_id: call_id
                   },
@@ -1127,8 +1131,8 @@ var config = {
                           proto_type: 34,
                           srcIp: pub_ip,
                           dstIp: peer_ip,
-                          srcPort: 0,
-                          dstPort: 0,
+                          srcPort: rtpports.src || 7000,
+                          dstPort: rtpports.dst || 10000,
                           mos: 393,
                           correlation_id: call_id
                   },
@@ -1147,8 +1151,8 @@ var config = {
                           proto_type: 35,
                           srcIp: peer_ip,
                           dstIp: pub_ip,
-                          srcPort: 0,
-                          dstPort: 0,
+                          srcPort: rtpports.src || 7000,
+                          dstPort: rtpports.dst || 10000,
                           correlation_id: call_id+'_b2b-1',
 			  mos: 440
                   },
@@ -1167,8 +1171,8 @@ var config = {
                           proto_type: 35,
                           srcIp: pub_ip,
                           dstIp: peer_ip,
-                          srcPort: 0,
-                          dstPort: 0,
+                          srcPort: rtpports.src || 7000,
+                          dstPort: rtpports.dst || 10000,
                           correlation_id: call_id,
 			  mos: 410
                   },
