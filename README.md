@@ -1,7 +1,7 @@
 <img src="https://user-images.githubusercontent.com/1423657/55069501-8348c400-5084-11e9-9931-fefe0f9874a7.png" width=200/>
 
 # HEPGEN.JS
-Barebone HEP Packet Generator for SIP-less Devs and Unit Testing
+Barebone HEP Packet Generator for SIP-less Devs and Unit Testing, supporting UDP or TCP transport.
 
 
 ![](http://i.imgur.com/Z3xYbDh.png)
@@ -37,9 +37,13 @@ npm install -g hepgen.js
 ```
 
 ### Run
-Replace `127.0.0.1` and `9060` with the actual IP and PORT of your HEP Server:
+Replace `127.0.0.1` and `9060` with the actual IP and PORT of your HEP Server (udp by default):
 ```
 hepgen.js -s 127.0.0.1 -p 9060 -c "./config/b2bcall_rtcp.js"
+```
+To turn on tcp transport add -t tcp to your command:
+```
+hepgen.js -s 127.0.0.1 -p 9060 -c "./config/b2bcall_rtcp.js" -t tcp
 ```
 
 ### Custom Config
@@ -61,5 +65,3 @@ hepgen.js -s 127.0.0.1 -p 9063 -P "./path/to/SIP.pcap-txt"
 ```
 hepgen.js -d
 ```
-
-

@@ -3,42 +3,55 @@
 // HEP Packet Generator for Devs
 var HEPjs = require('hep-js');
 var dgram = require('dgram');
+var net = require('net')
 const execSync = require('child_process').execSync;
 const exec = require('child_process').exec;
 
-var version = 'v1.0.8';
+var version = 'v1.0.9';
 var debug = false;
 var stats = {rcvd: 0, parsed: 0, hepsent: 0, err: 0, heperr: 0 };
+var socketUsers = 0;
+
 
 /* UDP Socket Handler */
 
 var getSocket = function (type) {
-    if (undefined === socket) {
+    if(debug)console.log('Socket Type =', type);
+    if (undefined === socket && type === 'udp4') {
         socket = dgram.createSocket(type);
-        socket.on('error', socketErrorHandler);
-        /**
-         * Handles socket's 'close' event,
-         * recover socket in case of unplanned closing.
-         */
-        var socketCloseHandler = function () {
-            if (socketUsers > 0) {
-                socket = undefined;
-                --socketUsers;
-                getSocket(type);
-            }
-        };
-        socket.on('close', socketCloseHandler);
+    } else if (type === 'tcp') {
+      socket = net.connect(_config_.HEP_PORT, _config_.HEP_SERVER)
     }
+
+    var socketErrorHandler = (err)=>{
+      console.log(err);
+      throw(err);
+    }
+
+    socket.on('error', socketErrorHandler);
+    /**
+     * Handles socket's 'close' event,
+     * recover socket in case of unplanned closing.
+     */
+    var socketCloseHandler = function () {
+        if (socketUsers > 0) {
+            socket = undefined;
+            --socketUsers;
+            getSocket(type);
+        }
+    };
+
+    socket.on('close', socketCloseHandler);
+
+
     return socket;
 }
 
-var socket = dgram.createSocket("udp4");
-    socket = getSocket('udp4');
 
 var countDown = function(){
 	count--;
 	if (count == 0) {
-		if(socket) socket.close();
+		if(socket && socket.hasOwnProperty('close')) socket.close();
 		console.log(stats);
 		console.log('Done! Exiting...');
 		process.exit(0);
@@ -52,16 +65,30 @@ var sendHEP3 = function(msg,rcinfo){
 			var hep_message = HEPjs.encapsulate(msg,rcinfo);
 			stats.parsed++;
 			if (hep_message) {
-				socket.send(hep_message, 0, hep_message.length, _config_.HEP_PORT, _config_.HEP_SERVER, function(err) {
-					stats.hepsent++;
-					countDown();
-				});
+        if(_config_.SOCKET_TYPE == 'udp4'){
+          socket.send(hep_message, 0, hep_message.length, _config_.HEP_PORT, _config_.HEP_SERVER, function(err) {
+  					stats.hepsent++;
+  					countDown();
+  				});
+        } else {
+          socket.write(hep_message, function(err) {
+            if(!err){
+              stats.hepsent++;
+    					countDown();
+            } else {
+              if(debug)console.log('tcp socket err: ', err);
+              stats.err++;
+              countDown();
+            }
+  				});
+        }
 			} else { console.log('HEP Parsing error!'); stats.heperr++; }
 		}
 		catch (e) {
 			console.log('HEP3 Error sending!');
 			console.log(e);
-			stats.heperr++;
+			stats.err++;
+      countDown();
 		}
 	}
 }
@@ -160,6 +187,8 @@ const execHEP = function(messages) {
 }
 
 
+/* Beginning of execution */
+
 if(process.argv.indexOf("-d") != -1){
     debug = true;
 }
@@ -180,9 +209,18 @@ if(process.argv.indexOf("-c") != -1){
 	if(process.argv.indexOf("-a") != -1){
 	    _config_.API_SERVER = process.argv[process.argv.indexOf("-a") + 1];
 	}
+  // socket type flag
+  if(process.argv.indexOf("-t") != -1) {
+    _config_.SOCKET_TYPE = process.argv[process.argv.indexOf("-t") + 1];
+  } else {
+    _config_.SOCKET_TYPE = 'udp4';
+  }
+
 	if (debug) console.log(_config_);
         execHEP(_config_.MESSAGES);
 }
+
+var socket = getSocket(_config_.SOCKET_TYPE);
 
 if(process.argv.indexOf("-P") != -1){
 
