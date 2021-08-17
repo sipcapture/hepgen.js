@@ -65,3 +65,8 @@ hepgen.js -s 127.0.0.1 -p 9063 -P "./path/to/SIP.pcap-txt"
 ```
 hepgen.js -d
 ```
+
+### Loop a Call multiple times (Be careful how you use it)
+```
+hepgen.js -s 127.0.0.1 -p 9060 -c "./config/loop_simple.js" --loop 5 //loop same call 5 times
+```

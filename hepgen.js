@@ -7,7 +7,7 @@ var net = require('net')
 const execSync = require('child_process').execSync;
 const exec = require('child_process').exec;
 
-var version = 'v1.0.9';
+var version = 'v1.1.0';
 var debug = false;
 var stats = {rcvd: 0, parsed: 0, hepsent: 0, err: 0, heperr: 0 };
 var socketUsers = 0;
@@ -149,42 +149,58 @@ var count = 0;
 var pause = 0;
 
 const execHEP = function(messages) {
+  if(debug)console.log('loop', _config_.LOOP_MESSAGE)
   count = messages.length;
-  messages.forEach(function preHep(message) {
-
-	var rcinfo = message.rcinfo;
-	var msg = message.payload;
-	if (debug) console.log(msg);
-	stats.rcvd++;
-
-	if (message.sleep) {
-		console.log('sleeping '+message.sleep+' ms...');
-		sleep( message.sleep );
-	}
-
-	var hrTime = process.hrtime();
-	var datenow = new Date().getTime();
-	rcinfo.time_sec = Math.floor( datenow / 1000);
-	rcinfo.time_usec = (datenow - (rcinfo.time_sec*1000))*1000;
-
-	if (debug) console.log(rcinfo);
-	if (message.pause && (message.pause > 10000 || message.pause < 0 )) message.pause = 100;
-	if (message.pause && message.pause > 0) {
-		pause += message.pause;
-		setTimeout(function() {
-		    // delayed ts
-	            var datenow = new Date().getTime();
-		    rcinfo.time_sec = Math.floor( datenow / 1000);
-		    rcinfo.time_usec = (datenow - (rcinfo.time_sec*1000))*1000;
-		    routeOUT(msg,rcinfo);
-		    process.stdout.write("rcvd: "+stats.rcvd+", parsed: "+stats.parsed+", hepsent: "+stats.hepsent+", err: "+stats.err+", heperr: "+stats.heperr+"\r");
-		}, pause);
-	} else {
-		routeOUT(msg,rcinfo);
-		process.stdout.write("rcvd: "+stats.rcvd+", parsed: "+stats.parsed+", hepsent: "+stats.hepsent+", err: "+stats.err+", heperr: "+stats.heperr+"\r");
-	}
-  });
+  if(_config_.LOOP_MESSAGE > 0) {
+    count = messages.length * _config_.LOOP_MESSAGE;
+    while(_config_.LOOP_MESSAGE > 0) {
+      if(debug)console.log('loop', _config_.LOOP_MESSAGE)
+      var upperCall = _config_.LOOP_MESSAGE + Math.random().toString(36).substring(7) + '@127.0.0.1'
+      messages.forEach(preHep);
+      --_config_.LOOP_MESSAGE;
+    }
+  } else {
+    messages.forEach(preHep);
+  }
 }
+
+/* messages processing and sending */
+
+function preHep(message) {
+
+var rcinfo = message.rcinfo;
+var msg = message.payload;
+if (debug) console.log(msg);
+stats.rcvd++;
+
+if (message.sleep) {
+  console.log('sleeping '+message.sleep+' ms...');
+  sleep( message.sleep );
+}
+
+var hrTime = process.hrtime();
+var datenow = new Date().getTime();
+rcinfo.time_sec = Math.floor( datenow / 1000);
+rcinfo.time_usec = (datenow - (rcinfo.time_sec*1000))*1000;
+
+if (debug) console.log(rcinfo);
+if (message.pause && (message.pause > 10000 || message.pause < 0 )) message.pause = 100;
+if (message.pause && message.pause > 0) {
+  pause += message.pause;
+  setTimeout(function() {
+      // delayed ts
+      var datenow = new Date().getTime();
+      rcinfo.time_sec = Math.floor( datenow / 1000);
+      rcinfo.time_usec = (datenow - (rcinfo.time_sec*1000))*1000;
+      routeOUT(msg,rcinfo);
+      process.stdout.write("rcvd: "+stats.rcvd+", parsed: "+stats.parsed+", hepsent: "+stats.hepsent+", err: "+stats.err+", heperr: "+stats.heperr+"\r");
+  }, pause);
+} else {
+  routeOUT(msg,rcinfo);
+  process.stdout.write("rcvd: "+stats.rcvd+", parsed: "+stats.parsed+", hepsent: "+stats.hepsent+", err: "+stats.err+", heperr: "+stats.heperr+"\r");
+}
+}
+
 
 
 /* Beginning of execution */
@@ -197,6 +213,7 @@ var _config_ = require("./config/default");
 
 if(process.argv.indexOf("-c") != -1){
     _config_ = require(process.argv[process.argv.indexOf("-c") + 1]);
+
 	if(process.argv.indexOf("-d") != -1){
 		debug = true;
 	}
@@ -214,6 +231,11 @@ if(process.argv.indexOf("-c") != -1){
     _config_.SOCKET_TYPE = process.argv[process.argv.indexOf("-t") + 1];
   } else {
     _config_.SOCKET_TYPE = 'udp4';
+  }
+  // loop flag for load testing
+  if(process.argv.indexOf("--loop") != -1) {
+    if(debug)console.log('Got Loop Setting with ', process.argv[process.argv.indexOf("--loop") + 1], process.argv)
+    _config_.LOOP_MESSAGE = new Number(process.argv[process.argv.indexOf("--loop") + 1]);
   }
 
 	if (debug) console.log(_config_);
