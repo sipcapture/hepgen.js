@@ -52,8 +52,8 @@ var countDown = function(){
 	count--;
 	if (count == 0) {
 		if(socket && socket.hasOwnProperty('close')) socket.close();
-		console.log(stats);
-		console.log('Done! Exiting...');
+		if(!_config_.LOOPED)console.log(stats);
+		if(!_config_.LOOPED)console.log('Done! Exiting...');
 		process.exit(0);
 	}
 }
@@ -129,7 +129,7 @@ var sendAPI = function(msg,rcinfo){
 }
 
 var routeOUT = function(msg,rcinfo){
-  console.log('ROUTING',msg,rcinfo);
+  if(!_config_.LOOPED)console.log('ROUTING',msg,rcinfo);
 	if (rcinfo.type === "HEP"){
 		sendHEP3(msg,rcinfo);
 	} else if(rcinfo.type === "API") {
@@ -184,10 +184,10 @@ async function preHep(message) {
     rcinfo.time_sec = Math.floor( datenow / 1000);
     rcinfo.time_usec = (datenow - (rcinfo.time_sec*1000))*1000;
     routeOUT(msg,rcinfo);
-    process.stdout.write("rcvd: "+stats.rcvd+", parsed: "+stats.parsed+", hepsent: "+stats.hepsent+", err: "+stats.err+", heperr: "+stats.heperr+"\r");
+    if(!_config_.LOOPED)process.stdout.write("rcvd: "+stats.rcvd+", parsed: "+stats.parsed+", hepsent: "+stats.hepsent+", err: "+stats.err+", heperr: "+stats.heperr+"\r");
   } else {
     routeOUT(msg,rcinfo);
-    process.stdout.write("rcvd: "+stats.rcvd+", parsed: "+stats.parsed+", hepsent: "+stats.hepsent+", err: "+stats.err+", heperr: "+stats.heperr+"\r");
+    if(_config_.LOOPED)process.stdout.write("rcvd: "+stats.rcvd+", parsed: "+stats.parsed+", hepsent: "+stats.hepsent+", err: "+stats.err+", heperr: "+stats.heperr+"\r");
   }
   return true
 }
@@ -230,7 +230,7 @@ if(process.argv.indexOf("-c") != -1){
 
 	if (debug) console.log(_config_);
   if(_config_.LOOPED){
-    console.log('we are looping');
+    if(debug)console.log('we are looping');
     startLoop();
   } else {
     execHEP(_config_.MESSAGES);
@@ -240,7 +240,7 @@ if(process.argv.indexOf("-c") != -1){
 async function startLoop() {
   var messages = _config_.MESSAGES;
   while(_config_.LOOP_MESSAGE > 0) {
-    console.log("looping now", _config_.LOOP_MESSAGE);
+    if(debug)console.log("looping now", _config_.LOOP_MESSAGE);
     await execHEP(messages, _config_.LOOP_MESSAGE);
     // re-evaluate for randomness (otherwise callid stays the same)
     delete require.cache[path]
