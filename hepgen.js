@@ -148,11 +148,12 @@ function sleep(ms) {
 var count = 0;
 var pause = 0;
 
-const execHEP = async function(messages) {
+const execHEP = async function(messages, loopCount) {
   count = messages.length;
+  count *= loopCount || 1;
 
   for (var message of messages) {
-    console.log('processing count', count--);
+    if(debug)console.log('processing count: ', count)
     await preHep(message)
   }
 
@@ -240,7 +241,8 @@ async function startLoop() {
   var messages = _config_.MESSAGES;
   while(_config_.LOOP_MESSAGE > 0) {
     console.log("looping now", _config_.LOOP_MESSAGE);
-    await execHEP(messages);
+    await execHEP(messages, _config_.LOOP_MESSAGE);
+    // re-evaluate for randomness (otherwise callid stays the same)
     delete require.cache[path]
     let conf = require(path)
     messages = conf.MESSAGES
