@@ -7,7 +7,7 @@ var net = require('net')
 const execSync = require('child_process').execSync;
 const exec = require('child_process').exec;
 
-var version = 'v1.1.0';
+var version = 'v1.1.5';
 var debug = false;
 var stats = {rcvd: 0, parsed: 0, hepsent: 0, err: 0, heperr: 0 };
 var socketUsers = 0;
@@ -173,7 +173,7 @@ async function preHep(message) {
   var hrTime = process.hrtime();
   var datenow = new Date().getTime();
   rcinfo.time_sec = Math.floor( datenow / 1000);
-  rcinfo.time_usec = (datenow - (rcinfo.time_sec*1000))*1000;
+  rcinfo.time_usec = ((datenow - (rcinfo.time_sec*1000))*1000)+rcinfo.time_usec;
 
   if (debug) console.log(rcinfo);
   if (message.pause && (message.pause > 10000 || message.pause < 0 )) message.pause = 100;
@@ -182,7 +182,7 @@ async function preHep(message) {
     await new Promise(f => setTimeout(f, pause))
     var datenow = new Date().getTime();
     rcinfo.time_sec = Math.floor( datenow / 1000);
-    rcinfo.time_usec = (datenow - (rcinfo.time_sec*1000))*1000;
+    rcinfo.time_usec = ((datenow - (rcinfo.time_sec*1000))*1000)+rcinfo.time_usec;
     routeOUT(msg,rcinfo);
     if(!_config_.LOOPED)process.stdout.write("rcvd: "+stats.rcvd+", parsed: "+stats.parsed+", hepsent: "+stats.hepsent+", err: "+stats.err+", heperr: "+stats.heperr+"\r");
   } else {
