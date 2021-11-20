@@ -146,8 +146,9 @@ async function handleRow (row, key) {
     // create message block for configuration
     if (debug)console.log('making a block from ', tmp[0])
 
+
     let block = row.replace(netRegex, function (match, proto, date, time, timeMicro, unused, fromIp, fromPort, divide, toIp, toPort) {
-      console.log('args for replace time', arguments)
+      if(debug) console.log('args for replace time', arguments)
       time = parseInt(time) // in seconds
       timeMicro = parseInt(timeMicro) // in microseconds
       if (debug)console.log('TEST', time, timeMicro, cache.previous.time)
@@ -159,8 +160,6 @@ async function handleRow (row, key) {
         rcinfo: {
           type: 'HEP',
           version: 3,
-          time_sec: time,
-          time_usec: timeMicro,
           payload_type: 1,
           captureId: '2001',
           capturePass: 'myHep',
