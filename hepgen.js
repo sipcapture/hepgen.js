@@ -65,8 +65,9 @@ var sendHEP3 = function(msg,rcinfo){
 			var hep_message = HEPjs.encapsulate(msg,rcinfo);
 			stats.parsed++;
 			if (hep_message) {
-        if(_config_.SOCKET_TYPE == 'udp4'){
+        if(socket && _config_.SOCKET_TYPE == 'udp4'){
           socket.send(hep_message, 0, hep_message.length, _config_.HEP_PORT, _config_.HEP_SERVER, function(err) {
+					console.log(err);
   					stats.hepsent++;
   					countDown();
   				});
