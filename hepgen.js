@@ -7,7 +7,7 @@ var net = require('net')
 const execSync = require('child_process').execSync;
 const exec = require('child_process').exec;
 
-var version = 'v1.0.9';
+var version = 'v1.1.5';
 var debug = false;
 var stats = {rcvd: 0, parsed: 0, hepsent: 0, err: 0, heperr: 0 };
 var socketUsers = 0;
@@ -52,8 +52,8 @@ var countDown = function(){
 	count--;
 	if (count == 0) {
 		if(socket && socket.hasOwnProperty('close')) socket.close();
-		console.log(stats);
-		console.log('Done! Exiting...');
+		if(!_config_.LOOPED)console.log(stats);
+		if(!_config_.LOOPED)console.log('Done! Exiting...');
 		process.exit(0);
 	}
 }
@@ -129,7 +129,7 @@ var sendAPI = function(msg,rcinfo){
 }
 
 var routeOUT = function(msg,rcinfo){
-  console.log('ROUTING',msg,rcinfo);
+  if(!_config_.LOOPED)console.log('ROUTING',msg,rcinfo);
 	if (rcinfo.type === "HEP"){
 		sendHEP3(msg,rcinfo);
 	} else if(rcinfo.type === "API") {
@@ -148,44 +148,49 @@ function sleep(ms) {
 var count = 0;
 var pause = 0;
 
-const execHEP = function(messages) {
+const execHEP = async function(messages, loopCount) {
   count = messages.length;
-  messages.forEach(function preHep(message) {
+  count *= loopCount || 1;
 
-	var rcinfo = message.rcinfo;
-	var msg = message.payload;
-	if (debug) console.log(msg);
-	stats.rcvd++;
+  for (var message of messages) {
+    if(debug)console.log('processing count: ', count)
+    await preHep(message)
+  }
 
-	if (message.sleep) {
-		console.log('sleeping '+message.sleep+' ms...');
-		sleep( message.sleep );
-	}
-
-	var hrTime = process.hrtime();
-	var datenow = new Date().getTime();
-	rcinfo.time_sec = Math.floor( datenow / 1000);
-	rcinfo.time_usec = (datenow - (rcinfo.time_sec*1000))*1000;
-
-	if (debug) console.log(rcinfo);
-	if (message.pause && (message.pause > 10000 || message.pause < 0 )) message.pause = 100;
-	if (message.pause && message.pause > 0) {
-		pause += message.pause;
-		setTimeout(function() {
-		    // delayed ts
-	            var datenow = new Date().getTime();
-		    rcinfo.time_sec = Math.floor( datenow / 1000);
-		    rcinfo.time_usec = (datenow - (rcinfo.time_sec*1000))*1000;
-		    routeOUT(msg,rcinfo);
-		    process.stdout.write("rcvd: "+stats.rcvd+", parsed: "+stats.parsed+", hepsent: "+stats.hepsent+", err: "+stats.err+", heperr: "+stats.heperr+"\r");
-		}, pause);
-	} else {
-		routeOUT(msg,rcinfo);
-		process.stdout.write("rcvd: "+stats.rcvd+", parsed: "+stats.parsed+", hepsent: "+stats.hepsent+", err: "+stats.err+", heperr: "+stats.heperr+"\r");
-	}
-  });
 }
 
+async function preHep(message) {
+  var rcinfo = message.rcinfo;
+  var msg = message.payload;
+  if (debug) console.log(msg);
+  stats.rcvd++;
+
+  if (message.sleep) {
+    console.log('sleeping '+message.sleep+' ms...');
+    sleep( message.sleep );
+  }
+
+  var hrTime = process.hrtime();
+  var datenow = new Date();
+  rcinfo.time_sec = rcinfo.time_sec || Math.floor( datenow.getTime() / 1000);
+  rcinfo.time_usec = rcinfo.time_usec || datenow.getMilliseconds() * 1000;
+
+  if (debug) console.log(rcinfo);
+  if (message.pause && (message.pause > 10000 || message.pause < 0 )) message.pause = 100;
+  if (message.pause && message.pause > 0) {
+    pause += message.pause;
+    await new Promise(f => setTimeout(f, pause))
+    var datenow = new Date();
+    rcinfo.time_sec = rcinfo.time_sec || Math.floor( datenow.getTime() / 1000);
+    rcinfo.time_usec = rcinfo.time_usec || datenow.getMilliseconds() * 1000;
+    routeOUT(msg,rcinfo);
+    if(!_config_.LOOPED)process.stdout.write("rcvd: "+stats.rcvd+", parsed: "+stats.parsed+", hepsent: "+stats.hepsent+", err: "+stats.err+", heperr: "+stats.heperr+"\r");
+  } else {
+    routeOUT(msg,rcinfo);
+    if(_config_.LOOPED)process.stdout.write("rcvd: "+stats.rcvd+", parsed: "+stats.parsed+", hepsent: "+stats.hepsent+", err: "+stats.err+", heperr: "+stats.heperr+"\r");
+  }
+  return true
+}
 
 /* Beginning of execution */
 
@@ -215,9 +220,34 @@ if(process.argv.indexOf("-c") != -1){
   } else {
     _config_.SOCKET_TYPE = 'udp4';
   }
+  // loop flag for load testing
+  if(process.argv.indexOf("--loop") != -1) {
+    if(debug)console.log('Got Loop Setting with ', process.argv[process.argv.indexOf("--loop") + 1], process.argv)
+    _config_.LOOP_MESSAGE = new Number(process.argv[process.argv.indexOf("--loop") + 1]);
+    _config_.LOOPED = true
+    var path = process.argv[process.argv.indexOf("-c") + 1]
+  }
 
 	if (debug) console.log(_config_);
-        execHEP(_config_.MESSAGES);
+  if(_config_.LOOPED){
+    if(debug)console.log('we are looping');
+    startLoop();
+  } else {
+    execHEP(_config_.MESSAGES);
+  }
+}
+
+async function startLoop() {
+  var messages = _config_.MESSAGES;
+  while(_config_.LOOP_MESSAGE > 0) {
+    if(debug)console.log("looping now", _config_.LOOP_MESSAGE);
+    await execHEP(messages, _config_.LOOP_MESSAGE);
+    // re-evaluate for randomness (otherwise callid stays the same)
+    delete require.cache[path]
+    let conf = require(path)
+    messages = conf.MESSAGES
+    --_config_.LOOP_MESSAGE
+  }
 }
 
 var socket = getSocket(_config_.SOCKET_TYPE);
