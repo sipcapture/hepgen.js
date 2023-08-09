@@ -37,13 +37,19 @@ npm install -g hepgen.js
 ```
 
 ### Run
-Replace `127.0.0.1` and `9060` with the actual IP and PORT of your HEP Server (udp by default):
+Replace `127.0.0.1` and `9060` with the actual IP and PORT of your HEP Server. Default transport is `udp`:
 ```
 hepgen.js -s 127.0.0.1 -p 9060 -c "./config/b2bcall_rtcp.js"
 ```
-To turn on tcp transport add -t tcp to your command:
+
+To turn on `tcp` transport add -t tcp to your command:
 ```
-hepgen.js -s 127.0.0.1 -p 9060 -c "./config/b2bcall_rtcp.js" -t tcp
+hepgen.js -s 127.0.0.1 -p 9061 -c "./config/b2bcall_rtcp.js" -t tcp
+```
+
+To turn on `tls` transport add -t tls to your command:
+```
+hepgen.js -s 127.0.0.1 -p 9443 -c "./config/b2bcall_rtcp.js" -t tls
 ```
 
 ### Custom Config

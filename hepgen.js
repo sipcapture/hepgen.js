@@ -3,7 +3,8 @@
 // HEP Packet Generator for Devs
 var HEPjs = require('hep-js');
 var dgram = require('dgram');
-var net = require('net')
+const net = require('net')
+const tls = require('node:tls')
 const execSync = require('child_process').execSync;
 const exec = require('child_process').exec;
 
@@ -21,7 +22,10 @@ var getSocket = function (type) {
         socket = dgram.createSocket(type);
     } else if (type === 'tcp') {
       socket = net.connect(_config_.HEP_PORT, _config_.HEP_SERVER)
-    }
+    } else if (type === 'tls') {
+	  socket = tls.connect(_config_.HEP_PORT, _config_.HEP_SERVER)
+	  console.log('TLS Socket', socket)
+	}
 
     var socketErrorHandler = (err)=>{
       console.log(err);
