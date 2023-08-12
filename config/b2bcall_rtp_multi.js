@@ -43,11 +43,24 @@ var useragent = 'HEPGEN.JS@sipcapture.org';
 
 var rtpports = { src: rand(7000,8000,0), dst: rand(10000,20000,0) };
 
+var finalStats = { mos1: 4.440, mos2: 4.440 }
+
 var rtpGenerator = function(config){
   if (!config)
-  var config = { pause: 500 }
-  var reports = [{
-                  // RTPAgent RTP media Report
+  var config = { pause: 5000, reports: 6 }
+  var reports = []
+  for (let i = 0; i <= config.reports; i++) {
+
+	var mos1 = parseFloat((Math.random() * (4.4 - 4.2) + 4.2).toFixed(3));
+	var mos2 = parseFloat((Math.random() * (3.9 - 2.0) + 2.0).toFixed(3));
+	var jit1 = 1.0-(mos1/6.0);
+	var jit2 = 1.3-(mos2/6.0);
+
+	finalStats.mos1 = parseFloat((( finalStats.mos1 + mos1) /2).toFixed(3));
+	finalStats.mos2 = parseFloat((( finalStats.mos2 + mos2) /2).toFixed(3));
+
+  	reports.push({
+                  // RTPAgent RTP media Reports
 		  // RTP Report 1
                     rcinfo: {
                             type: 'HEP',
@@ -62,12 +75,12 @@ var rtpGenerator = function(config){
                             dstIp: peer_ip,
                             srcPort: rtpports.src || 7000,
                             dstPort: rtpports.dst || 10000,
-                            mos: 403,
+                            mos: parseInt(mos1 * 100),
                             correlation_id: call_id
                     },
-      		  pause: 400,
-  		  payload: '{"CORRELATION_ID":"'+call_id+'","RTP_SIP_CALL_ID":"'+call_id+'","DELTA":19.983,"JITTER":0.017,"REPORT_TS":'+new Date().getTime()/1000+',"TL_BYTE":0,"SKEW":0.000,"TOTAL_PK":1512,"EXPECTED_PK":1512,"PACKET_LOSS":0,"SEQ":0,"MAX_JITTER":0.010,"MAX_DELTA":20.024,"MAX_SKEW":0.172,"MEAN_JITTER":0.005,"MIN_MOS":4.032, "MEAN_MOS":4.032, "MOS":4.032,"RFACTOR":80.200,"MIN_RFACTOR":80.200,"MEAN_RFACTOR":80.200,"SRC_IP":"'+pub_ip+'", "SRC_PORT":26872, "DST_IP":"'+peer_ip+'","DST_PORT":51354,"SRC_MAC":"00-30-48-7E-5D-C6","DST_MAC":"00-12-80-D7-38-5E","OUT_ORDER":0,"SSRC_CHG":0,"CODEC_PT":9, "CLOCK":8000,"CODEC_NAME":"g722","DIR":0,"REPORT_NAME":"'+pub_ip+':26872","PARTY":0,"TYPE":"PERIODIC"}'
-  }, {
+      		  pause: 500,
+  		  payload: '{"CORRELATION_ID":"'+call_id+'","RTP_SIP_CALL_ID":"'+call_id+'","DELTA":19.983,"JITTER":'+jit1+',"REPORT_TS":'+new Date().getTime()/1000+',"TL_BYTE":0,"SKEW":0.000,"TOTAL_PK":1512,"EXPECTED_PK":1512,"PACKET_LOSS":0,"SEQ":0,"MAX_JITTER":'+jit1+',"MAX_DELTA":20.024,"MAX_SKEW":0.172,"MEAN_JITTER":'+jit1+',"MIN_MOS": '+mos1+', "MEAN_MOS":'+mos1+', "MOS":'+mos1+',"RFACTOR":80.200,"MIN_RFACTOR":80.200,"MEAN_RFACTOR":80.200,"SRC_IP":"'+pub_ip+'", "SRC_PORT":26872, "DST_IP":"'+peer_ip+'","DST_PORT":51354,"SRC_MAC":"00-30-48-7E-5D-C6","DST_MAC":"00-12-80-D7-38-5E","OUT_ORDER":0,"SSRC_CHG":0,"CODEC_PT":9, "CLOCK":8000,"CODEC_NAME":"g722","DIR":0,"REPORT_NAME":"'+pub_ip+':26872","PARTY":0,"TYPE":"PERIODIC"}'
+  	}, {
                   // RTP Report 2
                     rcinfo: {
                             type: 'HEP',
@@ -80,55 +93,18 @@ var rtpGenerator = function(config){
                             proto_type: 34,
                             srcIp: peer_ip,
                             dstIp: pub_ip,
-                            srcPort: rtpports.src || 7000,
-                            dstPort: rtpports.dst || 10000,
-                            mos: 393,
+                            dstPort: rtpports.src || 7000,
+                            srcPort: rtpports.dst || 10000,
+                            mos: parseInt(mos2 * 100),
                             correlation_id: call_id
                     },
-      		  pause: 2500,
-  		  payload: '{"CORRELATION_ID":"'+call_id+'","RTP_SIP_CALL_ID":"'+call_id+'","DELTA":11.983,"JITTER":0.011,"REPORT_TS":'+new Date().getTime()/1000+',"TL_BYTE":0,"SKEW":0.000,"TOTAL_PK":1512,"EXPECTED_PK":1512,"PACKET_LOSS":0,"SEQ":0,"MAX_JITTER":0.210,"MAX_DELTA":20.124,"MAX_SKEW":0.221,"MEAN_JITTER":0.305,"MIN_MOS":3.932, "MEAN_MOS":3.932, "MOS":3.932,"RFACTOR":77.100,"MIN_RFACTOR":77.100,"MEAN_RFACTOR":77.100,"SRC_IP":"'+peer_ip+'", "SRC_PORT":26872, "DST_IP":"'+peer_ip+'","DST_PORT":51354,"SRC_MAC":"00-30-48-7E-5D-C6","DST_MAC":"00-12-80-D7-38-5E","OUT_ORDER":0,"SSRC_CHG":0,"CODEC_PT":9, "CLOCK":8000,"CODEC_NAME":"g722","DIR":0,"REPORT_NAME":"'+peer_ip+':26872","PARTY":0,"TYPE":"PERIODIC"}'
-  }, {
-                  // RTP Report 3
-                    rcinfo: {
-                            type: 'HEP',
-                            version: 3,
-                            payload_type: 'JSON',
-                            captureId: 2001,
-                            capturePass: capturePass,
-                            ip_family: 2,
-                            protocol: 17,
-                            proto_type: 34,
-                            srcIp: pub_ip,
-                            dstIp: peer_ip,
-                            srcPort: rtpports.src || 7000,
-                            dstPort: rtpports.dst || 10000,
-                            mos: 393,
-                            correlation_id: call_id
-                    },
-      		  pause: 2500,
-  		  payload: '{"CORRELATION_ID":"'+call_id+'","RTP_SIP_CALL_ID":"'+call_id+'","DELTA":19.983,"JITTER":0.017,"REPORT_TS":'+new Date().getTime()/1000+',"TL_BYTE":0,"SKEW":0.000,"TOTAL_PK":1511,"EXPECTED_PK":1512,"PACKET_LOSS":1,"SEQ":0,"MAX_JITTER":0.010,"MAX_DELTA":20.024,"MAX_SKEW":0.172,"MEAN_JITTER":0.005,"MIN_MOS":4.032, "MEAN_MOS":4.032, "MOS":4.032,"RFACTOR":80.200,"MIN_RFACTOR":80.200,"MEAN_RFACTOR":80.200,"SRC_IP":"'+pub_ip+'", "SRC_PORT":26872, "DST_IP":"'+peer_ip+'","DST_PORT":51354,"SRC_MAC":"00-30-48-7E-5D-C6","DST_MAC":"00-12-80-D7-38-5E","OUT_ORDER":0,"SSRC_CHG":0,"CODEC_PT":9, "CLOCK":8000,"CODEC_NAME":"g722","DIR":0,"REPORT_NAME":"'+pub_ip+':26872","PARTY":0,"TYPE":"PERIODIC"}'
-  }, {
-                  // RTP Report 4
-                    rcinfo: {
-                            type: 'HEP',
-                            version: 3,
-                            payload_type: 'JSON',
-                            captureId: 2001,
-                            capturePass: capturePass,
-                            ip_family: 2,
-                            protocol: 17,
-                            proto_type: 34,
-                            srcIp: peer_ip,
-                            dstIp: pub_ip,
-                            srcPort: rtpports.src || 7000,
-                            dstPort: rtpports.dst || 10000,
-                            mos: 402,
-                            correlation_id: call_id
-                    },
-      		  pause: 2500,
-  		  payload: '{"CORRELATION_ID":"'+call_id+'","RTP_SIP_CALL_ID":"'+call_id+'","DELTA":11.983,"JITTER":0.011,"REPORT_TS":'+new Date().getTime()/1000+',"TL_BYTE":0,"SKEW":0.000,"TOTAL_PK":1512,"EXPECTED_PK":1512,"PACKET_LOSS":0,"SEQ":0,"MAX_JITTER":0.210,"MAX_DELTA":20.124,"MAX_SKEW":0.221,"MEAN_JITTER":0.305,"MIN_MOS":3.932, "MEAN_MOS":3.932, "MOS":3.932,"RFACTOR":77.100,"MIN_RFACTOR":77.100,"MEAN_RFACTOR":77.100,"SRC_IP":"'+peer_ip+'", "SRC_PORT":26872, "DST_IP":"'+peer_ip+'","DST_PORT":51354,"SRC_MAC":"00-30-48-7E-5D-C6","DST_MAC":"00-12-80-D7-38-5E","OUT_ORDER":0,"SSRC_CHG":0,"CODEC_PT":9, "CLOCK":8000,"CODEC_NAME":"g722","DIR":0,"REPORT_NAME":"'+peer_ip+':26872","PARTY":0,"TYPE":"PERIODIC"}'
-  }, {
-                  // RTP Report 5 HANGUP
+      		  pause: config.pause,
+  		  payload: '{"CORRELATION_ID":"'+call_id+'","RTP_SIP_CALL_ID":"'+call_id+'","DELTA":11.983,"JITTER":'+jit2+',"REPORT_TS":'+new Date().getTime()/1000+',"TL_BYTE":0,"SKEW":0.000,"TOTAL_PK":1512,"EXPECTED_PK":1512,"PACKET_LOSS":0,"SEQ":0,"MAX_JITTER":'+jit2+',"MAX_DELTA":20.124,"MAX_SKEW":0.221,"MEAN_JITTER":'+jit2+',"MIN_MOS":'+mos2+', "MEAN_MOS":'+mos2+', "MOS":'+mos2+',"RFACTOR":77.100,"MIN_RFACTOR":77.100,"MEAN_RFACTOR":77.100,"SRC_IP":"'+peer_ip+'", "SRC_PORT":26872, "DST_IP":"'+peer_ip+'","DST_PORT":51354,"SRC_MAC":"00-30-48-7E-5D-C6","DST_MAC":"00-12-80-D7-38-5E","OUT_ORDER":0,"SSRC_CHG":0,"CODEC_PT":9, "CLOCK":8000,"CODEC_NAME":"g722","DIR":0,"REPORT_NAME":"'+peer_ip+':26872","PARTY":0,"TYPE":"PERIODIC"}'
+  	})
+  }
+
+  reports.push({
+                  // RTP Report HANGUP A-leg
                     rcinfo: {
                             type: 'HEP',
                             version: 3,
@@ -147,8 +123,8 @@ var rtpGenerator = function(config){
                     },
       		  pause: 2500,
   		  payload: '{"CORRELATION_ID":"'+call_id+'","RTP_SIP_CALL_ID":"'+call_id+'","DELTA":19.983,"JITTER":0.017,"REPORT_TS":'+new Date().getTime()/1000+',"TL_BYTE":0,"SKEW":0.000,"TOTAL_PK":1511,"EXPECTED_PK":1512,"PACKET_LOSS":1,"SEQ":0,"MAX_JITTER":0.010,"MAX_DELTA":20.024,"MAX_SKEW":0.172,"MEAN_JITTER":0.005,"MIN_MOS":4.032, "MEAN_MOS":4.032, "MOS":4.032,"RFACTOR":80.200,"MIN_RFACTOR":80.200,"MEAN_RFACTOR":80.200,"SRC_IP":"'+pub_ip+'", "SRC_PORT":26872, "DST_IP":"'+peer_ip+'","DST_PORT":51354,"SRC_MAC":"00-30-48-7E-5D-C6","DST_MAC":"00-12-80-D7-38-5E","OUT_ORDER":0,"SSRC_CHG":0,"CODEC_PT":9, "CLOCK":8000,"CODEC_NAME":"g722","DIR":0,"REPORT_NAME":"'+pub_ip+':26872","PARTY":0,"TYPE":"HANGUP"}'
-  }, {
-                  // RTP Final Report 6
+  	}, {
+                  // RTP Final Report 1
                     rcinfo: {
                             type: 'HEP',
                             version: 3,
@@ -163,12 +139,12 @@ var rtpGenerator = function(config){
                             srcPort: rtpports.src || 7000,
                             dstPort: rtpports.dst || 10000,
                             correlation_id: call_id,
-  			    mos: 440
+  			    mos: parseInt(finalStats.mos1*100) // 440
                     },
       		  pause: 50,
-  		  payload: '{"CORRELATION_ID":"'+call_id+'", "RTP_SIP_CALL_ID":"'+call_id+'","MOS":4.409,"RFACTOR":93.200,"DIR":0,"REPORT_NAME":"'+peer_ip+'","PARTY":0,"TYPE":"FINAL"}'
-  }, {
-                  // RTP Final Report 7
+  		  payload: '{"CORRELATION_ID":"'+call_id+'", "RTP_SIP_CALL_ID":"'+call_id+'","MOS":'+finalStats.mos1+',"RFACTOR":93.200,"DIR":0,"REPORT_NAME":"'+peer_ip+'","PARTY":0,"TYPE":"FINAL"}'
+  	}, {
+                  // RTP Final Report 2
                     rcinfo: {
                             type: 'HEP',
                             version: 3,
@@ -183,11 +159,12 @@ var rtpGenerator = function(config){
                             srcPort: rtpports.src || 7000,
                             dstPort: rtpports.dst || 10000,
                             correlation_id: call_id+'_b2b-1',
-  			    mos: 410
+  			    mos: parseInt(finalStats.mos2*100)
                     },
       		  pause: 50,
-  		  payload: '{"CORRELATION_ID":"'+call_id+'", "RTP_SIP_CALL_ID":"'+call_id+'_b2b-1","MOS":4.101,"RFACTOR":91.200,"DIR":1,"REPORT_NAME":"'+pub_ip+'","PARTY":1,"TYPE":"FINAL"}'
-  }]
+  		  payload: '{"CORRELATION_ID":"'+call_id+'", "RTP_SIP_CALL_ID":"'+call_id+'_b2b-1","MOS":'+finalStats.mos2+',"RFACTOR":91.200,"DIR":1,"REPORT_NAME":"'+pub_ip+'","PARTY":1,"TYPE":"FINAL"}'
+  	})
+
   return reports;
 };
 
