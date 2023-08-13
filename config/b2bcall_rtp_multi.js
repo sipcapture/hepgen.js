@@ -198,7 +198,7 @@ var config = {
     		proto_type: 0,
     	},
         pause: 1000,
-    	payload: ''
+    	payload: 'HEPPING'
 
 },
 {
