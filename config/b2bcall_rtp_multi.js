@@ -1,8 +1,12 @@
+// HEPIC RTP GENERATOR
 // HEPGEN-JS SETTINGS (please configure)
 // ------------------------------------------------------
 
 const capturePass = process.env.CAPTUREPASS || 'myHep';
 const captureId = process.env.CAPTUREID || '2001';
+const captureInterval = process.env.RTPINTERVAL || 5000;
+const captureReports = process.env.RTPCOUNT || 6;
+// ------------------------------------------------------
 
 var rand = function(maximum,minimum,even){
 	var final = Math.floor(Math.random() * (maximum - minimum + 1)) + minimum;
@@ -47,7 +51,7 @@ var finalStats = { mos1: 4.440, mos2: 4.440 }
 
 var rtpGenerator = function(config){
   if (!config)
-  var config = { pause: 5000, reports: 6 }
+  var config = { pause: captureInterval, reports: captureReports }
   var reports = []
   for (let i = 0; i <= config.reports; i++) {
 
