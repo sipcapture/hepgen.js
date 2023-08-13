@@ -182,7 +182,21 @@ var config = {
         // the Messages to send
         MESSAGES: [
 
+{
+ 	rcinfo: {
+    		type: 'HEP',
+    		version: 3,
+    		payload_type: 0,
+    		captureId: 2001,
+    		capturePass: capturePass,
+    		ip_family: 2,
+    		protocol: 17,
+    		proto_type: 0,
+    	},
+        pause: 1000,
+    	payload: ''
 
+},
 {
  	rcinfo: {
     		type: 'HEP',
@@ -237,39 +251,6 @@ var config = {
 
 
 }, {
-
- 	rcinfo: {
-    		type: 'HEP',
-    		version: 3,
-    		payload_type: 1,
-    		captureId: 2001,
-    		capturePass: capturePass,
-    		ip_family: 2,
-    		protocol: 17,
-    		proto_type: 1,
-    		correlation_id: call_id,
-    		srcIp: localhost,
-    		dstIp: localhost,
-    		srcPort: 5062,
-    	  	dstPort: 5060
-    	},
-        pause: 100,
-    	payload:
-	'SIP/2.0 100 Trying\r\n'+
-	'Via: SIP/2.0/UDP 127.0.0.1;branch=z9hG4bK008.4171ec66f99b948ab62008e62a6491c1.0\r\n'+
-	'Via: SIP/2.0/UDP '+priv_ip+':5064;received='+priv_nat+';branch=z9hG4bK923381359;rport=5064\r\n'+
-	'From: <sip:'+caller+'@'+domain+';user=phone>;tag=415746302\r\n'+
-	'To: <sip:'+callee+'@'+domain+';user=phone>\r\n'+
-	'Call-ID: '+call_id+'\r\n'+
-	'CSeq: 440 INVITE\r\n'+
-	'P-Out-Socket: udp:'+pub_ip+':5060\r\n'+
-	'P-Auth-IP: '+priv_nat+'\r\n'+
-	'Server: SIP Proxy\r\n'+
-	'Content-Length: 0\r\n'+
-	'\r\n\r\n'
-
-
-}, {
                 // Session Log
                   rcinfo: {
                           type: 'HEP',
@@ -280,10 +261,10 @@ var config = {
                           ip_family: 2,
                           protocol: 17,
                           proto_type: 100,
-                          srcIp: '127.0.0.1',
-                          dstIp: '127.0.0.1',
+                          srcIp: pub_ip,
+                          dstIp: localhost,
                           srcPort: 5060,
-                          dstPort: 5080,
+                          dstPort: 5060,
                           correlation_id: call_id
                   },
                   pause: 100,
@@ -319,41 +300,6 @@ var config = {
 	'Content-Length: 0\r\n'+
 	'\r\n\r\n'
 
-
-}, {
-
-        rcinfo: {
-                type: 'HEP',
-                version: 3,
-                payload_type: 1,
-                captureId: 2001,
-                capturePass: capturePass,
-                ip_family: 2,
-                protocol: 17,
-                proto_type: 1,
-                correlation_id: call_id,
-                srcIp: localhost,
-                dstIp: localhost,
-                srcPort: 5062,
-                dstPort: 5060
-        },
-        pause: 250,
-        payload:
-	'SIP/2.0 407 Proxy Authentication Required\r\n'+
-	'Via: SIP/2.0/UDP 127.0.0.1;branch=z9hG4bK008.4171ec66f99b948ab62008e62a6491c1.0\r\n'+
-	'Via: SIP/2.0/UDP '+priv_ip+':5064;received='+priv_nat+';branch=z9hG4bK923381359;rport=5064\r\n'+
-	'From: <sip:'+caller+'@'+domain+';user=phone>;tag=415746302\r\n'+
-	'To: <sip:'+callee+'@'+domain+';user=phone>;tag=1d24a28a0bded6c40d31e6db8aab9ac6.0385\r\n'+
-	'Call-ID: '+call_id+'\r\n'+
-	'CSeq: 440 INVITE\r\n'+
-	'P-Out-Socket: udp:'+pub_ip+':5060\r\n'+
-	'P-Auth-IP: '+priv_nat+'\r\n'+
-	'P-Auth-UA: '+useragent+'\r\n'+
-	'Proxy-Authenticate: Digest realm="'+domain+'", nonce="VuRZ5VbkWLkkVKJ9B1rBIN9Q3nRbqc9z"\r\n'+
-	'Server: SIP Proxy\r\n'+
-	'Content-Length: 0\r\n'+
-	'\r\n\r\n'
-
 }, {
                 // Session Log
                   rcinfo: {
@@ -365,10 +311,10 @@ var config = {
                           ip_family: 2,
                           protocol: 17,
                           proto_type: 100,
-                          srcIp: localhost,
+                          srcIp: pub_ip,
                           dstIp: localhost,
                           srcPort: 5060,
-                          dstPort: 5080,
+                          dstPort: 5060,
                           correlation_id: call_id
                   },
                   pause: 100,
@@ -489,79 +435,6 @@ var config = {
 	'a=fmtp:101 0-15\r\n'+
 	'\r\n\r\n'
 
-
-}, {
-
-        rcinfo: {
-                type: 'HEP',
-                version: 3,
-                payload_type: 1,
-                captureId: 2001,
-                capturePass: capturePass,
-                ip_family: 2,
-                protocol: 17,
-                proto_type: 1,
-                correlation_id: call_id,
-                srcIp: localhost,
-                dstIp: localhost,
-                srcPort: 5060,
-                dstPort: 5062
-        },
-        pause: 250,
-        payload:
-	'ACK sip:'+callee+'@'+domain+';user=phone SIP/2.0\r\n'+
-	'Max-Forwards: 10\r\n'+
-	'Record-Route: <sip:127.0.0.1;r2=on;lr=on;ftag=415746302;lb=yes;socket=udp:'+pub_ip+':5060>\r\n'+
-	'Record-Route: <sip:'+pub_ip+';r2=on;lr=on;ftag=415746302;lb=yes;socket=udp:'+pub_ip+':5060>\r\n'+
-	'Via: SIP/2.0/UDP 127.0.0.1;branch=z9hG4bK008.4171ec66f99b948ab62008e62a6491c1.0\r\n'+
-	'Via: SIP/2.0/UDP '+priv_ip+':5064;received='+priv_nat+';branch=z9hG4bK923381359;rport=5064\r\n'+
-	'From: <sip:'+caller+'@'+domain+';user=phone>;tag=415746302\r\n'+
-	'To: <sip:'+callee+'@'+domain+';user=phone>;tag=1d24a28a0bded6c40d31e6db8aab9ac6.0385\r\n'+
-	'Call-ID: '+call_id+'\r\n'+
-	'CSeq: 440 ACK\r\n'+
-	'Content-Length: 0\r\n'+
-	'P-Src-Ip: '+priv_nat+'\r\n'+
-	'P-Src-Port: 5064\r\n'+
-	'P-Src-Proto: udp\r\n'+
-	'P-Src-Af: 4\r\n'+
-	'P-Sock-Info: udp:'+pub_ip+':5060\r\n'+
-	'\r\n\r\n'
-
-
-}, {
-
-        rcinfo: {
-                type: 'HEP',
-                version: 3,
-                payload_type: 1,
-                captureId: 2001,
-                capturePass: capturePass,
-                ip_family: 2,
-                protocol: 17,
-                proto_type: 1,
-                correlation_id: call_id,
-                srcIp: localhost,
-                dstIp: localhost,
-                srcPort: 5062,
-                dstPort: 5060
-        },
-        pause: 250,
-        payload:
-	'SIP/2.0 100 Trying\r\n'+
-	'Via: SIP/2.0/UDP 127.0.0.1;branch=z9hG4bK108.b3688c839f95242bceba6f2ddb22e5a8.0\r\n'+
-	'Via: SIP/2.0/UDP '+priv_ip+':5064;received='+priv_nat+';branch=z9hG4bK104237110;rport=5064\r\n'+
-	'From: <sip:'+caller+'@'+domain+';user=phone>;tag=415746302\r\n'+
-	'To: <sip:'+callee+'@'+domain+';user=phone>\r\n'+
-	'Call-ID: '+call_id+'\r\n'+
-	'CSeq: 441 INVITE\r\n'+
-	'P-Out-Socket: udp:'+pub_ip+':5060\r\n'+
-	'P-Auth-IP: '+priv_nat+'\r\n'+
-	'P-Auth-UA: '+useragent+'\r\n'+
-	'Server: SIP Proxy\r\n'+
-	'Content-Length: 0\r\n'+
-	'\r\n\r\n'
-
-
 }, {
 
         rcinfo: {
@@ -591,7 +464,6 @@ var config = {
 	'Content-Length: 0\r\n'+
 	'\r\n\r\n'
 
-
 }, {
 
         rcinfo: {
@@ -604,83 +476,9 @@ var config = {
                 protocol: 17,
                 proto_type: 1,
                 correlation_id: call_id,
-                srcIp: localhost,
-                dstIp: localhost,
-                srcPort: 5062,
-                dstPort: 5060
-        },
-        pause: 250,
-        payload:
-	'SIP/2.0 101 Connecting\r\n'+
-	'Via: SIP/2.0/UDP 127.0.0.1;branch=z9hG4bK108.b3688c839f95242bceba6f2ddb22e5a8.0\r\n'+
-	'Via: SIP/2.0/UDP '+priv_ip+':5064;received='+priv_nat+';branch=z9hG4bK104237110;rport=5064\r\n'+
-	'From: <sip:'+caller+'@'+domain+';user=phone>;tag=415746302\r\n'+
-	'To: <sip:'+callee+'@'+domain+';user=phone>\r\n'+
-	'Call-ID: '+call_id+'\r\n'+
-	'CSeq: 441 INVITE\r\n'+
-	'P-Out-Socket: udp:'+pub_ip+':5060\r\n'+
-	'P-Auth-IP: '+priv_nat+'\r\n'+
-	'P-Auth-UA: '+useragent+'\r\n'+
-	'P-Authorization: '+caller+'\r\n'+
-	'P-Authorized: 1\r\n'+
-	'P-Caller-UUID: 8f38d8a9-2152-408d-ab05-c587a52bb89a\r\n'+
-	'Server: SIP Proxy\r\n'+
-	'Content-Length: 0\r\n'+
-	'\r\n\r\n'
-
-
-
-}, {
-
-        rcinfo: {
-                type: 'HEP',
-                version: 3,
-                payload_type: 1,
-                captureId: 2001,
-                capturePass: capturePass,
-                ip_family: 2,
-                protocol: 17,
-                proto_type: 1,
-                correlation_id: call_id,
-                srcIp: localhost,
-                dstIp: localhost,
-                srcPort: 5080,
-                dstPort: 5062
-        },
-        pause: 250,
-        payload:
-	'SIP/2.0 100 Connecting\r\n'+
-	'Record-Route: <sip:127.0.0.1:5062;lr=on;ftag=415746302;did=d5d.c191;mpd=ii;ice_caller=strip;ice_callee=strip;rtpprx=yes;vsf=YlB4MwAQcRpkPgIJNBwOYAhoe188D24/UEcsTigdagkbLCgy>\r\n'+
-	'Record-Route: <sip:127.0.0.1;r2=on;lr=on;ftag=415746302;nat=yes;lb=yes;socket=udp:'+pub_ip+':5060>\r\n'+
-	'Record-Route: <sip:'+pub_ip+';r2=on;lr=on;ftag=415746302;nat=yes;lb=yes;socket=udp:'+pub_ip+':5060>\r\n'+
-	'Via: SIP/2.0/UDP 127.0.0.1:5062;branch=z9hG4bK108.7a23429f0ff569e334535fa224937400.0;received=127.0.0.1\r\n'+
-	'Via: SIP/2.0/UDP 127.0.0.1;branch=z9hG4bK108.b3688c839f95242bceba6f2ddb22e5a8.0\r\n'+
-	'Via: SIP/2.0/UDP '+priv_ip+':5064;received='+priv_nat+';branch=z9hG4bK104237110;rport=5064\r\n'+
-	'From: <sip:'+caller_e164+'@'+domain+'>;tag=415746302\r\n'+
-	'To: <sip:'+callee+'@'+domain+';user=phone>;tag=7DB80AAE-56E458BB0008256B-B7852700\r\n'+
-	'Call-ID: '+call_id+'\r\n'+
-	'CSeq: 441 INVITE\r\n'+
-	'Server: Application Server\r\n'+
-	'Contact: <sip:'+callee+'@127.0.0.1:5080>\r\n'+
-	'Content-Length: 0\r\n'+
-	'\r\n\r\n'
-
-
-}, {
-
-        rcinfo: {
-                type: 'HEP',
-                version: 3,
-                payload_type: 1,
-                captureId: 2001,
-                capturePass: capturePass,
-                ip_family: 2,
-                protocol: 17,
-                proto_type: 1,
-                correlation_id: call_id,
-                srcIp: localhost,
-                dstIp: localhost,
-                srcPort: 5080,
+                srcIp: pub_ip,
+                dstIp: peer_ip,
+                srcPort: 5060,
                 dstPort: 5060
         },
         pause: 250,
@@ -740,71 +538,6 @@ var config = {
         },
         pause: 250,
         payload:
-	'SIP/2.0 100 Trying\r\n'+
-	'Via: SIP/2.0/UDP '+pub_ip+';branch=z9hG4bK3365.2469d7e5f9b74442c0453dffe9b89adf.0\r\n'+
-	'Via: SIP/2.0/UDP 127.0.0.1:5080;branch=z9hG4bKhD1m8aH6;rport=5080\r\n'+
-	'From: <sip:'+caller_e164+'@'+domain+'>;tag=06DE7CEB-56E458BB000864AD-B855F700\r\n'+
-	'To: <sip:'+callee+'@'+peer_ip+'>\r\n'+
-	'CSeq: 10 INVITE\r\n'+
-	'Call-ID: '+call_id+'_b2b-1\r\n'+
-	'User-Agent: HEPeer\r\n'+
-	'Content-Length: 0\r\n'+
-	'\r\n\r\n'
-
-
-}, {
-
-        rcinfo: {
-                type: 'HEP',
-                version: 3,
-                payload_type: 1,
-                captureId: 2001,
-                capturePass: capturePass,
-                ip_family: 2,
-                protocol: 17,
-                proto_type: 1,
-                correlation_id: call_id,
-                srcIp: localhost,
-                dstIp: localhost,
-                srcPort: 5060,
-                dstPort: 5080
-        },
-        pause: 250,
-        payload:
-	'SIP/2.0 100 Trying\r\n'+
-	'Via: SIP/2.0/UDP 127.0.0.1:5080;branch=z9hG4bKhD1m8aH6;rport=5080\r\n'+
-	'From: <sip:'+caller_e164+'@'+domain+'>;tag=06DE7CEB-56E458BB000864AD-B855F700\r\n'+
-	'To: <sip:'+callee+'@'+peer_ip+'>\r\n'+
-	'CSeq: 10 INVITE\r\n'+
-	'Call-ID: '+call_id+'_b2b-1\r\n'+
-	'User-Agent: HEPeer\r\n'+
-	'Content-Length: 0\r\n'+
-	'P-Src-Ip: '+peer_ip+'\r\n'+
-	'P-Src-Port: 5060\r\n'+
-	'P-Src-Proto: udp\r\n'+
-	'P-Src-Af: 4\r\n'+
-	'\r\n\r\n'
-
-
-}, {
-
-        rcinfo: {
-                type: 'HEP',
-                version: 3,
-                payload_type: 1,
-                captureId: 2001,
-                capturePass: capturePass,
-                ip_family: 2,
-                protocol: 17,
-                proto_type: 1,
-                correlation_id: call_id,
-                srcIp: peer_ip,
-                dstIp: pub_ip,
-                srcPort: 5060,
-                dstPort: 5060
-        },
-        pause: 250,
-        payload:
 	'SIP/2.0 100 trying -- your call is important to us\r\n'+
 	'Via: SIP/2.0/UDP '+pub_ip+';branch=z9hG4bK3365.2469d7e5f9b74442c0453dffe9b89adf.0\r\n'+
 	'Via: SIP/2.0/UDP 127.0.0.1:5080;branch=z9hG4bKhD1m8aH6;rport=5080\r\n'+
@@ -815,40 +548,6 @@ var config = {
 	'User-Agent: HEPeer\r\n'+
 	'Content-Length: 0\r\n'+
 	'\r\n\r\n'
-
-}, {
-
-        rcinfo: {
-                type: 'HEP',
-                version: 3,
-                payload_type: 1,
-                captureId: 2001,
-                capturePass: capturePass,
-                ip_family: 2,
-                protocol: 17,
-                proto_type: 1,
-                correlation_id: call_id,
-                srcIp: localhost,
-                dstIp: localhost,
-                srcPort: 5060,
-                dstPort: 5080
-        },
-        pause: 250,
-        payload:
-	'SIP/2.0 100 trying -- your call is important to us\r\n'+
-	'Via: SIP/2.0/UDP 127.0.0.1:5080;branch=z9hG4bKhD1m8aH6;rport=5080\r\n'+
-	'From: <sip:'+caller_e164+'@'+domain+'>;tag=06DE7CEB-56E458BB000864AD-B855F700\r\n'+
-	'To: <sip:'+callee+'@'+peer_ip+'>\r\n'+
-	'CSeq: 10 INVITE\r\n'+
-	'Call-ID: '+call_id+'_b2b-1\r\n'+
-	'User-Agent: HEPeer\r\n'+
-	'Content-Length: 0\r\n'+
-	'P-Src-Ip: '+peer_ip+'\r\n'+
-	'P-Src-Port: 5060\r\n'+
-	'P-Src-Proto: udp\r\n'+
-	'P-Src-Af: 4\r\n'+
-	'\r\n\r\n'
-
 
 }, {
 
@@ -902,66 +601,6 @@ var config = {
 	'a=ptime:20\r\n'+
 	'a=sendrecv\r\n'+
 	'\r\n\r\n'
-
-
-
-}, {
-
-        rcinfo: {
-                type: 'HEP',
-                version: 3,
-                payload_type: 1,
-                captureId: 2001,
-                capturePass: capturePass,
-                ip_family: 2,
-                protocol: 17,
-                proto_type: 1,
-                correlation_id: call_id,
-                srcIp: localhost,
-                dstIp: localhost,
-                srcPort: 5060,
-                dstPort: 5080
-        },
-        pause: 250,
-        payload:
-	'SIP/2.0 200 OK\r\n'+
-	'Via: SIP/2.0/UDP 127.0.0.1:5080;branch=z9hG4bKhD1m8aH6;rport=5080\r\n'+
-	'Record-Route: <sip:'+peer_ip+';lr;ftag=06DE7CEB-56E458BB000864AD-B855F700>\r\n'+
-	'Record-Route: <sip:'+pub_ip+';r2=on;lr=on;ftag=06DE7CEB-56E458BB000864AD-B855F700;lb=yes>\r\n'+
-	'Record-Route: <sip:127.0.0.1;r2=on;lr=on;ftag=06DE7CEB-56E458BB000864AD-B855F700;lb=yes>\r\n'+
-	'From: <sip:'+caller_e164+'@'+domain+'>;tag=06DE7CEB-56E458BB000864AD-B855F700\r\n'+
-	'To: <sip:'+callee+'@'+peer_ip+'>;tag=as6db2fc4d\r\n'+
-	'Call-ID: '+call_id+'_b2b-1\r\n'+
-	'CSeq: 10 INVITE\r\n'+
-	'User-Agent: HEPeer\r\n'+
-	'Allow: INVITE, ACK, CANCEL, OPTIONS, BYE, REFER, SUBSCRIBE, NOTIFY\r\n'+
-	'Supported: replaces\r\n'+
-	'Contact: <sip:'+callee+'@'+peer_ip+':7070>\r\n'+
-	'Content-Type: application/sdp\r\n'+
-	'Content-Length: 311\r\n'+
-	'P-Src-Ip: '+peer_ip+'\r\n'+
-	'P-Src-Port: 5060\r\n'+
-	'P-Src-Proto: udp\r\n'+
-	'P-Src-Af: 4\r\n'+
-	'\r\n'+
-	'v=0\r\n'+
-	'o=root 11882 11882 IN IP4 '+peer_ip+'\r\n'+
-	's=session\r\n'+
-	'c=IN IP4 '+peer_ip+'\r\n'+
-	't=0 0\r\n'+
-	'm=audio 12366 RTP/AVP 8 0 18 101\r\n'+
-	'a=rtpmap:8 PCMA/8000\r\n'+
-	'a=rtpmap:0 PCMU/8000\r\n'+
-	'a=rtpmap:18 G729/8000\r\n'+
-	'a=fmtp:18 annexb=no\r\n'+
-	'a=rtpmap:101 telephone-event/8000\r\n'+
-	'a=fmtp:101 0-16\r\n'+
-	'a=silenceSupp:off - - - -\r\n'+
-	'a=ptime:20\r\n'+
-	'a=sendrecv\r\n'+
-	'\r\n\r\n'
-
-
 
 }, {
 
@@ -1053,80 +692,6 @@ var config = {
 	'Content-Length: 0\r\n'+
 	'\r\n\r\n'
 
-
-}, {
-
-        rcinfo: {
-                type: 'HEP',
-                version: 3,
-                payload_type: 1,
-                captureId: 2001,
-                capturePass: capturePass,
-                ip_family: 2,
-                protocol: 17,
-                proto_type: 1,
-                correlation_id: call_id,
-                srcIp: localhost,
-                dstIp: localhost,
-                srcPort: 5062,
-                dstPort: 5080
-        },
-        pause: 250,
-        payload:
-	'ACK sip:127.0.0.1:5080 SIP/2.0\r\n'+
-	'Record-Route: <sip:127.0.0.1:5062;lr=on;ftag=415746302;rtpprx=yes>\r\n'+
-	'Record-Route: <sip:127.0.0.1;r2=on;lr=on;ftag=415746302;nat=yes;lb=yes;socket=udp:'+pub_ip+':5060>\r\n'+
-	'Record-Route: <sip:'+pub_ip+';r2=on;lr=on;ftag=415746302;nat=yes;lb=yes;socket=udp:'+pub_ip+':5060>\r\n'+
-	'Via: SIP/2.0/UDP 127.0.0.1:5062;branch=z9hG4bK108.0fd09acb0f53e63bd1f6a6e0953c2f1d.0\r\n'+
-	'Via: SIP/2.0/UDP 127.0.0.1;branch=z9hG4bK108.5ae58236d6ead15f6ae2d0eaa55bcccd.0\r\n'+
-	'Via: SIP/2.0/UDP '+priv_ip+':5064;received='+priv_nat+';branch=z9hG4bK1536455165;rport=5064\r\n'+
-	'From: <sip:'+caller_e164+'@'+domain+'>;tag=415746302\r\n'+
-	'To: <sip:'+callee+'@'+domain+';user=phone>;tag=7DB80AAE-56E458BB0008256B-B7852700\r\n'+
-	'Call-ID: '+call_id+'\r\n'+
-	'CSeq: 441 ACK\r\n'+
-	'Contact: <sip:'+caller+'@'+priv_ip+':5064;alias='+priv_nat+'~5064~1;user=phone>\r\n'+
-	'Max-Forwards: 68\r\n'+
-	'Supported: replaces, path, timer, eventlist\r\n'+
-	'User-Agent: '+useragent+'\r\n'+
-	'Allow: INVITE, ACK, OPTIONS, CANCEL, BYE, SUBSCRIBE, NOTIFY, INFO, REFER, UPDATE, MESSAGE\r\n'+
-	'Content-Length: 0\r\n'+
-	'\r\n\r\n'
-
-}, {
-
-        rcinfo: {
-                type: 'HEP',
-                version: 3,
-                payload_type: 1,
-                captureId: 2001,
-                capturePass: capturePass,
-                ip_family: 2,
-                protocol: 17,
-                proto_type: 1,
-                correlation_id: call_id,
-                srcIp: localhost,
-                dstIp: localhost,
-                srcPort: 5080,
-                dstPort: 5060
-        },
-        pause: 250,
-        payload:
-	'ACK sip:'+callee+'@'+peer_ip+':7070 SIP/2.0\r\n'+
-	'Via: SIP/2.0/UDP 127.0.0.1:5080;branch=z9hG4bKarC4XaNK;rport\r\n'+
-	'From: <sip:'+caller_e164+'@'+domain+'>;tag=06DE7CEB-56E458BB000864AD-B855F700\r\n'+
-	'To: <sip:'+callee+'@'+peer_ip+'>;tag=as6db2fc4d\r\n'+
-	'CSeq: 10 ACK\r\n'+
-	'Call-ID: '+call_id+'_b2b-1\r\n'+
-	'Contact: <sip:127.0.0.1:5080>\r\n'+
-	'Route: <sip:127.0.0.1;r2=on;lr=on;ftag=06DE7CEB-56E458BB000864AD-B855F700;lb=yes>, <sip:'+pub_ip+';r2=on;lr=on;ftag=06DE7CEB-56E458BB000864AD-B855F700;lb=yes>, <sip:'+peer_ip+';lr;ftag=06DE7CEB-56E458BB000864AD-B855F700>\r\n'+
-	'Supported: replaces, path, timer, eventlist\r\n'+
-	'User-Agent: '+useragent+'\r\n'+
-	'Allow: INVITE, ACK, OPTIONS, CANCEL, BYE, SUBSCRIBE, NOTIFY, INFO, REFER, UPDATE, MESSAGE\r\n'+
-	'Content-Length: 0\r\n'+
-	'\r\n\r\n'
-
-
-
 }, {
 
         rcinfo: {
@@ -1202,85 +767,6 @@ var config = {
 	'Content-Length: 0\r\n'+
 	'\r\n\r\n'
 
-
-}, {
-
-        rcinfo: {
-                type: 'HEP',
-                version: 3,
-                payload_type: 1,
-                captureId: 2001,
-                capturePass: capturePass,
-                ip_family: 2,
-                protocol: 17,
-                proto_type: 1,
-                correlation_id: call_id,
-                srcIp: localhost,
-                dstIp: localhost,
-                srcPort: 5060,
-                dstPort: 5062
-        },
-        pause: 250,
-        payload:
-	'BYE sip:127.0.0.1:5080 SIP/2.0\r\n'+
-	'Record-Route: <sip:127.0.0.1;r2=on;lr=on;ftag=415746302;nat=yes;lb=yes;socket=udp:'+pub_ip+':5060>\r\n'+
-	'Record-Route: <sip:'+pub_ip+';r2=on;lr=on;ftag=415746302;nat=yes;lb=yes;socket=udp:'+pub_ip+':5060>\r\n'+
-	'Via: SIP/2.0/UDP 127.0.0.1;branch=z9hG4bKef7.abfc04310a6de51d3c2cd97b1a12fe11.0\r\n'+
-	'Via: SIP/2.0/UDP '+priv_ip+':5064;received='+priv_nat+';branch=z9hG4bK829262785;rport=5064\r\n'+
-	'Route: <sip:127.0.0.1:5062;lr=on;ftag=415746302;did=d5d.c191;mpd=ii;ice_caller=strip;ice_callee=strip;rtpprx=yes;vsf=YlB4MwAQcRpkPgIJNBwOYAhoe188D24/UEcsTigdagkbLCgy>\r\n'+
-	'From: <sip:'+caller+'@'+domain+';user=phone>;tag=415746302\r\n'+
-	'To: <sip:'+callee+'@'+domain+';user=phone>;tag=7DB80AAE-56E458BB0008256B-B7852700\r\n'+
-	'Call-ID: '+call_id+'\r\n'+
-	'CSeq: 442 BYE\r\n'+
-	'Contact: <sip:'+caller+'@'+priv_ip+':5064;alias='+priv_nat+'~5064~1;user=phone>\r\n'+
-	'Max-Forwards: 69\r\n'+
-	'Supported: replaces, path, timer, eventlist\r\n'+
-	'User-Agent: '+useragent+'\r\n'+
-	'Allow: INVITE, ACK, OPTIONS, CANCEL, BYE, SUBSCRIBE, NOTIFY, INFO, REFER, UPDATE, MESSAGE\r\n'+
-	'Content-Length: 0\r\n'+
-	'P-Src-Ip: '+priv_nat+'\r\n'+
-	'P-Src-Port: 5064\r\n'+
-	'P-Src-Proto: udp\r\n'+
-	'P-Src-Af: 4\r\n'+
-	'P-Sock-Info: udp:'+pub_ip+':5060\r\n'+
-	'P-Src-Nat: 1\r\n'+
-	'\r\n\r\n'
-
-
-}, {
-
-        rcinfo: {
-                type: 'HEP',
-                version: 3,
-                payload_type: 1,
-                captureId: 2001,
-                capturePass: capturePass,
-                ip_family: 2,
-                protocol: 17,
-                proto_type: 1,
-                correlation_id: call_id,
-                srcIp: localhost,
-                dstIp: localhost,
-                srcPort: 5062,
-                dstPort: 5060
-        },
-        pause: 100,
-        payload:
-	'SIP/2.0 100 Trying\r\n'+
-	'Via: SIP/2.0/UDP 127.0.0.1;branch=z9hG4bKef7.abfc04310a6de51d3c2cd97b1a12fe11.0\r\n'+
-	'Via: SIP/2.0/UDP '+priv_ip+':5064;received='+priv_nat+';branch=z9hG4bK829262785;rport=5064\r\n'+
-	'From: <sip:'+caller+'@'+domain+';user=phone>;tag=415746302\r\n'+
-	'To: <sip:'+callee+'@'+domain+';user=phone>;tag=7DB80AAE-56E458BB0008256B-B7852700\r\n'+
-	'Call-ID: '+call_id+'\r\n'+
-	'CSeq: 442 BYE\r\n'+
-	'P-Out-Socket: udp:'+pub_ip+':5060\r\n'+
-	'P-Auth-IP: '+priv_nat+'\r\n'+
-	'P-Auth-UA: '+useragent+'\r\n'+
-	'Server: SIP Proxy\r\n'+
-	'Content-Length: 0\r\n'+
-	'\r\n\r\n'
-
-
 }, {
 
         rcinfo: {
@@ -1309,180 +795,6 @@ var config = {
 	'Server: SIP Proxy\r\n'+
 	'Content-Length: 0\r\n'+
 	'\r\n\r\n'
-
-
-}, {
-
-        rcinfo: {
-                type: 'HEP',
-                version: 3,
-                payload_type: 1,
-                captureId: 2001,
-                capturePass: capturePass,
-                ip_family: 2,
-                protocol: 17,
-                proto_type: 1,
-                correlation_id: call_id,
-                srcIp: localhost,
-                dstIp: localhost,
-                srcPort: 5062,
-                dstPort: 5080
-        },
-        pause: 250,
-        payload:
-	'BYE sip:127.0.0.1:5080 SIP/2.0\r\n'+
-	'Record-Route: <sip:127.0.0.1:5062;lr=on;ftag=415746302;rtpprx=yes>\r\n'+
-	'Record-Route: <sip:127.0.0.1;r2=on;lr=on;ftag=415746302;nat=yes;lb=yes;socket=udp:'+pub_ip+':5060>\r\n'+
-	'Record-Route: <sip:'+pub_ip+';r2=on;lr=on;ftag=415746302;nat=yes;lb=yes;socket=udp:'+pub_ip+':5060>\r\n'+
-	'Via: SIP/2.0/UDP 127.0.0.1:5062;branch=z9hG4bKef7.c1f3367df5cff89f98058ed5508fce22.0\r\n'+
-	'Via: SIP/2.0/UDP 127.0.0.1;branch=z9hG4bKef7.abfc04310a6de51d3c2cd97b1a12fe11.0\r\n'+
-	'Via: SIP/2.0/UDP '+priv_ip+':5064;received='+priv_nat+';branch=z9hG4bK829262785;rport=5064\r\n'+
-	'From: <sip:'+caller_e164+'@'+domain+'>;tag=415746302\r\n'+
-	'To: <sip:'+callee+'@'+domain+';user=phone>;tag=7DB80AAE-56E458BB0008256B-B7852700\r\n'+
-	'Call-ID: '+call_id+'\r\n'+
-	'CSeq: 442 BYE\r\n'+
-	'Contact: <sip:'+caller+'@'+priv_ip+':5064;alias='+priv_nat+'~5064~1;user=phone>\r\n'+
-	'Max-Forwards: 68\r\n'+
-	'Supported: replaces, path, timer, eventlist\r\n'+
-	'User-Agent: '+useragent+'\r\n'+
-	'Allow: INVITE, ACK, OPTIONS, CANCEL, BYE, SUBSCRIBE, NOTIFY, INFO, REFER, UPDATE, MESSAGE\r\n'+
-	'Content-Length: 0\r\n'+
-	'\r\n\r\n'
-
-
-}, {
-
-        rcinfo: {
-                type: 'HEP',
-                version: 3,
-                payload_type: 1,
-                captureId: 2001,
-                capturePass: capturePass,
-                ip_family: 2,
-                protocol: 17,
-                proto_type: 1,
-                correlation_id: call_id,
-                srcIp: localhost,
-                dstIp: localhost,
-                srcPort: 5080,
-                dstPort: 5062
-        },
-        pause: 250,
-        payload:
-	'SIP/2.0 200 OK\r\n'+
-	'Record-Route: <sip:127.0.0.1:5062;lr=on;ftag=415746302;rtpprx=yes>\r\n'+
-	'Record-Route: <sip:127.0.0.1;r2=on;lr=on;ftag=415746302;nat=yes;lb=yes;socket=udp:'+pub_ip+':5060>\r\n'+
-	'Record-Route: <sip:'+pub_ip+';r2=on;lr=on;ftag=415746302;nat=yes;lb=yes;socket=udp:'+pub_ip+':5060>\r\n'+
-	'Via: SIP/2.0/UDP 127.0.0.1:5062;branch=z9hG4bKef7.c1f3367df5cff89f98058ed5508fce22.0;received=127.0.0.1\r\n'+
-	'Via: SIP/2.0/UDP 127.0.0.1;branch=z9hG4bKef7.abfc04310a6de51d3c2cd97b1a12fe11.0\r\n'+
-	'Via: SIP/2.0/UDP '+priv_ip+':5064;received='+priv_nat+';branch=z9hG4bK829262785;rport=5064\r\n'+
-	'From: <sip:'+caller_e164+'@'+domain+'>;tag=415746302\r\n'+
-	'To: <sip:'+callee+'@'+domain+';user=phone>;tag=7DB80AAE-56E458BB0008256B-B7852700\r\n'+
-	'Call-ID: '+call_id+'\r\n'+
-	'CSeq: 442 BYE\r\n'+
-	'Server: Application Server\r\n'+
-	'Content-Length: 0\r\n'+
-	'\r\n\r\n'
-
-
-}, {
-
-        rcinfo: {
-                type: 'HEP',
-                version: 3,
-                payload_type: 1,
-                captureId: 2001,
-                capturePass: capturePass,
-                ip_family: 2,
-                protocol: 17,
-                proto_type: 1,
-                correlation_id: call_id,
-                srcIp: localhost,
-                dstIp: localhost,
-                srcPort: 5062,
-                dstPort: 5060
-        },
-        pause: 250,
-        payload:
-	'SIP/2.0 200 OK\r\n'+
-	'Record-Route: <sip:127.0.0.1:5062;lr=on;ftag=415746302;rtpprx=yes>\r\n'+
-	'Record-Route: <sip:127.0.0.1;r2=on;lr=on;ftag=415746302;nat=yes;lb=yes;socket=udp:'+pub_ip+':5060>\r\n'+
-	'Record-Route: <sip:'+pub_ip+';r2=on;lr=on;ftag=415746302;nat=yes;lb=yes;socket=udp:'+pub_ip+':5060>\r\n'+
-	'Via: SIP/2.0/UDP 127.0.0.1;branch=z9hG4bKef7.abfc04310a6de51d3c2cd97b1a12fe11.0\r\n'+
-	'Via: SIP/2.0/UDP '+priv_ip+':5064;received='+priv_nat+';branch=z9hG4bK829262785;rport=5064\r\n'+
-	'From: <sip:'+caller+'@'+domain+';user=phone>;tag=415746302\r\n'+
-	'To: <sip:'+callee+'@'+domain+';user=phone>;tag=7DB80AAE-56E458BB0008256B-B7852700\r\n'+
-	'Call-ID: '+call_id+'\r\n'+
-	'CSeq: 442 BYE\r\n'+
-	'Server: Application Server\r\n'+
-	'Content-Length: 0\r\n'+
-	'P-Out-Socket: udp:'+pub_ip+':5060\r\n'+
-	'\r\n\r\n'
-
-
-
-}, {
-
-        rcinfo: {
-                type: 'HEP',
-                version: 3,
-                payload_type: 1,
-                captureId: 2001,
-                capturePass: capturePass,
-                ip_family: 2,
-                protocol: 17,
-                proto_type: 1,
-                correlation_id: call_id,
-                srcIp: pub_ip,
-                dstIp: priv_nat,
-                srcPort: 5060,
-                dstPort: 5064
-        },
-        pause: 250,
-        payload:
-	'SIP/2.0 200 OK\r\n'+
-	'Record-Route: <sip:127.0.0.1:5062;lr=on;ftag=415746302;rtpprx=yes>\r\n'+
-	'Record-Route: <sip:127.0.0.1;r2=on;lr=on;ftag=415746302;nat=yes;lb=yes;socket=udp:'+pub_ip+':5060>\r\n'+
-	'Record-Route: <sip:'+pub_ip+';r2=on;lr=on;ftag=415746302;nat=yes;lb=yes;socket=udp:'+pub_ip+':5060>\r\n'+
-	'Via: SIP/2.0/UDP '+priv_ip+':5064;received='+priv_nat+';branch=z9hG4bK829262785;rport=5064\r\n'+
-	'From: <sip:'+caller+'@'+domain+';user=phone>;tag=415746302\r\n'+
-	'To: <sip:'+callee+'@'+domain+';user=phone>;tag=7DB80AAE-56E458BB0008256B-B7852700\r\n'+
-	'Call-ID: '+call_id+'\r\n'+
-	'CSeq: 442 BYE\r\n'+
-	'Server: Application Server\r\n'+
-	'Content-Length: 0\r\n'+
-	'\r\n\r\n'
-
-
-}, {
-
-        rcinfo: {
-                type: 'HEP',
-                version: 3,
-                payload_type: 1,
-                captureId: 2001,
-                capturePass: capturePass,
-                ip_family: 2,
-                protocol: 17,
-                proto_type: 1,
-                correlation_id: call_id,
-                srcIp: localhost,
-                dstIp: localhost,
-                srcPort: 5080,
-                dstPort: 5060
-        },
-        pause: 150,
-        payload:
-	'BYE sip:'+callee+'@'+peer_ip+':7070 SIP/2.0\r\n'+
-	'Via: SIP/2.0/UDP 127.0.0.1:5080;branch=z9hG4bK3.dYFaLV;rport\r\n'+
-	'From: <sip:'+caller_e164+'@'+domain+'>;tag=06DE7CEB-56E458BB000864AD-B855F700\r\n'+
-	'To: <sip:'+callee+'@'+peer_ip+'>;tag=as6db2fc4d\r\n'+
-	'CSeq: 11 BYE\r\n'+
-	'Call-ID: '+call_id+'_b2b-1\r\n'+
-	'Route: <sip:127.0.0.1;r2=on;lr=on;ftag=06DE7CEB-56E458BB000864AD-B855F700;lb=yes>, <sip:'+pub_ip+';r2=on;lr=on;ftag=06DE7CEB-56E458BB000864AD-B855F700;lb=yes>, <sip:'+peer_ip+';lr;ftag=06DE7CEB-56E458BB000864AD-B855F700>\r\n'+
-	'Content-Length: 0\r\n'+
-	'\r\n\r\n'
-
 
 }, {
 
@@ -1555,7 +867,6 @@ var config = {
 	'\r\n\r\n'
 
 
-
 }, {
 
         rcinfo: {
@@ -1568,32 +879,26 @@ var config = {
                 protocol: 17,
                 proto_type: 1,
                 correlation_id: call_id,
-                srcIp: localhost,
-                dstIp: localhost,
+                srcIp: pub_ip,
+                dstIp: priv_nat,
                 srcPort: 5060,
-                dstPort: 5080
+                dstPort: 5064
         },
         pause: 250,
         payload:
 	'SIP/2.0 200 OK\r\n'+
-	'Via: SIP/2.0/UDP 127.0.0.1:5080;branch=z9hG4bK3.dYFaLV;rport=5080\r\n'+
-	'Record-Route: <sip:'+peer_ip+';lr;ftag=06DE7CEB-56E458BB000864AD-B855F700>\r\n'+
-	'Record-Route: <sip:'+pub_ip+';r2=on;lr=on;ftag=06DE7CEB-56E458BB000864AD-B855F700;lb=yes>\r\n'+
-	'Record-Route: <sip:127.0.0.1;r2=on;lr=on;ftag=06DE7CEB-56E458BB000864AD-B855F700;lb=yes>\r\n'+
-	'From: <sip:'+caller_e164+'@'+domain+'>;tag=06DE7CEB-56E458BB000864AD-B855F700\r\n'+
-	'To: <sip:'+callee+'@'+peer_ip+'>;tag=as6db2fc4d\r\n'+
-	'Call-ID: '+call_id+'_b2b-1\r\n'+
-	'CSeq: 11 BYE\r\n'+
-	'User-Agent: HEPeer\r\n'+
-	'Allow: INVITE, ACK, CANCEL, OPTIONS, BYE, REFER, SUBSCRIBE, NOTIFY\r\n'+
-	'Supported: replaces\r\n'+
-	'Contact: <sip:'+callee+'@'+peer_ip+':7070>\r\n'+
+	'Record-Route: <sip:127.0.0.1:5062;lr=on;ftag=415746302;rtpprx=yes>\r\n'+
+	'Record-Route: <sip:127.0.0.1;r2=on;lr=on;ftag=415746302;nat=yes;lb=yes;socket=udp:'+pub_ip+':5060>\r\n'+
+	'Record-Route: <sip:'+pub_ip+';r2=on;lr=on;ftag=415746302;nat=yes;lb=yes;socket=udp:'+pub_ip+':5060>\r\n'+
+	'Via: SIP/2.0/UDP '+priv_ip+':5064;received='+priv_nat+';branch=z9hG4bK829262785;rport=5064\r\n'+
+	'From: <sip:'+caller+'@'+domain+';user=phone>;tag=415746302\r\n'+
+	'To: <sip:'+callee+'@'+domain+';user=phone>;tag=7DB80AAE-56E458BB0008256B-B7852700\r\n'+
+	'Call-ID: '+call_id+'\r\n'+
+	'CSeq: 442 BYE\r\n'+
+	'Server: Application Server\r\n'+
 	'Content-Length: 0\r\n'+
-	'P-Src-Ip: '+peer_ip+'\r\n'+
-	'P-Src-Port: 5060\r\n'+
-	'P-Src-Proto: udp\r\n'+
-	'P-Src-Af: 4\r\n'+
 	'\r\n\r\n'
+
 
 }, {
                 // Session Log
@@ -1606,10 +911,10 @@ var config = {
                           ip_family: 2,
                           protocol: 17,
                           proto_type: 100,
-                          srcIp: localhost,
+                          srcIp: pub_ip,
                           dstIp: localhost,
                           srcPort: 5060,
-                          dstPort: 5080,
+                          dstPort: 5060,
                           correlation_id: call_id
                   },
                   pause: 100,
