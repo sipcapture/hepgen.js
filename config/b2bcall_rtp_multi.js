@@ -6,6 +6,8 @@ const capturePass = process.env.CAPTUREPASS || 'myHep';
 const captureId = process.env.CAPTUREID || '2001';
 const captureInterval = process.env.RTPINTERVAL || 5000;
 const captureReports = process.env.RTPCOUNT || 6;
+const capturePing = process.env.PING || true;
+const captureBad = process.env.BAD || false;
 // ------------------------------------------------------
 
 var rand = function(maximum,minimum,even){
@@ -55,8 +57,18 @@ var rtpGenerator = function(config){
   var reports = []
   for (let i = 0; i <= config.reports; i++) {
 
-	var mos1 = parseFloat((Math.random() * (4.4 - 4.2) + 4.2).toFixed(3));
-	var mos2 = parseFloat((Math.random() * (3.9 - 2.0) + 2.0).toFixed(3));
+	var amax = 4.4
+	var amin = 4.3
+	var bmax = 4.4
+	var bmin = 4.3
+
+	if (captureBad) {
+		amax = 4.4; amin = 4.1;
+		bmax = 3.9; bmin = 2.0;
+	}
+
+	var mos1 = parseFloat((Math.random() * (amax - amin) + amin).toFixed(3));
+	var mos2 = parseFloat((Math.random() * (bmax - bmin) + bmin).toFixed(3));
 	var jit1 = 1.0-(mos1/6.0);
 	var jit2 = 1.3-(mos2/6.0);
 
@@ -126,7 +138,7 @@ var rtpGenerator = function(config){
                             correlation_id: call_id
                     },
       		  pause: 2500,
-  		  payload: '{"CORRELATION_ID":"'+call_id+'","RTP_SIP_CALL_ID":"'+call_id+'","DELTA":19.983,"JITTER":0.017,"REPORT_TS":'+new Date().getTime()/1000+',"TL_BYTE":0,"SKEW":0.000,"TOTAL_PK":1511,"EXPECTED_PK":1512,"PACKET_LOSS":1,"SEQ":0,"MAX_JITTER":0.010,"MAX_DELTA":20.024,"MAX_SKEW":0.172,"MEAN_JITTER":0.005,"MIN_MOS":4.032, "MEAN_MOS":4.032, "MOS":4.032,"RFACTOR":80.200,"MIN_RFACTOR":80.200,"MEAN_RFACTOR":80.200,"SRC_IP":"'+pub_ip+'", "SRC_PORT":26872, "DST_IP":"'+peer_ip+'","DST_PORT":51354,"SRC_MAC":"00-30-48-7E-5D-C6","DST_MAC":"00-12-80-D7-38-5E","OUT_ORDER":0,"SSRC_CHG":0,"CODEC_PT":9, "CLOCK":8000,"CODEC_NAME":"g722","DIR":0,"REPORT_NAME":"'+pub_ip+':26872","PARTY":0,"TYPE":"HANGUP"}'
+  		  payload: '{"CORRELATION_ID":"'+call_id+'","RTP_SIP_CALL_ID":"'+call_id+'","DELTA":19.983,"JITTER":0.017,"REPORT_TS":'+new Date().getTime()/1000+',"TL_BYTE":0,"SKEW":0.000,"TOTAL_PK":1511,"EXPECTED_PK":1512,"PACKET_LOSS":1,"SEQ":0,"MAX_JITTER":0.010,"MAX_DELTA":20.024,"MAX_SKEW":0.172,"MEAN_JITTER":0.005,"MIN_MOS":'+finalStats.mos2+', "MEAN_MOS":'+finalStats.mos2+', "MOS":'+finalStats.mos2+',"RFACTOR":80.200,"MIN_RFACTOR":80.200,"MEAN_RFACTOR":80.200,"SRC_IP":"'+pub_ip+'", "SRC_PORT":26872, "DST_IP":"'+peer_ip+'","DST_PORT":51354,"SRC_MAC":"00-30-48-7E-5D-C6","DST_MAC":"00-12-80-D7-38-5E","OUT_ORDER":0,"SSRC_CHG":0,"CODEC_PT":9, "CLOCK":8000,"CODEC_NAME":"g722","DIR":0,"REPORT_NAME":"'+pub_ip+':26872","PARTY":0,"TYPE":"HANGUP"}'
   	}, {
                   // RTP Final Report 1
                     rcinfo: {
@@ -184,8 +196,10 @@ var config = {
         HEP_ID: 2001,
         HEP_AUTH: capturePass,
         // the Messages to send
-        MESSAGES: [
+        MESSAGES: []
+}
 
+if (capturePass) config.MESSAGES.push(
 {
  	rcinfo: {
     		type: 'HEP',
@@ -200,7 +214,9 @@ var config = {
         pause: 1000,
     	payload: 'HEPPING'
 
-},
+})
+
+config.MESSAGES.push(
 {
  	rcinfo: {
     		type: 'HEP',
@@ -926,9 +942,7 @@ var config = {
 
  }
 
-]
-
-};
+);
 
 
 

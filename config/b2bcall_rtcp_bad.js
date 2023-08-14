@@ -1541,7 +1541,7 @@ var config = {
                           correlation_id: call_id
                   },
                   pause: 100,
-                  payload: 'CDR: TS='+new Date().toISOString()+' FROM='+caller_e164+' TO='+callee+' COST=0.00'+rand(21,55)+' CALLID='+call_id
+                  payload: 'CDR: TS='+new Date().toISOString()+' FROM='+caller_e164+' TO='+callee+' COST=4.'+rand(21,55)+' CALLID='+call_id
  }
 ]
 };
