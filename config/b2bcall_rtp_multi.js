@@ -138,7 +138,7 @@ var rtpGenerator = function(config){
                             correlation_id: call_id
                     },
       		  pause: 2500,
-  		  payload: '{"CORRELATION_ID":"'+call_id+'","RTP_SIP_CALL_ID":"'+call_id+'","DELTA":19.983,"JITTER":0.017,"REPORT_TS":'+new Date().getTime()/1000+',"TL_BYTE":0,"SKEW":0.000,"TOTAL_PK":1511,"EXPECTED_PK":1512,"PACKET_LOSS":1,"SEQ":0,"MAX_JITTER":0.010,"MAX_DELTA":20.024,"MAX_SKEW":0.172,"MEAN_JITTER":0.005,"MIN_MOS":'+finalStats.mos2+', "MEAN_MOS":'+finalStats.mos2+', "MOS":'+finalStats.mos2+',"RFACTOR":80.200,"MIN_RFACTOR":80.200,"MEAN_RFACTOR":80.200,"SRC_IP":"'+pub_ip+'", "SRC_PORT":26872, "DST_IP":"'+peer_ip+'","DST_PORT":51354,"SRC_MAC":"00-30-48-7E-5D-C6","DST_MAC":"00-12-80-D7-38-5E","OUT_ORDER":0,"SSRC_CHG":0,"CODEC_PT":9, "CLOCK":8000,"CODEC_NAME":"g722","DIR":0,"REPORT_NAME":"'+pub_ip+':26872","PARTY":0,"TYPE":"FINAL"}'
+  		  payload: '{"CORRELATION_ID":"'+call_id+'","RTP_SIP_CALL_ID":"'+call_id+'","DELTA":19.983,"JITTER":0.017,"REPORT_TS":'+new Date().getTime()/1000+',"TL_BYTE":241833,"SKEW":0.000,"TOTAL_PK":1511,"EXPECTED_PK":1512,"PACKET_LOSS":1,"SEQ":0,"MAX_JITTER":0.010,"MAX_DELTA":20.024,"MAX_SKEW":0.172,"MEAN_JITTER":0.005,"MIN_MOS":'+finalStats.mos2+', "MEAN_MOS":'+finalStats.mos2+', "MOS":'+finalStats.mos2+',"RFACTOR":80.200,"MIN_RFACTOR":80.200,"MEAN_RFACTOR":80.200,"SRC_IP":"'+pub_ip+'", "SRC_PORT":26872, "DST_IP":"'+peer_ip+'","DST_PORT":51354,"SRC_MAC":"00-30-48-7E-5D-C6","DST_MAC":"00-12-80-D7-38-5E","OUT_ORDER":0,"SSRC_CHG":0,"CODEC_PT":9, "CLOCK":8000,"CODEC_NAME":"g722","DIR":0,"REPORT_NAME":"'+pub_ip+':26872","PARTY":0,"TYPE":"FINAL"}'
   	}, {
 
 		  // RTP Report FINAL A-leg OUT
@@ -159,7 +159,7 @@ var rtpGenerator = function(config){
                             correlation_id: call_id
                     },
       		  pause: 500,
-  		  payload: '{"CORRELATION_ID":"'+call_id+'","RTP_SIP_CALL_ID":"'+call_id+'","DELTA":19.983,"JITTER":0.027,"REPORT_TS":'+new Date().getTime()/1000+',"TL_BYTE":0,"SKEW":0.000,"TOTAL_PK":1512,"EXPECTED_PK":1512,"PACKET_LOSS":0,"SEQ":0,"MAX_JITTER":0.020,"MAX_DELTA":20.024,"MAX_SKEW":0.172,"MEAN_JITTER":0.020,"MIN_MOS": '+finalStats.mos1+', "MEAN_MOS":'+finalStats.mos1+', "MOS":'+finalStats.mos1+',"RFACTOR":80.200,"MIN_RFACTOR":80.200,"MEAN_RFACTOR":80.200,"SRC_IP":"'+pub_ip+'", "SRC_PORT":26872, "DST_IP":"'+peer_ip+'","DST_PORT":51354,"SRC_MAC":"00-30-48-7E-5D-C6","DST_MAC":"00-12-80-D7-38-5E","OUT_ORDER":0,"SSRC_CHG":0,"CODEC_PT":9, "CLOCK":8000,"CODEC_NAME":"g722","DIR":1,"REPORT_NAME":"'+peer_ip+':26872","PARTY":1,"TYPE":"FINAL"}'
+  		  payload: '{"CORRELATION_ID":"'+call_id+'","RTP_SIP_CALL_ID":"'+call_id+'","DELTA":19.983,"JITTER":0.027,"REPORT_TS":'+new Date().getTime()/1000+',"TL_BYTE":241920,"SKEW":0.000,"TOTAL_PK":1512,"EXPECTED_PK":1512,"PACKET_LOSS":0,"SEQ":0,"MAX_JITTER":0.020,"MAX_DELTA":20.024,"MAX_SKEW":0.172,"MEAN_JITTER":0.020,"MIN_MOS": '+finalStats.mos1+', "MEAN_MOS":'+finalStats.mos1+', "MOS":'+finalStats.mos1+',"RFACTOR":80.200,"MIN_RFACTOR":80.200,"MEAN_RFACTOR":80.200,"SRC_IP":"'+pub_ip+'", "SRC_PORT":26872, "DST_IP":"'+peer_ip+'","DST_PORT":51354,"SRC_MAC":"00-30-48-7E-5D-C6","DST_MAC":"00-12-80-D7-38-5E","OUT_ORDER":0,"SSRC_CHG":0,"CODEC_PT":9, "CLOCK":8000,"CODEC_NAME":"g722","DIR":1,"REPORT_NAME":"'+peer_ip+':26872","PARTY":1,"TYPE":"FINAL"}'
 
   	}, {
                   // RTP Final Report 1
