@@ -178,7 +178,7 @@ var rtpGenerator = function(config){
   			    mos: parseInt(finalStats.mos2*100)
                     },
       		  pause: 50,
-  		  payload: '{"CORRELATION_ID":"'+call_id+'", "RTP_SIP_CALL_ID":"'+call_id+'_b2b-1","MOS":'+finalStats.mos2+',"RFACTOR":91.200,"DIR":1,"REPORT_NAME":"'+pub_ip+'","PARTY":1,"TYPE":"FINAL"}'
+  		  payload: '{\"CORRELATION_ID\":\"'+call_id+'\", \"RTP_SIP_CALL_ID\":\"'+call_id+'\",\"MOS\":'+finalStats.mos2+',\"RFACTOR\":91.200,\"DIR\":1,\"REPORT_NAME\":\"'+pub_ip+'\",\"PARTY\":1,\"TYPE\":\"FINAL\"}'
   	},{
                 // DTMF Log
                   rcinfo: {
