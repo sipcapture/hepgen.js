@@ -201,26 +201,7 @@ var rtpGenerator = function(config){
                     },
       		  pause: 50,
   		  payload: '{"CORRELATION_ID":"'+call_id+'", "RTP_SIP_CALL_ID":"'+call_id+'","MOS":'+finalStats.mos2+',"RFACTOR":91.200,"DIR":1,"REPORT_NAME":"'+pub_ip+'","PARTY":1,"TYPE":"FINAL"}'
-  	},{
-                // DTMF Log
-                  rcinfo: {
-                          type: 'HEP',
-                          version: 3,
-                          payload_type: 'SIP',
-                          captureId: 2001,
-                          capturePass: capturePass,
-                          ip_family: 2,
-                          protocol: 17,
-                          proto_type: 100,
-                          srcIp: pub_ip,
-                          dstIp: localhost,
-                          srcPort: 5060,
-                          dstPort: 5060,
-                          correlation_id: call_id
-                  },
-                  pause: 100,
-                  payload: '{"CORRELATION_ID":"'+call_id+'","REPORT_TS":'+new Date().getTime()/1000+',"DTMF":"ts:'+new Date().getTime()/1000+',tsu:843750,e:1,v:15,d:160,c:1;","SRC_IP":"'+pub_ip+'", "SRC_PORT":'+(rtpports.src || 7000)+', "DST_IP":"'+localhost+'","DST_PORT":'+(rtpports.dst || 7000)+',"CODEC_PT":101,"CODEC_NAME":"telephone-event","PARTY":0,"TYPE":"PERIODIC"}'
-	})
+  	})
 
   return reports;
 };
@@ -792,7 +773,27 @@ config.MESSAGES.push(
 }, 
 /* Inject RTP Reports */
 ...rtpGenerator(0), 
+
 {
+                // DTMF Log
+                  rcinfo: {
+                          type: 'HEP',
+                          version: 3,
+                          payload_type: 'SIP',
+                          captureId: 2001,
+                          capturePass: capturePass,
+                          ip_family: 2,
+                          protocol: 17,
+                          proto_type: 100,
+                          srcIp: pub_ip,
+                          dstIp: localhost,
+                          srcPort: 5060,
+                          dstPort: 5060,
+                          correlation_id: call_id
+                  },
+                  pause: 100,
+                  payload: '{"CORRELATION_ID":"'+call_id+'","REPORT_TS":'+new Date().getTime()/1000+',"DTMF":"ts:'+new Date().getTime()/1000+',tsu:843750,e:1,v:15,d:160,c:1;","SRC_IP":"'+pub_ip+'", "SRC_PORT":'+(rtpports.src || 7000)+', "DST_IP":"'+localhost+'","DST_PORT":'+(rtpports.dst || 7000)+',"CODEC_PT":101,"CODEC_NAME":"telephone-event","PARTY":0,"TYPE":"PERIODIC"}'
+},{
         rcinfo: {
                 type: 'HEP',
                 version: 3,
