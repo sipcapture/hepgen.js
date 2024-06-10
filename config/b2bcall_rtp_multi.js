@@ -197,7 +197,7 @@ var rtpGenerator = function(config){
                           correlation_id: call_id
                   },
                   pause: 100,
-                  payload: '{ "CORRELATION_ID":"'+call_id'", "REPORT_TS":'+new Date().getTime()/1000+',"DTMF":"ts:'+new Date().getTime()/1000+',tsu:843750,e:1,v:15,d:160,c:1;","SRC_IP":"'+pub_ip+'", "SRC_PORT":'+rtpports.src || 7000'+', "DST_IP":"'+localhost+'","DST_PORT":'+rtpports.dst || 7000+',"CODEC_PT":101,"CODEC_NAME":"telephone-event","PARTY":0,"TYPE":"PERIODIC"}'
+                  payload: '{ "CORRELATION_ID":"'+call_id'", "REPORT_TS":'+new Date().getTime()/1000+',"DTMF":"ts:'+new Date().getTime()/1000+',tsu:843750,e:1,v:15,d:160,c:1;","SRC_IP":"'+pub_ip+'", "SRC_PORT":'+rtpports.src || 7000'+', "DST_IP":"'+localhost+'","DST_PORT":'+rtpports.dst || 7000+',"CODEC_PT":101,"CODEC_NAME":"telephone-event","PARTY":0,"TYPE":"PERIODIC","event": "rtp_stats"}'
 	})
 
   return reports;
