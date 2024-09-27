@@ -69,24 +69,24 @@ var sendHEP3 = function(msg,rcinfo){
 			var hep_message = HEPjs.encapsulate(msg,rcinfo);
 			stats.parsed++;
 			if (hep_message) {
-        if(socket && _config_.SOCKET_TYPE == 'udp4'){
-          socket.send(hep_message, 0, hep_message.length, _config_.HEP_PORT, _config_.HEP_SERVER, function(err) {
-					console.log(err);
-  					stats.hepsent++;
-  					countDown();
-  				});
-        } else {
-          socket.write(hep_message, function(err) {
-            if(!err){
-              stats.hepsent++;
-    					countDown();
-            } else {
-              if(debug)console.log('tcp socket err: ', err);
-              stats.err++;
-              countDown();
-            }
-  				});
-        }
+				if(socket && _config_.SOCKET_TYPE == 'udp4'){
+					socket.send(hep_message, 0, hep_message.length, _config_.HEP_PORT, _config_.HEP_SERVER, function(err) {
+						console.log(err);
+						stats.hepsent++;
+						countDown();
+					});
+				} else {
+					socket.write(hep_message, function(err) {
+						if(!err){
+							stats.hepsent++;
+							countDown();
+						} else {
+							if(debug)console.log('tcp socket err: ', err);
+							stats.err++;
+							countDown();
+						}
+					});
+				}
 			} else { console.log('HEP Parsing error!'); stats.heperr++; }
 		}
 		catch (e) {
