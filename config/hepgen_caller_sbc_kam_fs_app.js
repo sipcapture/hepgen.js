@@ -188,7 +188,7 @@ function createMediaReports() {
 				type: 'HEP', version: 3, payload_type: 'JSON',
                                 captureId: 2010, capturePass: 'myHep', ip_family: 2,
 	                        protocol: 17,
-	                        proto_type: 5,
+	                        proto_type: 34,
 	                        srcIp: priv_ip,
 	                        dstIp: priv_nat,
 	                        srcPort: rtpPorts.uac_sbc.uac_rtp,
@@ -198,7 +198,7 @@ function createMediaReports() {
 				time_usec: Math.floor((currentTime % 1000) * 1000) + 100
 			},
 			pause: 200,
-			payload: '{"CORRELATION_ID":"'+a_leg_call_id + '","RTP_SIP_CALL_ID":"'+a_leg_call_id+'","SR_DELAY":0,"INTERARRIVAL_JITTER":0,"REPORT_TS":'+uac_to_sbc_stats.REPORT_TS+',"TOTAL_PK":'+uac_to_sbc_stats.TOTAL_PK+',"TOTAL_RTCP_PK":14,"CUM_PACKET_LOSS":'+uac_to_sbc_stats.PACKET_LOSS+',"PERCENTAGE_LOSS":0,"MAX_INTERARRIVAL_JITTER":'+uac_to_sbc_stats.MAX_JITTER+150+',"MAX_SR_DELAY":0,"MAX_PERCENTAGE_LOSS":0.391,"MEAN_PERCENTAGE_LOSS":0.055,"MEAN_INTERARRIVAL_JITTER":'+uac_to_sbc_stats.MEAN_JITTER+150+',"MIN_MOS":'+uac_to_sbc_stats.MIN_MOS-1+',"MEAN_MOS":'+uac_to_sbc_stats.MEAN_MOS-1+',"MOS":'+uac_to_sbc_stats.MOS-1+',"RFACTOR":'+uac_to_sbc_stats.RFACTOR+',"MIN_RFACTOR":'+uac_to_sbc_stats.MIN_RFACTOR+',"MEAN_RFACTOR":'+uac_to_sbc_stats.MEAN_RFACTOR+',"SRC_IP":"'+priv_ip+'","SRC_PORT":'+rtpPorts.uac_sbc.uac_rtp+',"DST_IP":"'+priv_nat+'","DST_PORT":'+rtpPorts.uac_sbc.sbc_rtp+',"OCTET_COUNT":208160,"SSRC_CHG":'+uac_to_sbc_stats.SSRC_CHG+',"PKT_TYPE_REPORT":[200,0,0],"HIGH_EXT_SEQ":12656,"SSRC":"0xedc34144","DIR":0,"REPORT_NAME":"'+priv_ip+':'+rtpPorts.uac_sbc.uac_rtp+'","PARTY":0,"IP_QOS":0,"INFO_VLAN":0,"VIDEO":0,"REPORT_START":'+(currentTime/1000)-10000+',"REPORT_END":'+(currentTime/1000)+100+',"TYPE":"PERIODIC","STYPE":"HEPAGENT-RTCP-1.1.107","SOURCE":"RTCP"}'
+			payload: '{"CORRELATION_ID":"'+a_leg_call_id + '","RTP_SIP_CALL_ID":"'+a_leg_call_id+'","SR_DELAY":0,"INTERARRIVAL_JITTER":0,"REPORT_TS":'+uac_to_sbc_stats.REPORT_TS+',"TOTAL_PK":'+uac_to_sbc_stats.TOTAL_PK+',"TOTAL_RTCP_PK":14,"CUM_PACKET_LOSS":'+uac_to_sbc_stats.PACKET_LOSS+',"PERCENTAGE_LOSS":0,"MAX_INTERARRIVAL_JITTER":'+(uac_to_sbc_stats.MAX_JITTER+150)+',"MAX_SR_DELAY":0,"MAX_PERCENTAGE_LOSS":0.391,"MEAN_PERCENTAGE_LOSS":0.055,"MEAN_INTERARRIVAL_JITTER":'+(uac_to_sbc_stats.MEAN_JITTER+150)+',"MIN_MOS":'+(uac_to_sbc_stats.MIN_MOS-1)+',"MEAN_MOS":'+(uac_to_sbc_stats.MEAN_MOS-1).toFixed(3)+',"MOS":'+(uac_to_sbc_stats.MOS-1).toFixed(3)+',"RFACTOR":'+uac_to_sbc_stats.RFACTOR+',"MIN_RFACTOR":'+uac_to_sbc_stats.MIN_RFACTOR+',"MEAN_RFACTOR":'+uac_to_sbc_stats.MEAN_RFACTOR+',"SRC_IP":"'+priv_ip+'","SRC_PORT":'+rtpPorts.uac_sbc.uac_rtp+',"DST_IP":"'+priv_nat+'","DST_PORT":'+rtpPorts.uac_sbc.sbc_rtp+',"OCTET_COUNT":208160,"SSRC_CHG":'+uac_to_sbc_stats.SSRC_CHG+',"PKT_TYPE_REPORT":[200,0,0],"HIGH_EXT_SEQ":12656,"SSRC":"0xedc34144","DIR":0,"REPORT_NAME":"'+priv_ip+':'+rtpPorts.uac_sbc.uac_rtp+'","PARTY":0,"IP_QOS":0,"INFO_VLAN":0,"VIDEO":0,"REPORT_START":'+Math.floor((currentTime/1000)-10000)+',"REPORT_END":'+Math.floor((currentTime/1000)+100)+',"TYPE":"PERIODIC","STYPE":"HEPAGENT-RTCP-1.1.107","SOURCE":"RTCP"}'
 		});
 
 		// SBC -> UAC
@@ -207,7 +207,7 @@ function createMediaReports() {
 				type: 'HEP', version: 3, payload_type: 'JSON',
                                 captureId: 2010, capturePass: 'myHep', ip_family: 2,
 	                        protocol: 17,
-	                        proto_type: 5,
+	                        proto_type: 34,
 	                        srcIp: priv_nat,
 	                        dstIp: priv_ip,
 	                        srcPort: rtpPorts.uac_sbc.sbc_rtp,
@@ -217,7 +217,7 @@ function createMediaReports() {
 				time_usec: Math.floor((currentTime % 1000) * 1000) + 100
 			},
 			pause: 200,
-			payload: '{"CORRELATION_ID":"'+a_leg_call_id + '","RTP_SIP_CALL_ID":"'+a_leg_call_id+'","SR_DELAY":0,"INTERARRIVAL_JITTER":0,"REPORT_TS":'+sbc_to_uac_stats.REPORT_TS+',"TOTAL_PK":'+sbc_to_uac_stats.TOTAL_PK+',"TOTAL_RTCP_PK":14,"CUM_PACKET_LOSS":'+sbc_to_uac_stats.PACKET_LOSS+',"PERCENTAGE_LOSS":0,"MAX_INTERARRIVAL_JITTER":'+sbc_to_uac_stats.MAX_JITTER+150+',"MAX_SR_DELAY":0,"MAX_PERCENTAGE_LOSS":0.391,"MEAN_PERCENTAGE_LOSS":0.055,"MEAN_INTERARRIVAL_JITTER":'+sbc_to_uac_stats.MEAN_JITTER+150+',"MIN_MOS":'+sbc_to_uac_stats.MIN_MOS-1+',"MEAN_MOS":'+sbc_to_uac_stats.MEAN_MOS-1+',"MOS":'+sbc_to_uac_stats.MOS-1+',"RFACTOR":'+sbc_to_uac_stats.RFACTOR+',"MIN_RFACTOR":'+sbc_to_uac_stats.MIN_RFACTOR+',"MEAN_RFACTOR":'+sbc_to_uac_stats.MEAN_RFACTOR+',"SRC_IP":"'+priv_nat+'","SRC_PORT":'+rtpPorts.uac_sbc.sbc_rtp+',"DST_IP":"'+priv_ip+'","DST_PORT":'+rtpPorts.uac_sbc.uac_rtp+',"OCTET_COUNT":208160,"SSRC_CHG":'+sbc_to_uac_stats.SSRC_CHG+',"PKT_TYPE_REPORT":[200,0,0],"HIGH_EXT_SEQ":12656,"SSRC":"0xedc34144","DIR":0,"REPORT_NAME":"'+priv_nat+':'+rtpPorts.uac_sbc.sbc_rtp+'","PARTY":0,"IP_QOS":0,"INFO_VLAN":0,"VIDEO":0,"REPORT_START":'+(currentTime/1000)-10000+',"REPORT_END":'+(currentTime/1000)+100+',"TYPE":"PERIODIC","STYPE":"HEPAGENT-RTCP-1.1.107","SOURCE":"RTCP"}'
+			payload: '{"CORRELATION_ID":"'+a_leg_call_id + '","RTP_SIP_CALL_ID":"'+a_leg_call_id+'","SR_DELAY":0,"INTERARRIVAL_JITTER":0,"REPORT_TS":'+sbc_to_uac_stats.REPORT_TS+',"TOTAL_PK":'+sbc_to_uac_stats.TOTAL_PK+',"TOTAL_RTCP_PK":14,"CUM_PACKET_LOSS":'+sbc_to_uac_stats.PACKET_LOSS+',"PERCENTAGE_LOSS":0,"MAX_INTERARRIVAL_JITTER":'+(sbc_to_uac_stats.MAX_JITTER+150)+',"MAX_SR_DELAY":0,"MAX_PERCENTAGE_LOSS":0.391,"MEAN_PERCENTAGE_LOSS":0.055,"MEAN_INTERARRIVAL_JITTER":'+(sbc_to_uac_stats.MEAN_JITTER+150)+',"MIN_MOS":'+(sbc_to_uac_stats.MIN_MOS-1).toFixed(3)+',"MEAN_MOS":'+(sbc_to_uac_stats.MEAN_MOS-1).toFixed(3)+',"MOS":'+(sbc_to_uac_stats.MOS-1).toFixed(3)+',"RFACTOR":'+sbc_to_uac_stats.RFACTOR+',"MIN_RFACTOR":'+sbc_to_uac_stats.MIN_RFACTOR+',"MEAN_RFACTOR":'+sbc_to_uac_stats.MEAN_RFACTOR+',"SRC_IP":"'+priv_nat+'","SRC_PORT":'+rtpPorts.uac_sbc.sbc_rtp+',"DST_IP":"'+priv_ip+'","DST_PORT":'+rtpPorts.uac_sbc.uac_rtp+',"OCTET_COUNT":208160,"SSRC_CHG":'+sbc_to_uac_stats.SSRC_CHG+',"PKT_TYPE_REPORT":[200,0,0],"HIGH_EXT_SEQ":12656,"SSRC":"0xedc34144","DIR":0,"REPORT_NAME":"'+priv_nat+':'+rtpPorts.uac_sbc.sbc_rtp+'","PARTY":0,"IP_QOS":0,"INFO_VLAN":0,"VIDEO":0,"REPORT_START":'+Math.floor((currentTime/1000)-10000)+',"REPORT_END":'+Math.floor(currentTime/1000)+100+',"TYPE":"PERIODIC","STYPE":"HEPAGENT-RTCP-1.1.107","SOURCE":"RTCP"}'
 		});
 		
 		// === LEG 2: SBC ↔ FreeSWITCH (B-leg part 1) ===
@@ -364,6 +364,48 @@ function createfinalreports() {
 		pause: 100,
 		payload: '{"CORRELATION_ID":"'+a_leg_call_id+'","RTP_SIP_CALL_ID":"'+a_leg_call_id+'","DELTA":'+sbc_to_uac_final.DELTA+',"JITTER":'+sbc_to_uac_final.JITTER+',"REPORT_TS":'+sbc_to_uac_final.REPORT_TS+',"TL_BYTE":'+sbc_to_uac_final.TL_BYTE+',"SKEW":'+sbc_to_uac_final.SKEW+',"TOTAL_PK":'+sbc_to_uac_final.TOTAL_PK+',"EXPECTED_PK":'+sbc_to_uac_final.EXPECTED_PK+',"PACKET_LOSS":'+sbc_to_uac_final.PACKET_LOSS+',"SEQ":'+sbc_to_uac_final.SEQ+',"MAX_JITTER":'+sbc_to_uac_final.MAX_JITTER+',"MAX_DELTA":'+sbc_to_uac_final.MAX_DELTA+',"MAX_SKEW":'+sbc_to_uac_final.MAX_SKEW+',"MEAN_JITTER":'+sbc_to_uac_final.MEAN_JITTER+',"MIN_MOS":'+sbc_to_uac_final.MIN_MOS+',"MEAN_MOS":'+sbc_to_uac_final.MEAN_MOS+',"MOS":'+sbc_to_uac_final.MOS+',"RFACTOR":'+sbc_to_uac_final.RFACTOR+',"MIN_RFACTOR":'+sbc_to_uac_final.MIN_RFACTOR+',"MEAN_RFACTOR":'+sbc_to_uac_final.MEAN_RFACTOR+',"SRC_IP":"'+priv_nat+'", "SRC_PORT":'+rtpPorts.uac_sbc.sbc_rtp+', "DST_IP":"'+priv_ip+'","DST_PORT":'+rtpPorts.uac_sbc.uac_rtp+',"SRC_MAC":"'+sbc_to_uac_final.SRC_MAC+'","DST_MAC":"'+sbc_to_uac_final.DST_MAC+'","OUT_ORDER":'+sbc_to_uac_final.OUT_ORDER+',"SSRC_CHG":'+sbc_to_uac_final.SSRC_CHG+',"CODEC_PT":'+sbc_to_uac_final.CODEC_PT+', "CLOCK":'+sbc_to_uac_final.CLOCK+',"CODEC_NAME":"'+sbc_to_uac_final.CODEC_NAME+'","DIR":1,"REPORT_NAME":"'+priv_nat+':'+rtpPorts.uac_sbc.sbc_rtp+'","PARTY":0,"TYPE":"FINAL"}'
 	});
+
+	// == RTCP Hangups ==
+
+	// RTCP Stats
+		
+		// UAC -> SBC
+		mediaReports.push({
+			rcinfo: {
+				type: 'HEP', version: 3, payload_type: 'JSON',
+                                captureId: 2010, capturePass: 'myHep', ip_family: 2,
+	                        protocol: 17,
+	                        proto_type: 34,
+	                        srcIp: priv_ip,
+	                        dstIp: priv_nat,
+	                        srcPort: rtpPorts.uac_sbc.uac_rtp,
+	                        dstPort: rtpPorts.uac_sbc.sbc_rtp,
+	                        correlation_id: a_leg_call_id,
+				time_sec: Math.floor(currentTime / 1000),
+				time_usec: Math.floor((currentTime % 1000) * 1000) + 100
+			},
+			pause: 200,
+			payload: '{"CORRELATION_ID":"'+a_leg_call_id + '","RTP_SIP_CALL_ID":"'+a_leg_call_id+'","SR_DELAY":0,"INTERARRIVAL_JITTER":0,"REPORT_TS":'+uac_to_sbc_stats.REPORT_TS+',"TOTAL_PK":'+uac_to_sbc_stats.TOTAL_PK+',"TOTAL_RTCP_PK":14,"CUM_PACKET_LOSS":'+uac_to_sbc_stats.PACKET_LOSS+',"PERCENTAGE_LOSS":0,"MAX_INTERARRIVAL_JITTER":'+(uac_to_sbc_stats.MAX_JITTER+150)+',"MAX_SR_DELAY":0,"MAX_PERCENTAGE_LOSS":0.391,"MEAN_PERCENTAGE_LOSS":0.055,"MEAN_INTERARRIVAL_JITTER":'+(uac_to_sbc_stats.MEAN_JITTER+150)+',"MIN_MOS":'+(uac_to_sbc_stats.MIN_MOS-1)+',"MEAN_MOS":'+(uac_to_sbc_stats.MEAN_MOS-1).toFixed(3)+',"MOS":'+(uac_to_sbc_stats.MOS-1).toFixed(3)+',"RFACTOR":'+uac_to_sbc_stats.RFACTOR+',"MIN_RFACTOR":'+uac_to_sbc_stats.MIN_RFACTOR+',"MEAN_RFACTOR":'+uac_to_sbc_stats.MEAN_RFACTOR+',"SRC_IP":"'+priv_ip+'","SRC_PORT":'+rtpPorts.uac_sbc.uac_rtp+',"DST_IP":"'+priv_nat+'","DST_PORT":'+rtpPorts.uac_sbc.sbc_rtp+',"OCTET_COUNT":208160,"SSRC_CHG":'+uac_to_sbc_stats.SSRC_CHG+',"PKT_TYPE_REPORT":[200,0,0],"HIGH_EXT_SEQ":12656,"SSRC":"0xedc34144","DIR":0,"REPORT_NAME":"'+priv_ip+':'+rtpPorts.uac_sbc.uac_rtp+'","PARTY":0,"IP_QOS":0,"INFO_VLAN":0,"VIDEO":0,"REPORT_START":'+Math.floor((currentTime/1000)-10000)+',"REPORT_END":'+Math.floor((currentTime/1000)+100)+',"TYPE":"HANGUP","STYPE":"HEPAGENT-RTCP-1.1.107","SOURCE":"RTCP"}'
+		});
+
+		// SBC -> UAC
+		mediaReports.push({
+			rcinfo: {
+				type: 'HEP', version: 3, payload_type: 'JSON',
+                                captureId: 2010, capturePass: 'myHep', ip_family: 2,
+	                        protocol: 17,
+	                        proto_type: 34,
+	                        srcIp: priv_nat,
+	                        dstIp: priv_ip,
+	                        srcPort: rtpPorts.uac_sbc.sbc_rtp,
+	                        dstPort: rtpPorts.uac_sbc.uac_rtp,
+	                        correlation_id: a_leg_call_id,
+				time_sec: Math.floor(currentTime / 1000),
+				time_usec: Math.floor((currentTime % 1000) * 1000) + 100
+			},
+			pause: 200,
+			payload: '{"CORRELATION_ID":"'+a_leg_call_id + '","RTP_SIP_CALL_ID":"'+a_leg_call_id+'","SR_DELAY":0,"INTERARRIVAL_JITTER":0,"REPORT_TS":'+sbc_to_uac_stats.REPORT_TS+',"TOTAL_PK":'+sbc_to_uac_stats.TOTAL_PK+',"TOTAL_RTCP_PK":14,"CUM_PACKET_LOSS":'+sbc_to_uac_stats.PACKET_LOSS+',"PERCENTAGE_LOSS":0,"MAX_INTERARRIVAL_JITTER":'+(sbc_to_uac_stats.MAX_JITTER+150)+',"MAX_SR_DELAY":0,"MAX_PERCENTAGE_LOSS":0.391,"MEAN_PERCENTAGE_LOSS":0.055,"MEAN_INTERARRIVAL_JITTER":'+(sbc_to_uac_stats.MEAN_JITTER+150)+',"MIN_MOS":'+(sbc_to_uac_stats.MIN_MOS-1).toFixed(3)+',"MEAN_MOS":'+(sbc_to_uac_stats.MEAN_MOS-1).toFixed(3)+',"MOS":'+(sbc_to_uac_stats.MOS-1).toFixed(3)+',"RFACTOR":'+sbc_to_uac_stats.RFACTOR+',"MIN_RFACTOR":'+sbc_to_uac_stats.MIN_RFACTOR+',"MEAN_RFACTOR":'+sbc_to_uac_stats.MEAN_RFACTOR+',"SRC_IP":"'+priv_nat+'","SRC_PORT":'+rtpPorts.uac_sbc.sbc_rtp+',"DST_IP":"'+priv_ip+'","DST_PORT":'+rtpPorts.uac_sbc.uac_rtp+',"OCTET_COUNT":208160,"SSRC_CHG":'+sbc_to_uac_stats.SSRC_CHG+',"PKT_TYPE_REPORT":[200,0,0],"HIGH_EXT_SEQ":12656,"SSRC":"0xedc34144","DIR":0,"REPORT_NAME":"'+priv_nat+':'+rtpPorts.uac_sbc.sbc_rtp+'","PARTY":0,"IP_QOS":0,"INFO_VLAN":0,"VIDEO":0,"REPORT_START":'+Math.floor((currentTime/1000)-10000)+',"REPORT_END":'+Math.floor(currentTime/1000)+100+',"TYPE":"HANGUP","STYPE":"HEPAGENT-RTCP-1.1.107","SOURCE":"RTCP"}'
+		});
 
 	// LEG 2 FINAL: SBC ↔ FreeSWITCH
 	let sbc_to_fs_final = generateRTPStats({ssrc: ssrcValues.sbc_to_fs}, finalTime, 4);
