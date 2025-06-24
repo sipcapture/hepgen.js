@@ -29,6 +29,8 @@ var pub_ip = '192.168.1.12';
 var peer_ip = '192.168.1.13';
 var app_ip = '192.168.1.14';
 
+var durationFactor = 45; // Duration factor times 2 (2 seconds per report)
+
 var rand = function(maximum,minimum,even){
 	var final = Math.floor(Math.random() * (maximum - minimum + 1)) + minimum;
 	if (even && final % 2 != 0) final++;
@@ -121,6 +123,7 @@ var ssrcValues = {
 
 // Function to create RTP media reports for all 3 legs
 function createMediaReports() {
+
 	var mediaReports = [];
 	var baseTime = Date.now();
 
@@ -262,6 +265,7 @@ function createMediaReports() {
 // Calculate average MOS values for FINAL reports
 function avgMOS(mosArray) {
 	return (mosArray.reduce((a, b) => a + b, 0) / mosArray.length).toFixed(3);
+
 }
 
 
