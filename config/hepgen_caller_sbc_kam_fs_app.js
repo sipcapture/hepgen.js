@@ -15,6 +15,8 @@ var pub_ip = '192.168.1.12';
 var peer_ip = '192.168.1.13';
 var app_ip = '192.168.1.14';
 
+var durationFactor = 45; // Duration factor times 2 (2 seconds per report)
+
 var rand = function(maximum,minimum,even){
 	var final = Math.floor(Math.random() * (maximum - minimum + 1)) + minimum;
 	if (even && final % 2 != 0) final++;
@@ -120,7 +122,7 @@ function createMediaReports() {
     };
     
     // Generate 3 periodic reports over ~6 seconds
-    for (let i = 1; i <= 3; i++) {
+    for (let i = 1; i <= durationFactor; i++) {
         let currentTime = baseTime + (i * 2000); // 2 second intervals
         
         // === LEG 1: UAC ↔ SBC (A-leg) ===
