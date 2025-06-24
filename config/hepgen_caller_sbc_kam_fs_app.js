@@ -29,8 +29,6 @@ var pub_ip = '192.168.1.12';
 var peer_ip = '192.168.1.13';
 var app_ip = '192.168.1.14';
 
-var durationFactor = 45; // Duration factor times 2 (2 seconds per report)
-
 var rand = function(maximum,minimum,even){
 	var final = Math.floor(Math.random() * (maximum - minimum + 1)) + minimum;
 	if (even && final % 2 != 0) final++;
@@ -1023,21 +1021,40 @@ var config = {
 			'Content-Length: 0\r\n\r\n'
 		},
 
+		{
+			rcinfo: {
+				type: 'HEP', version: 3, payload_type: 1,
+				captureId: 2010, capturePass: 'myHep', ip_family: 2,
+				protocol: 17, proto_type: 1, correlation_id: b_leg_call_id,
+				srcIp: '192.168.1.11', dstIp: '192.168.1.12', srcPort: 5060, dstPort: 5060
+			},
+			pause: 400,
+			payload:
+			'ACK sip:9876@sipcapture.org SIP/2.0\r\n' +
+			'Via: SIP/2.0/UDP 192.168.1.11:5060;branch=z9hG4bK-sbc-ack;rport\r\n' +
+			'From: <sip:hepgenjs@sipcapture.org>;tag=sbc\r\n' +
+			'To: <sip:9876@sipcapture.org>;tag=apptag\r\n' +
+			'Call-ID: ' + b_leg_call_id + '\r\n' +
+			'CSeq: 1 ACK\r\n' +
+			'x-cid: ' + a_leg_call_id + '\r\n' +
+			'Content-Length: 0\r\n\r\n'
+		},
+
 		// === Ribbon Log ===
 
 		{
 			rcinfo: {
 				type: 'HEP', version: 3, payload_type: 'JSON',
 				captureId: 2050, capturePass: 'myHep', ip_family: 2,
-				protocol: 17, proto_type: 100, correlation_id: a_leg_call_id,
-				srcIp: '192.168.1.10', dstIp: '192.168.1.11', srcPort: 5060, dstPort: 5060
+				protocol: 17, proto_type: 100, correlation_id: b_leg_call_id,
+				srcIp: '192.168.1.11', dstIp: '192.168.1.11', srcPort: 5060, dstPort: 5060
 			},
 			pause: 250,
 			payload:
 			'Acct-Status-Type = Start\r\n' +
 			'Acct-Authentic = 0\r\n' +
 			'NET-Session-Ingress-CallId = "0"\r\n' +
-			'NET-Session-Egress-CallId = "' + a_leg_call_id + '"\r\n' +
+			'NET-Session-Egress-CallId = "' + b_leg_call_id + '"\r\n' +
 			'NET-Session-Generic-Id = "2"\r\n' +
 			'Acct-Multi-Session-Id = "' + Date.now() + '"\r\n' +
 			'NET-Ingress-Signaling-Group = "1"\r\n' +
@@ -1060,25 +1077,6 @@ var config = {
 			'NAS-IP-Address = 134.56.72.218\r\n' +
 			'Acct-Unique-Session-Id = "4d1f78f67a5c582e"\r\n'+
 			'Timestamp = ' + Date.now() + '\r\n'
-		},
-
-		{
-			rcinfo: {
-				type: 'HEP', version: 3, payload_type: 1,
-				captureId: 2010, capturePass: 'myHep', ip_family: 2,
-				protocol: 17, proto_type: 1, correlation_id: b_leg_call_id,
-				srcIp: '192.168.1.11', dstIp: '192.168.1.12', srcPort: 5060, dstPort: 5060
-			},
-			pause: 400,
-			payload:
-			'ACK sip:9876@sipcapture.org SIP/2.0\r\n' +
-			'Via: SIP/2.0/UDP 192.168.1.11:5060;branch=z9hG4bK-sbc-ack;rport\r\n' +
-			'From: <sip:hepgenjs@sipcapture.org>;tag=sbc\r\n' +
-			'To: <sip:9876@sipcapture.org>;tag=apptag\r\n' +
-			'Call-ID: ' + b_leg_call_id + '\r\n' +
-			'CSeq: 1 ACK\r\n' +
-			'x-cid: ' + a_leg_call_id + '\r\n' +
-			'Content-Length: 0\r\n\r\n'
 		},
 
 		{
@@ -1126,9 +1124,7 @@ var config = {
                                 correlation_id: a_leg_call_id,
                                 srcIp: '192.168.1.10', dstIp: '192.168.1.11',
                                 srcPort: rtpPorts.fs_app.app_rtp, dstPort: rtpPorts.fs_app.fs_rtp,
-                                mos: 436,
-                                time_sec: Math.floor(Date.now() / 1000) + 10,
-                                time_usec: 465000
+                                mos: 436
                   	},
                   	pause: 1000, // Longer pause before media starts
                   	payload: '{"CORRELATION_ID":"' + a_leg_call_id + '",' + '"REPORT_TS":' + (new Date().getTime() / 1000).toFixed(3) + ',' + '"DTMF":"ts:' + (new Date().getTime() / 1000).toFixed(3) + ',tsu:843750,e:1,v:15,d:160,c:1"}'
