@@ -1003,6 +1003,45 @@ var config = {
 			'\r\n'
 		},
 
+		// === Ribbon Log ===
+
+		{
+			rcinfo: {
+				type: 'HEP', version: 3, payload_type: 'JSON',
+				captureId: 2050, capturePass: 'myHep', ip_family: 2,
+				protocol: 17, proto_type: 100, correlation_id: b_leg_call_id,
+				srcIp: '192.168.1.10', dstIp: '192.168.1.11', srcPort: 5060, dstPort: 5060
+			},
+			pause: 250,
+			payload:
+			'Acct-Status-Type = Start\r\n' +
+			'Acct-Authentic = 0\r\n' +
+			'NET-Session-Ingress-CallId = "0"\r\n' +
+			'NET-Session-Egress-CallId = "' + b_leg_call_id + '"\r\n' +
+			'NET-Session-Generic-Id = "2"\r\n' +
+			'Acct-Multi-Session-Id = "' + Date.now() + '"\r\n' +
+			'NET-Ingress-Signaling-Group = "1"\r\n' +
+			'NET-Egress-Signaling-Group = "0"\r\n' +
+			'NET-Ingress-Channel-Number = 1\r\n' +
+			'NET-Egress-Channel-Number = 0\r\n' +
+			'NET-Call-Origin = "1"\r\n' +
+			'NET-Calling-Number = "sip:hepgenjs@sipcapture.org"\r\n' +
+			'NET-Called-Number = "9876"\r\n' +
+			'NET-Calling-Name = "PolycomVVX-VVX_300-UA/4.1.6.4835"\r\n' +
+			'NET-Ingress-Channel-Id = "0:1:1"\r\n' + 
+			'NET-Setup-Time = "' + Date.now() + '"\r\n' +
+			'Acct-Session-Id = "0"\r\n' +
+			'NET-Firmware-Version = "2.0.0v85"\r\n' +
+			'NET-Local-Time-Zone = "CEST"\r\n' +
+			'NET-Gw-Id = "efb8efa8cdfedc3ba0bb7b"\r\n' +
+			'NET-Time-And-Day = "' + Date.now() + '"\r\n' +
+			'NAS-Port = 1813\r\n' +
+			'Acct-Delay-Time = 0\r\n' +
+			'NAS-IP-Address = 134.56.72.218\r\n' +
+			'Acct-Unique-Session-Id = "4d1f78f67a5c582e"\r\n'+
+			'Timestamp = ' + Date.now() + '\r\n'
+		},
+
 		// === ACK SEQUENCE ===
 		// ACK from Caller → App through all hops
 		{
@@ -1060,7 +1099,23 @@ var config = {
 			'CSeq: 1 ACK\r\n' +
 			'Content-Length: 0\r\n\r\n'
 		},
-
+		// DTMF to start off RTP
+		{
+			rcinfo: {
+                                type: 'HEP', version: 3, payload_type: 'JSON',
+                                captureId: 2010, capturePass: 'myHep', ip_family: 2,
+                                protocol: 17, proto_type: 100,
+                                correlation_id: b_leg_call_id,
+                                srcIp: app_ip, dstIp: pub_ip,
+                                srcPort: rtpPorts.fs_app.app_rtp, dstPort: rtpPorts.fs_app.fs_rtp,
+                                mos: 436,
+                                time_sec: Math.floor(Date.now() / 1000) + 10,
+                                time_usec: 465000
+                  	},
+                  	pause: 200,
+                  	payload: '{"CORRELATION_ID":"' + a_leg_call_id + '",' + '"REPORT_TS":' + (new Date().getTime() / 1000).toFixed(3) + ',' + '"DTMF":"ts:' + (new Date().getTime() / 1000).toFixed(3) + ',tsu:843750,e:1,v:15,d:160,c:1"}'
+                },
+		},
 		{
 			rcinfo: {
 				type: 'HEP', version: 3, payload_type: 1,
@@ -1393,23 +1448,6 @@ var config = {
 				TYPE: "FINAL"
 			})
 		},
-                //DTMF
-                {
-                // DTMF Log
-                          rcinfo: {
-                                type: 'HEP', version: 3, payload_type: 'JSON',
-                                captureId: 2010, capturePass: 'myHep', ip_family: 2,
-                                protocol: 17, proto_type: 100,
-                                correlation_id: b_leg_call_id,
-                                srcIp: app_ip, dstIp: pub_ip,
-                                srcPort: rtpPorts.fs_app.app_rtp, dstPort: rtpPorts.fs_app.fs_rtp,
-                                mos: 436,
-                                time_sec: Math.floor(Date.now() / 1000) + 10,
-                                time_usec: 465000
-                  },
-                  pause: 1100,
-                  payload: '{"CORRELATION_ID":"' + a_leg_call_id + '",' + '"REPORT_TS":' + (new Date().getTime() / 1000).toFixed(3) + ',' + '"DTMF":"ts:' + (new Date().getTime() / 1000).toFixed(3) + ',tsu:843750,e:1,v:15,d:160,c:1"}'
-                },
 		// Session Log
 		{
 			rcinfo: {
