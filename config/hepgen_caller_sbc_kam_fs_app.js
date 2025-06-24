@@ -134,8 +134,10 @@ function createMediaReports() {
 		app_to_fs: []
 	};
 
+	let duration = Math.floor( 2* Math.random() * 50 )
+
 	// Generate 3 periodic reports over ~6 seconds
-	for (let i = 1; i <= 3; i++) {
+	for (let i = 1; i <= duration; i++) {
 		let currentTime = baseTime + (i * 2000); // 2 second intervals
 
 		// === LEG 1: UAC ↔ SBC (A-leg) ===
