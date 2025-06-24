@@ -1211,7 +1211,7 @@ var config = {
                                 time_usec: Math.floor((Date.now() % 1000) * 1000)
                   	},
                   	pause: 1000, // Longer pause before media starts
-                  	payload: '{"CORRELATION_ID":"' + a_leg_call_id + '",' + '"REPORT_TS":' + (Math.floor(Date.now() / 1000) + 6) + ',' + '"DTMF":"ts:' + (Math.floor(Date.now() / 1000) + 6) + ',tsu:843750,e:1,v:15,d:160,c:1"}'
+                  	payload: '{"CORRELATION_ID":"' + a_leg_call_id + '",' + '"REPORT_TS":' + (Math.floor(Date.now() / 1000) + 6) + ',' + '"DTMF":"ts:' + (Math.floor(Date.now() / 1000) + 6) + ',tsu:843750,e:1,v:15,d:160,c:1","SRC_IP":"'+priv_ip+'","SRC_PORT":'+rtpPorts.fs_app.app_rtp+',"DST_IP":"'+priv_nat+'","DST_PORT":'+rtpPorts.fs_app.fs_rtp+',"CODEC_PT":0,"CODEC_NAME":"telephone-event","PARTY":1,"STYPE":"HEPAGENT-DTMF","TYPE":"PERIODIC"}'
                 },
 
 		// === MEDIA PHASE: Insert RTP reports here ===
