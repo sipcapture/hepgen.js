@@ -1,11 +1,5 @@
-// Full A-leg and B-leg SIP B2BUA Call with proper Call-ID and x-cid correlation
-// EXTENDED WITH RTP MEDIA REPORTS - COMPLETE CORRECTED VERSION
-
-//var call_id = 'call-' + Date.now();
-//var a_leg_call_id = call_id;
-//var b_leg_call_id = call_id + '_b2b';
-//var c_leg_call_id = call_id + '_b2b';
-//var d_leg_call_id = 'call-' + Date.now();
+// HEPGEN Scenario
+// End-To-End Simulation of UAC -> SBC -> Kamailio -> FS -> UAC Flow w/ Media Reports, Logs, DTMF examples
 
 function generateCallId() {
     return Date.now() + '-' + Math.floor(Math.random() * 100000);
@@ -17,7 +11,6 @@ var b2b_call_id = generateCallId(); // Shared by b_leg and c_leg
 var b_leg_call_id = b2b_call_id;
 var c_leg_call_id = b2b_call_id;
 var d_leg_call_id = generateCallId();
-
 
 var caller = 'hepgenjs';
 var callee = '9876';
