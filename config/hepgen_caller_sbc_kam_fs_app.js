@@ -256,7 +256,7 @@ function createMediaReports() {
 				time_sec: Math.floor(currentTime / 1000),
 				time_usec: Math.floor((currentTime % 1000) * 1000) + 500
 			},
-			pause: i === 3 ? 2000 : 100, // Longer pause before BYE on last report
+			pause: i === duration ? 2500 : 2000, // Longer pause before BYE on last report
 			payload: '{"CORRELATION_ID":"'+b_leg_call_id+'","RTP_SIP_CALL_ID":"'+b_leg_call_id+'","DELTA":'+app_to_fs_stats.DELTA+',"JITTER":'+app_to_fs_stats.JITTER+',"REPORT_TS":'+app_to_fs_stats.REPORT_TS+',"TL_BYTE":'+app_to_fs_stats.TL_BYTE+',"SKEW":'+app_to_fs_stats.SKEW+',"TOTAL_PK":'+app_to_fs_stats.TOTAL_PK+',"EXPECTED_PK":'+app_to_fs_stats.EXPECTED_PK+',"PACKET_LOSS":'+app_to_fs_stats.PACKET_LOSS+',"SEQ":'+app_to_fs_stats.SEQ+',"MAX_JITTER":'+app_to_fs_stats.MAX_JITTER+',"MAX_DELTA":'+app_to_fs_stats.MAX_DELTA+',"MAX_SKEW":'+app_to_fs_stats.MAX_SKEW+',"MEAN_JITTER":'+app_to_fs_stats.MEAN_JITTER+',"MIN_MOS":'+app_to_fs_stats.MIN_MOS+', "MEAN_MOS":'+app_to_fs_stats.MEAN_MOS+', "MOS":'+app_to_fs_stats.MOS+',"RFACTOR":'+app_to_fs_stats.RFACTOR+',"MIN_RFACTOR":'+app_to_fs_stats.MIN_RFACTOR+',"MEAN_RFACTOR":'+app_to_fs_stats.MEAN_RFACTOR+',"SRC_IP":"'+app_ip+'", "SRC_PORT":'+rtpPorts.fs_app.app_rtp+', "DST_IP":"'+peer_ip+'","DST_PORT":'+rtpPorts.fs_app.fs_rtp+',"SRC_MAC":"'+app_to_fs_stats.SRC_MAC+'","DST_MAC":"'+app_to_fs_stats.DST_MAC+'","OUT_ORDER":'+app_to_fs_stats.OUT_ORDER+',"SSRC_CHG":'+app_to_fs_stats.SSRC_CHG+',"CODEC_PT":'+app_to_fs_stats.CODEC_PT+', "CLOCK":'+app_to_fs_stats.CLOCK+',"CODEC_NAME":"'+app_to_fs_stats.CODEC_NAME+'","DIR":1,"REPORT_NAME":"'+app_ip+':'+rtpPorts.fs_app.app_rtp+'","PARTY":1,"TYPE":"PERIODIC"}'
 		});
 	}
@@ -1099,6 +1099,24 @@ var config = {
 			'CSeq: 1 ACK\r\n' +
 			'Content-Length: 0\r\n\r\n'
 		},
+		{
+			rcinfo: {
+				type: 'HEP', version: 3, payload_type: 1,
+				captureId: 2010, capturePass: 'myHep', ip_family: 2,
+				protocol: 17, proto_type: 1, correlation_id: b_leg_call_id,
+				srcIp: '192.168.1.13', dstIp: '192.168.1.14', srcPort: 5060, dstPort: 5070
+			},
+			pause: 400, 
+			payload:
+			'ACK sip:9876@sipcapture.org SIP/2.0\r\n' +
+			'Via: SIP/2.0/UDP 192.168.1.13:5060;branch=z9hG4bK-fs-ack;rport\r\n' +
+			'From: <sip:hepgenjs@sipcapture.org>;tag=fs\r\n' +
+			'To: <sip:9876@sipcapture.org>;tag=apptag\r\n' +
+			'Call-ID: ' + d_leg_call_id + '\r\n' +
+			'x-cid: ' + a_leg_call_id + '\r\n' +
+			'CSeq: 1 ACK\r\n' +
+			'Content-Length: 0\r\n\r\n'
+		},
 		// DTMF to start off RTP
 		{
 			rcinfo: {
@@ -1112,27 +1130,9 @@ var config = {
                                 time_sec: Math.floor(Date.now() / 1000) + 10,
                                 time_usec: 465000
                   	},
-                  	pause: 200,
+                  	pause: 500, // Longer pause before media starts
                   	payload: '{"CORRELATION_ID":"' + a_leg_call_id + '",' + '"REPORT_TS":' + (new Date().getTime() / 1000).toFixed(3) + ',' + '"DTMF":"ts:' + (new Date().getTime() / 1000).toFixed(3) + ',tsu:843750,e:1,v:15,d:160,c:1"}'
                 },
-		{
-			rcinfo: {
-				type: 'HEP', version: 3, payload_type: 1,
-				captureId: 2010, capturePass: 'myHep', ip_family: 2,
-				protocol: 17, proto_type: 1, correlation_id: b_leg_call_id,
-				srcIp: '192.168.1.13', dstIp: '192.168.1.14', srcPort: 5060, dstPort: 5070
-			},
-			pause: 500, // Longer pause before media starts
-			payload:
-			'ACK sip:9876@sipcapture.org SIP/2.0\r\n' +
-			'Via: SIP/2.0/UDP 192.168.1.13:5060;branch=z9hG4bK-fs-ack;rport\r\n' +
-			'From: <sip:hepgenjs@sipcapture.org>;tag=fs\r\n' +
-			'To: <sip:9876@sipcapture.org>;tag=apptag\r\n' +
-			'Call-ID: ' + d_leg_call_id + '\r\n' +
-			'x-cid: ' + a_leg_call_id + '\r\n' +
-			'CSeq: 1 ACK\r\n' +
-			'Content-Length: 0\r\n\r\n'
-		},
 
 		// === MEDIA PHASE: Insert RTP reports here ===
 		...createMediaReports(),
