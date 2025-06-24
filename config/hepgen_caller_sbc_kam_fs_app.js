@@ -1387,7 +1387,23 @@ var config = {
 				TYPE: "FINAL"
 			})
 		},
-
+                //DTMF
+                {
+                // DTMF Log
+                          rcinfo: {
+                                type: 'HEP', version: 3, payload_type: 'JSON',
+                                captureId: 2010, capturePass: 'myHep', ip_family: 2,
+                                protocol: 17, proto_type: 100,
+                                correlation_id: b_leg_call_id,
+                                srcIp: app_ip, dstIp: pub_ip,
+                                srcPort: rtpPorts.fs_app.app_rtp, dstPort: rtpPorts.fs_app.fs_rtp,
+                                mos: 436,
+                                time_sec: Math.floor(Date.now() / 1000) + 10,
+                                time_usec: 465000
+                  },
+                  pause: 1100,
+                  payload: '{"CORRELATION_ID":"' + a_leg_call_id + '",' + '"REPORT_TS":' + (new Date().getTime() / 1000).toFixed(3) + ',' + '"DTMF":"ts:' + (new Date().getTime() / 1000).toFixed(3) + ',tsu:843750,e:1,v:15,d:160,c:1"}'
+                },
 		// Session Log
 		{
 			rcinfo: {
