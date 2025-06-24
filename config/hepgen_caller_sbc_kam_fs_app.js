@@ -159,7 +159,7 @@ function createMediaReports() {
 				time_sec: Math.floor(currentTime / 1000),
 				time_usec: Math.floor((currentTime % 1000) * 1000)
 			},
-			pause: 100,
+			pause: 200,
 			payload: '{"CORRELATION_ID":"'+a_leg_call_id+'","RTP_SIP_CALL_ID":"'+a_leg_call_id+'","DELTA":'+uac_to_sbc_stats.DELTA+',"JITTER":'+uac_to_sbc_stats.JITTER+',"REPORT_TS":'+uac_to_sbc_stats.REPORT_TS+',"TL_BYTE":'+uac_to_sbc_stats.TL_BYTE+',"SKEW":'+uac_to_sbc_stats.SKEW+',"TOTAL_PK":'+uac_to_sbc_stats.TOTAL_PK+',"EXPECTED_PK":'+uac_to_sbc_stats.EXPECTED_PK+',"PACKET_LOSS":'+uac_to_sbc_stats.PACKET_LOSS+',"SEQ":'+uac_to_sbc_stats.SEQ+',"MAX_JITTER":'+uac_to_sbc_stats.MAX_JITTER+',"MAX_DELTA":'+uac_to_sbc_stats.MAX_DELTA+',"MAX_SKEW":'+uac_to_sbc_stats.MAX_SKEW+',"MEAN_JITTER":'+uac_to_sbc_stats.MEAN_JITTER+',"MIN_MOS":'+uac_to_sbc_stats.MIN_MOS+', "MEAN_MOS":'+uac_to_sbc_stats.MEAN_MOS+', "MOS":'+uac_to_sbc_stats.MOS+',"RFACTOR":'+uac_to_sbc_stats.RFACTOR+',"MIN_RFACTOR":'+uac_to_sbc_stats.MIN_RFACTOR+',"MEAN_RFACTOR":'+uac_to_sbc_stats.MEAN_RFACTOR+',"SRC_IP":"'+priv_ip+'", "SRC_PORT":'+rtpPorts.uac_sbc.uac_rtp+', "DST_IP":"'+priv_nat+'","DST_PORT":'+rtpPorts.uac_sbc.sbc_rtp+',"SRC_MAC":"'+uac_to_sbc_stats.SRC_MAC+'","DST_MAC":"'+uac_to_sbc_stats.DST_MAC+'","OUT_ORDER":'+uac_to_sbc_stats.OUT_ORDER+',"SSRC_CHG":'+uac_to_sbc_stats.SSRC_CHG+',"CODEC_PT":'+uac_to_sbc_stats.CODEC_PT+', "CLOCK":'+uac_to_sbc_stats.CLOCK+',"CODEC_NAME":"'+uac_to_sbc_stats.CODEC_NAME+'","DIR":0,"REPORT_NAME":"'+priv_ip+':'+rtpPorts.uac_sbc.uac_rtp+'","PARTY":0,"TYPE":"PERIODIC"}'
 		});
 
@@ -178,7 +178,7 @@ function createMediaReports() {
 				time_sec: Math.floor(currentTime / 1000),
 				time_usec: Math.floor((currentTime % 1000) * 1000) + 100
 			},
-			pause: 100,
+			pause: 200,
 			payload: '{"CORRELATION_ID":"'+a_leg_call_id+'","RTP_SIP_CALL_ID":"'+a_leg_call_id+'","DELTA":'+sbc_to_uac_stats.DELTA+',"JITTER":'+sbc_to_uac_stats.JITTER+',"REPORT_TS":'+sbc_to_uac_stats.REPORT_TS+',"TL_BYTE":'+sbc_to_uac_stats.TL_BYTE+',"SKEW":'+sbc_to_uac_stats.SKEW+',"TOTAL_PK":'+sbc_to_uac_stats.TOTAL_PK+',"EXPECTED_PK":'+sbc_to_uac_stats.EXPECTED_PK+',"PACKET_LOSS":'+sbc_to_uac_stats.PACKET_LOSS+',"SEQ":'+sbc_to_uac_stats.SEQ+',"MAX_JITTER":'+sbc_to_uac_stats.MAX_JITTER+',"MAX_DELTA":'+sbc_to_uac_stats.MAX_DELTA+',"MAX_SKEW":'+sbc_to_uac_stats.MAX_SKEW+',"MEAN_JITTER":'+sbc_to_uac_stats.MEAN_JITTER+',"MIN_MOS":'+sbc_to_uac_stats.MIN_MOS+', "MEAN_MOS":'+sbc_to_uac_stats.MEAN_MOS+', "MOS":'+sbc_to_uac_stats.MOS+',"RFACTOR":'+sbc_to_uac_stats.RFACTOR+',"MIN_RFACTOR":'+sbc_to_uac_stats.MIN_RFACTOR+',"MEAN_RFACTOR":'+sbc_to_uac_stats.MEAN_RFACTOR+',"SRC_IP":"'+priv_nat+'", "SRC_PORT":'+rtpPorts.uac_sbc.sbc_rtp+', "DST_IP":"'+priv_ip+'","DST_PORT":'+rtpPorts.uac_sbc.uac_rtp+',"SRC_MAC":"'+sbc_to_uac_stats.SRC_MAC+'","DST_MAC":"'+sbc_to_uac_stats.DST_MAC+'","OUT_ORDER":'+sbc_to_uac_stats.OUT_ORDER+',"SSRC_CHG":'+sbc_to_uac_stats.SSRC_CHG+',"CODEC_PT":'+sbc_to_uac_stats.CODEC_PT+', "CLOCK":'+sbc_to_uac_stats.CLOCK+',"CODEC_NAME":"'+sbc_to_uac_stats.CODEC_NAME+'","DIR":1,"REPORT_NAME":"'+priv_nat+':'+rtpPorts.uac_sbc.sbc_rtp+'","PARTY":0,"TYPE":"PERIODIC"}'
 		});
 
@@ -198,7 +198,7 @@ function createMediaReports() {
 				time_sec: Math.floor(currentTime / 1000),
 				time_usec: Math.floor((currentTime % 1000) * 1000) + 200
 			},
-			pause: 100,
+			pause: 200,
 			payload: '{"CORRELATION_ID":"'+b_leg_call_id+'","RTP_SIP_CALL_ID":"'+b_leg_call_id+'","DELTA":'+sbc_to_fs_stats.DELTA+',"JITTER":'+sbc_to_fs_stats.JITTER+',"REPORT_TS":'+sbc_to_fs_stats.REPORT_TS+',"TL_BYTE":'+sbc_to_fs_stats.TL_BYTE+',"SKEW":'+sbc_to_fs_stats.SKEW+',"TOTAL_PK":'+sbc_to_fs_stats.TOTAL_PK+',"EXPECTED_PK":'+sbc_to_fs_stats.EXPECTED_PK+',"PACKET_LOSS":'+sbc_to_fs_stats.PACKET_LOSS+',"SEQ":'+sbc_to_fs_stats.SEQ+',"MAX_JITTER":'+sbc_to_fs_stats.MAX_JITTER+',"MAX_DELTA":'+sbc_to_fs_stats.MAX_DELTA+',"MAX_SKEW":'+sbc_to_fs_stats.MAX_SKEW+',"MEAN_JITTER":'+sbc_to_fs_stats.MEAN_JITTER+',"MIN_MOS":'+sbc_to_fs_stats.MIN_MOS+', "MEAN_MOS":'+sbc_to_fs_stats.MEAN_MOS+', "MOS":'+sbc_to_fs_stats.MOS+',"RFACTOR":'+sbc_to_fs_stats.RFACTOR+',"MIN_RFACTOR":'+sbc_to_fs_stats.MIN_RFACTOR+',"MEAN_RFACTOR":'+sbc_to_fs_stats.MEAN_RFACTOR+',"SRC_IP":"'+priv_nat+'", "SRC_PORT":'+rtpPorts.sbc_fs.sbc_rtp+', "DST_IP":"'+peer_ip+'","DST_PORT":'+rtpPorts.sbc_fs.fs_rtp+',"SRC_MAC":"'+sbc_to_fs_stats.SRC_MAC+'","DST_MAC":"'+sbc_to_fs_stats.DST_MAC+'","OUT_ORDER":'+sbc_to_fs_stats.OUT_ORDER+',"SSRC_CHG":'+sbc_to_fs_stats.SSRC_CHG+',"CODEC_PT":'+sbc_to_fs_stats.CODEC_PT+', "CLOCK":'+sbc_to_fs_stats.CLOCK+',"CODEC_NAME":"'+sbc_to_fs_stats.CODEC_NAME+'","DIR":0,"REPORT_NAME":"'+priv_nat+':'+rtpPorts.sbc_fs.sbc_rtp+'","PARTY":1,"TYPE":"PERIODIC"}'
 		});
 
@@ -217,7 +217,7 @@ function createMediaReports() {
 				time_sec: Math.floor(currentTime / 1000),
 				time_usec: Math.floor((currentTime % 1000) * 1000) + 300
 			},
-			pause: 100,
+			pause: 200,
 			payload: '{"CORRELATION_ID":"'+b_leg_call_id+'","RTP_SIP_CALL_ID":"'+b_leg_call_id+'","DELTA":'+fs_to_sbc_stats.DELTA+',"JITTER":'+fs_to_sbc_stats.JITTER+',"REPORT_TS":'+fs_to_sbc_stats.REPORT_TS+',"TL_BYTE":'+fs_to_sbc_stats.TL_BYTE+',"SKEW":'+fs_to_sbc_stats.SKEW+',"TOTAL_PK":'+fs_to_sbc_stats.TOTAL_PK+',"EXPECTED_PK":'+fs_to_sbc_stats.EXPECTED_PK+',"PACKET_LOSS":'+fs_to_sbc_stats.PACKET_LOSS+',"SEQ":'+fs_to_sbc_stats.SEQ+',"MAX_JITTER":'+fs_to_sbc_stats.MAX_JITTER+',"MAX_DELTA":'+fs_to_sbc_stats.MAX_DELTA+',"MAX_SKEW":'+fs_to_sbc_stats.MAX_SKEW+',"MEAN_JITTER":'+fs_to_sbc_stats.MEAN_JITTER+',"MIN_MOS":'+fs_to_sbc_stats.MIN_MOS+', "MEAN_MOS":'+fs_to_sbc_stats.MEAN_MOS+', "MOS":'+fs_to_sbc_stats.MOS+',"RFACTOR":'+fs_to_sbc_stats.RFACTOR+',"MIN_RFACTOR":'+fs_to_sbc_stats.MIN_RFACTOR+',"MEAN_RFACTOR":'+fs_to_sbc_stats.MEAN_RFACTOR+',"SRC_IP":"'+peer_ip+'", "SRC_PORT":'+rtpPorts.sbc_fs.fs_rtp+', "DST_IP":"'+priv_nat+'","DST_PORT":'+rtpPorts.sbc_fs.sbc_rtp+',"SRC_MAC":"'+fs_to_sbc_stats.SRC_MAC+'","DST_MAC":"'+fs_to_sbc_stats.DST_MAC+'","OUT_ORDER":'+fs_to_sbc_stats.OUT_ORDER+',"SSRC_CHG":'+fs_to_sbc_stats.SSRC_CHG+',"CODEC_PT":'+fs_to_sbc_stats.CODEC_PT+', "CLOCK":'+fs_to_sbc_stats.CLOCK+',"CODEC_NAME":"'+fs_to_sbc_stats.CODEC_NAME+'","DIR":1,"REPORT_NAME":"'+peer_ip+':'+rtpPorts.sbc_fs.fs_rtp+'","PARTY":1,"TYPE":"PERIODIC"}'
 		});
 
@@ -237,7 +237,7 @@ function createMediaReports() {
 				time_sec: Math.floor(currentTime / 1000),
 				time_usec: Math.floor((currentTime % 1000) * 1000) + 400
 			},
-			pause: 100,
+			pause: 200,
 			payload: '{"CORRELATION_ID":"'+b_leg_call_id+'","RTP_SIP_CALL_ID":"'+b_leg_call_id+'","DELTA":'+fs_to_app_stats.DELTA+',"JITTER":'+fs_to_app_stats.JITTER+',"REPORT_TS":'+fs_to_app_stats.REPORT_TS+',"TL_BYTE":'+fs_to_app_stats.TL_BYTE+',"SKEW":'+fs_to_app_stats.SKEW+',"TOTAL_PK":'+fs_to_app_stats.TOTAL_PK+',"EXPECTED_PK":'+fs_to_app_stats.EXPECTED_PK+',"PACKET_LOSS":'+fs_to_app_stats.PACKET_LOSS+',"SEQ":'+fs_to_app_stats.SEQ+',"MAX_JITTER":'+fs_to_app_stats.MAX_JITTER+',"MAX_DELTA":'+fs_to_app_stats.MAX_DELTA+',"MAX_SKEW":'+fs_to_app_stats.MAX_SKEW+',"MEAN_JITTER":'+fs_to_app_stats.MEAN_JITTER+',"MIN_MOS":'+fs_to_app_stats.MIN_MOS+', "MEAN_MOS":'+fs_to_app_stats.MEAN_MOS+', "MOS":'+fs_to_app_stats.MOS+',"RFACTOR":'+fs_to_app_stats.RFACTOR+',"MIN_RFACTOR":'+fs_to_app_stats.MIN_RFACTOR+',"MEAN_RFACTOR":'+fs_to_app_stats.MEAN_RFACTOR+',"SRC_IP":"'+peer_ip+'", "SRC_PORT":'+rtpPorts.fs_app.fs_rtp+', "DST_IP":"'+app_ip+'","DST_PORT":'+rtpPorts.fs_app.app_rtp+',"SRC_MAC":"'+fs_to_app_stats.SRC_MAC+'","DST_MAC":"'+fs_to_app_stats.DST_MAC+'","OUT_ORDER":'+fs_to_app_stats.OUT_ORDER+',"SSRC_CHG":'+fs_to_app_stats.SSRC_CHG+',"CODEC_PT":'+fs_to_app_stats.CODEC_PT+', "CLOCK":'+fs_to_app_stats.CLOCK+',"CODEC_NAME":"'+fs_to_app_stats.CODEC_NAME+'","DIR":0,"REPORT_NAME":"'+peer_ip+':'+rtpPorts.fs_app.fs_rtp+'","PARTY":1,"TYPE":"PERIODIC"}'
 		});
 
@@ -256,7 +256,7 @@ function createMediaReports() {
 				time_sec: Math.floor(currentTime / 1000),
 				time_usec: Math.floor((currentTime % 1000) * 1000) + 500
 			},
-			pause: i === duration ? 2500 : 2000, // Longer pause before BYE on last report
+			pause: i === duration ? 4000 : 2000, // Longer pause before BYE on last report
 			payload: '{"CORRELATION_ID":"'+b_leg_call_id+'","RTP_SIP_CALL_ID":"'+b_leg_call_id+'","DELTA":'+app_to_fs_stats.DELTA+',"JITTER":'+app_to_fs_stats.JITTER+',"REPORT_TS":'+app_to_fs_stats.REPORT_TS+',"TL_BYTE":'+app_to_fs_stats.TL_BYTE+',"SKEW":'+app_to_fs_stats.SKEW+',"TOTAL_PK":'+app_to_fs_stats.TOTAL_PK+',"EXPECTED_PK":'+app_to_fs_stats.EXPECTED_PK+',"PACKET_LOSS":'+app_to_fs_stats.PACKET_LOSS+',"SEQ":'+app_to_fs_stats.SEQ+',"MAX_JITTER":'+app_to_fs_stats.MAX_JITTER+',"MAX_DELTA":'+app_to_fs_stats.MAX_DELTA+',"MAX_SKEW":'+app_to_fs_stats.MAX_SKEW+',"MEAN_JITTER":'+app_to_fs_stats.MEAN_JITTER+',"MIN_MOS":'+app_to_fs_stats.MIN_MOS+', "MEAN_MOS":'+app_to_fs_stats.MEAN_MOS+', "MOS":'+app_to_fs_stats.MOS+',"RFACTOR":'+app_to_fs_stats.RFACTOR+',"MIN_RFACTOR":'+app_to_fs_stats.MIN_RFACTOR+',"MEAN_RFACTOR":'+app_to_fs_stats.MEAN_RFACTOR+',"SRC_IP":"'+app_ip+'", "SRC_PORT":'+rtpPorts.fs_app.app_rtp+', "DST_IP":"'+peer_ip+'","DST_PORT":'+rtpPorts.fs_app.fs_rtp+',"SRC_MAC":"'+app_to_fs_stats.SRC_MAC+'","DST_MAC":"'+app_to_fs_stats.DST_MAC+'","OUT_ORDER":'+app_to_fs_stats.OUT_ORDER+',"SSRC_CHG":'+app_to_fs_stats.SSRC_CHG+',"CODEC_PT":'+app_to_fs_stats.CODEC_PT+', "CLOCK":'+app_to_fs_stats.CLOCK+',"CODEC_NAME":"'+app_to_fs_stats.CODEC_NAME+'","DIR":1,"REPORT_NAME":"'+app_ip+':'+rtpPorts.fs_app.app_rtp+'","PARTY":1,"TYPE":"PERIODIC"}'
 		});
 	}
@@ -304,7 +304,7 @@ function createfinalreports() {
 			time_sec: Math.floor(finalTime / 1000),
 			time_usec: Math.floor((finalTime % 1000) * 1000)
 		},
-		pause: 50,
+		pause: 100,
 		payload: '{"CORRELATION_ID":"'+a_leg_call_id+'","RTP_SIP_CALL_ID":"'+a_leg_call_id+'","DELTA":'+uac_to_sbc_final.DELTA+',"JITTER":'+uac_to_sbc_final.JITTER+',"REPORT_TS":'+uac_to_sbc_final.REPORT_TS+',"TL_BYTE":'+uac_to_sbc_final.TL_BYTE+',"SKEW":'+uac_to_sbc_final.SKEW+',"TOTAL_PK":'+uac_to_sbc_final.TOTAL_PK+',"EXPECTED_PK":'+uac_to_sbc_final.EXPECTED_PK+',"PACKET_LOSS":'+uac_to_sbc_final.PACKET_LOSS+',"SEQ":'+uac_to_sbc_final.SEQ+',"MAX_JITTER":'+uac_to_sbc_final.MAX_JITTER+',"MAX_DELTA":'+uac_to_sbc_final.MAX_DELTA+',"MAX_SKEW":'+uac_to_sbc_final.MAX_SKEW+',"MEAN_JITTER":'+uac_to_sbc_final.MEAN_JITTER+',"MIN_MOS":'+uac_to_sbc_final.MIN_MOS+',"MEAN_MOS":'+uac_to_sbc_final.MEAN_MOS+',"MOS":'+uac_to_sbc_final.MOS+',"RFACTOR":'+uac_to_sbc_final.RFACTOR+',"MIN_RFACTOR":'+uac_to_sbc_final.MIN_RFACTOR+',"MEAN_RFACTOR":'+uac_to_sbc_final.MEAN_RFACTOR+',"SRC_IP":"'+priv_ip+'", "SRC_PORT":'+rtpPorts.uac_sbc.uac_rtp+', "DST_IP":"'+priv_nat+'","DST_PORT":'+rtpPorts.uac_sbc.sbc_rtp+',"SRC_MAC":"'+uac_to_sbc_final.SRC_MAC+'","DST_MAC":"'+uac_to_sbc_final.DST_MAC+'","OUT_ORDER":'+uac_to_sbc_final.OUT_ORDER+',"SSRC_CHG":'+uac_to_sbc_final.SSRC_CHG+',"CODEC_PT":'+uac_to_sbc_final.CODEC_PT+', "CLOCK":'+uac_to_sbc_final.CLOCK+',"CODEC_NAME":"'+uac_to_sbc_final.CODEC_NAME+'","DIR":0,"REPORT_NAME":"'+priv_ip+':'+rtpPorts.uac_sbc.uac_rtp+'","PARTY":0,"TYPE":"FINAL"}'
 	});
 
@@ -323,7 +323,7 @@ function createfinalreports() {
 			time_sec: Math.floor(finalTime / 1000),
 			time_usec: Math.floor((finalTime % 1000) * 1000) + 100
 		},
-		pause: 50,
+		pause: 100,
 		payload: '{"CORRELATION_ID":"'+a_leg_call_id+'","RTP_SIP_CALL_ID":"'+a_leg_call_id+'","DELTA":'+sbc_to_uac_final.DELTA+',"JITTER":'+sbc_to_uac_final.JITTER+',"REPORT_TS":'+sbc_to_uac_final.REPORT_TS+',"TL_BYTE":'+sbc_to_uac_final.TL_BYTE+',"SKEW":'+sbc_to_uac_final.SKEW+',"TOTAL_PK":'+sbc_to_uac_final.TOTAL_PK+',"EXPECTED_PK":'+sbc_to_uac_final.EXPECTED_PK+',"PACKET_LOSS":'+sbc_to_uac_final.PACKET_LOSS+',"SEQ":'+sbc_to_uac_final.SEQ+',"MAX_JITTER":'+sbc_to_uac_final.MAX_JITTER+',"MAX_DELTA":'+sbc_to_uac_final.MAX_DELTA+',"MAX_SKEW":'+sbc_to_uac_final.MAX_SKEW+',"MEAN_JITTER":'+sbc_to_uac_final.MEAN_JITTER+',"MIN_MOS":'+sbc_to_uac_final.MIN_MOS+',"MEAN_MOS":'+sbc_to_uac_final.MEAN_MOS+',"MOS":'+sbc_to_uac_final.MOS+',"RFACTOR":'+sbc_to_uac_final.RFACTOR+',"MIN_RFACTOR":'+sbc_to_uac_final.MIN_RFACTOR+',"MEAN_RFACTOR":'+sbc_to_uac_final.MEAN_RFACTOR+',"SRC_IP":"'+priv_nat+'", "SRC_PORT":'+rtpPorts.uac_sbc.sbc_rtp+', "DST_IP":"'+priv_ip+'","DST_PORT":'+rtpPorts.uac_sbc.uac_rtp+',"SRC_MAC":"'+sbc_to_uac_final.SRC_MAC+'","DST_MAC":"'+sbc_to_uac_final.DST_MAC+'","OUT_ORDER":'+sbc_to_uac_final.OUT_ORDER+',"SSRC_CHG":'+sbc_to_uac_final.SSRC_CHG+',"CODEC_PT":'+sbc_to_uac_final.CODEC_PT+', "CLOCK":'+sbc_to_uac_final.CLOCK+',"CODEC_NAME":"'+sbc_to_uac_final.CODEC_NAME+'","DIR":1,"REPORT_NAME":"'+priv_nat+':'+rtpPorts.uac_sbc.sbc_rtp+'","PARTY":0,"TYPE":"FINAL"}'
 	});
 
@@ -343,7 +343,7 @@ function createfinalreports() {
 			time_sec: Math.floor(finalTime / 1000),
 			time_usec: Math.floor((finalTime % 1000) * 1000) + 200
 		},
-		pause: 50,
+		pause: 100,
 		payload: '{"CORRELATION_ID":"'+b_leg_call_id+'","RTP_SIP_CALL_ID":"'+b_leg_call_id+'","DELTA":'+sbc_to_fs_final.DELTA+',"JITTER":'+sbc_to_fs_final.JITTER+',"REPORT_TS":'+sbc_to_fs_final.REPORT_TS+',"TL_BYTE":'+sbc_to_fs_final.TL_BYTE+',"SKEW":'+sbc_to_fs_final.SKEW+',"TOTAL_PK":'+sbc_to_fs_final.TOTAL_PK+',"EXPECTED_PK":'+sbc_to_fs_final.EXPECTED_PK+',"PACKET_LOSS":'+sbc_to_fs_final.PACKET_LOSS+',"SEQ":'+sbc_to_fs_final.SEQ+',"MAX_JITTER":'+sbc_to_fs_final.MAX_JITTER+',"MAX_DELTA":'+sbc_to_fs_final.MAX_DELTA+',"MAX_SKEW":'+sbc_to_fs_final.MAX_SKEW+',"MEAN_JITTER":'+sbc_to_fs_final.MEAN_JITTER+',"MIN_MOS":'+sbc_to_fs_final.MIN_MOS+',"MEAN_MOS":'+sbc_to_fs_final.MEAN_MOS+',"MOS":'+sbc_to_fs_final.MOS+',"RFACTOR":'+sbc_to_fs_final.RFACTOR+',"MIN_RFACTOR":'+sbc_to_fs_final.MIN_RFACTOR+',"MEAN_RFACTOR":'+sbc_to_fs_final.MEAN_RFACTOR+',"SRC_IP":"'+priv_nat+'", "SRC_PORT":'+rtpPorts.sbc_fs.sbc_rtp+', "DST_IP":"'+peer_ip+'","DST_PORT":'+rtpPorts.sbc_fs.fs_rtp+',"SRC_MAC":"'+sbc_to_fs_final.SRC_MAC+'","DST_MAC":"'+sbc_to_fs_final.DST_MAC+'","OUT_ORDER":'+sbc_to_fs_final.OUT_ORDER+',"SSRC_CHG":'+sbc_to_fs_final.SSRC_CHG+',"CODEC_PT":'+sbc_to_fs_final.CODEC_PT+', "CLOCK":'+sbc_to_fs_final.CLOCK+',"CODEC_NAME":"'+sbc_to_fs_final.CODEC_NAME+'","DIR":0,"REPORT_NAME":"'+priv_nat+':'+rtpPorts.sbc_fs.sbc_rtp+'","PARTY":1,"TYPE":"FINAL"}'
 	});
 
@@ -362,7 +362,7 @@ function createfinalreports() {
 			time_sec: Math.floor(finalTime / 1000),
 			time_usec: Math.floor((finalTime % 1000) * 1000) + 300
 		},
-		pause: 50,
+		pause: 100,
 		payload: '{"CORRELATION_ID":"'+b_leg_call_id+'","RTP_SIP_CALL_ID":"'+b_leg_call_id+'","DELTA":'+fs_to_sbc_final.DELTA+',"JITTER":'+fs_to_sbc_final.JITTER+',"REPORT_TS":'+fs_to_sbc_final.REPORT_TS+',"TL_BYTE":'+fs_to_sbc_final.TL_BYTE+',"SKEW":'+fs_to_sbc_final.SKEW+',"TOTAL_PK":'+fs_to_sbc_final.TOTAL_PK+',"EXPECTED_PK":'+fs_to_sbc_final.EXPECTED_PK+',"PACKET_LOSS":'+fs_to_sbc_final.PACKET_LOSS+',"SEQ":'+fs_to_sbc_final.SEQ+',"MAX_JITTER":'+fs_to_sbc_final.MAX_JITTER+',"MAX_DELTA":'+fs_to_sbc_final.MAX_DELTA+',"MAX_SKEW":'+fs_to_sbc_final.MAX_SKEW+',"MEAN_JITTER":'+fs_to_sbc_final.MEAN_JITTER+',"MIN_MOS":'+fs_to_sbc_final.MIN_MOS+',"MEAN_MOS":'+fs_to_sbc_final.MEAN_MOS+',"MOS":'+fs_to_sbc_final.MOS+',"RFACTOR":'+fs_to_sbc_final.RFACTOR+',"MIN_RFACTOR":'+fs_to_sbc_final.MIN_RFACTOR+',"MEAN_RFACTOR":'+fs_to_sbc_final.MEAN_RFACTOR+',"SRC_IP":"'+peer_ip+'", "SRC_PORT":'+rtpPorts.sbc_fs.fs_rtp+', "DST_IP":"'+priv_nat+'","DST_PORT":'+rtpPorts.sbc_fs.sbc_rtp+',"SRC_MAC":"'+fs_to_sbc_final.SRC_MAC+'","DST_MAC":"'+fs_to_sbc_final.DST_MAC+'","OUT_ORDER":'+fs_to_sbc_final.OUT_ORDER+',"SSRC_CHG":'+fs_to_sbc_final.SSRC_CHG+',"CODEC_PT":'+fs_to_sbc_final.CODEC_PT+', "CLOCK":'+fs_to_sbc_final.CLOCK+',"CODEC_NAME":"'+fs_to_sbc_final.CODEC_NAME+'","DIR":1,"REPORT_NAME":"'+peer_ip+':'+rtpPorts.sbc_fs.fs_rtp+'","PARTY":1,"TYPE":"FINAL"}'
 	});
 
@@ -382,7 +382,7 @@ function createfinalreports() {
 			time_sec: Math.floor(finalTime / 1000),
 			time_usec: Math.floor((finalTime % 1000) * 1000) + 400
 		},
-		pause: 50,
+		pause: 100,
 		payload: '{"CORRELATION_ID":"'+b_leg_call_id+'","RTP_SIP_CALL_ID":"'+b_leg_call_id+'","DELTA":'+fs_to_app_final.DELTA+',"JITTER":'+fs_to_app_final.JITTER+',"REPORT_TS":'+fs_to_app_final.REPORT_TS+',"TL_BYTE":'+fs_to_app_final.TL_BYTE+',"SKEW":'+fs_to_app_final.SKEW+',"TOTAL_PK":'+fs_to_app_final.TOTAL_PK+',"EXPECTED_PK":'+fs_to_app_final.EXPECTED_PK+',"PACKET_LOSS":'+fs_to_app_final.PACKET_LOSS+',"SEQ":'+fs_to_app_final.SEQ+',"MAX_JITTER":'+fs_to_app_final.MAX_JITTER+',"MAX_DELTA":'+fs_to_app_final.MAX_DELTA+',"MAX_SKEW":'+fs_to_app_final.MAX_SKEW+',"MEAN_JITTER":'+fs_to_app_final.MEAN_JITTER+',"MIN_MOS":'+fs_to_app_final.MIN_MOS+',"MEAN_MOS":'+fs_to_app_final.MEAN_MOS+',"MOS":'+fs_to_app_final.MOS+',"RFACTOR":'+fs_to_app_final.RFACTOR+',"MIN_RFACTOR":'+fs_to_app_final.MIN_RFACTOR+',"MEAN_RFACTOR":'+fs_to_app_final.MEAN_RFACTOR+',"SRC_IP":"'+peer_ip+'", "SRC_PORT":'+rtpPorts.fs_app.fs_rtp+', "DST_IP":"'+app_ip+'","DST_PORT":'+rtpPorts.fs_app.app_rtp+',"SRC_MAC":"'+fs_to_app_final.SRC_MAC+'","DST_MAC":"'+fs_to_app_final.DST_MAC+'","OUT_ORDER":'+fs_to_app_final.OUT_ORDER+',"SSRC_CHG":'+fs_to_app_final.SSRC_CHG+',"CODEC_PT":'+fs_to_app_final.CODEC_PT+', "CLOCK":'+fs_to_app_final.CLOCK+',"CODEC_NAME":"'+fs_to_app_final.CODEC_NAME+'","DIR":0,"REPORT_NAME":"'+peer_ip+':'+rtpPorts.fs_app.fs_rtp+'","PARTY":1,"TYPE":"FINAL"}'
 	});
 
@@ -401,7 +401,7 @@ function createfinalreports() {
 			time_sec: Math.floor(finalTime / 1000),
 			time_usec: Math.floor((finalTime % 1000) * 1000) + 500
 		},
-		pause: 100,
+		pause: 1000,
 		payload: '{"CORRELATION_ID":"'+b_leg_call_id+'","RTP_SIP_CALL_ID":"'+b_leg_call_id+'","DELTA":'+app_to_fs_final.DELTA+',"JITTER":'+app_to_fs_final.JITTER+',"REPORT_TS":'+app_to_fs_final.REPORT_TS+',"TL_BYTE":'+app_to_fs_final.TL_BYTE+',"SKEW":'+app_to_fs_final.SKEW+',"TOTAL_PK":'+app_to_fs_final.TOTAL_PK+',"EXPECTED_PK":'+app_to_fs_final.EXPECTED_PK+',"PACKET_LOSS":'+app_to_fs_final.PACKET_LOSS+',"SEQ":'+app_to_fs_final.SEQ+',"MAX_JITTER":'+app_to_fs_final.MAX_JITTER+',"MAX_DELTA":'+app_to_fs_final.MAX_DELTA+',"MAX_SKEW":'+app_to_fs_final.MAX_SKEW+',"MEAN_JITTER":'+app_to_fs_final.MEAN_JITTER+',"MIN_MOS":'+app_to_fs_final.MIN_MOS+',"MEAN_MOS":'+app_to_fs_final.MEAN_MOS+',"MOS":'+app_to_fs_final.MOS+',"RFACTOR":'+app_to_fs_final.RFACTOR+',"MIN_RFACTOR":'+app_to_fs_final.MIN_RFACTOR+',"MEAN_RFACTOR":'+app_to_fs_final.MEAN_RFACTOR+',"SRC_IP":"'+app_ip+'", "SRC_PORT":'+rtpPorts.fs_app.app_rtp+', "DST_IP":"'+peer_ip+'","DST_PORT":'+rtpPorts.fs_app.fs_rtp+',"SRC_MAC":"'+app_to_fs_final.SRC_MAC+'","DST_MAC":"'+app_to_fs_final.DST_MAC+'","OUT_ORDER":'+app_to_fs_final.OUT_ORDER+',"SSRC_CHG":'+app_to_fs_final.SSRC_CHG+',"CODEC_PT":'+app_to_fs_final.CODEC_PT+', "CLOCK":'+app_to_fs_final.CLOCK+',"CODEC_NAME":"'+app_to_fs_final.CODEC_NAME+'","DIR":1,"REPORT_NAME":"'+app_ip+':'+rtpPorts.fs_app.app_rtp+'","PARTY":1,"TYPE":"FINAL"}'
 	});
 
@@ -444,7 +444,7 @@ function createhangupreports() {
 			time_sec: Math.floor(finalTime / 1000),
 			time_usec: Math.floor((finalTime % 1000) * 1000)
 		},
-		pause: 50,
+		pause: 100,
 		payload: '{"CORRELATION_ID":"'+a_leg_call_id+'","RTP_SIP_CALL_ID":"'+a_leg_call_id+'","DELTA":'+uac_to_sbc_final.DELTA+',"JITTER":'+uac_to_sbc_final.JITTER+',"REPORT_TS":'+uac_to_sbc_final.REPORT_TS+',"TL_BYTE":'+uac_to_sbc_final.TL_BYTE+',"SKEW":'+uac_to_sbc_final.SKEW+',"TOTAL_PK":'+uac_to_sbc_final.TOTAL_PK+',"EXPECTED_PK":'+uac_to_sbc_final.EXPECTED_PK+',"PACKET_LOSS":'+uac_to_sbc_final.PACKET_LOSS+',"SEQ":'+uac_to_sbc_final.SEQ+',"MAX_JITTER":'+uac_to_sbc_final.MAX_JITTER+',"MAX_DELTA":'+uac_to_sbc_final.MAX_DELTA+',"MAX_SKEW":'+uac_to_sbc_final.MAX_SKEW+',"MEAN_JITTER":'+uac_to_sbc_final.MEAN_JITTER+',"MIN_MOS":'+uac_to_sbc_final.MIN_MOS+', "MEAN_MOS":'+uac_to_sbc_final.MEAN_MOS+', "MOS":'+uac_to_sbc_final.MOS+',"RFACTOR":'+uac_to_sbc_final.RFACTOR+',"MIN_RFACTOR":'+uac_to_sbc_final.MIN_RFACTOR+',"MEAN_RFACTOR":'+uac_to_sbc_final.MEAN_RFACTOR+',"SRC_IP":"'+priv_ip+'", "SRC_PORT":'+rtpPorts.uac_sbc.uac_rtp+', "DST_IP":"'+priv_nat+'","DST_PORT":'+rtpPorts.uac_sbc.sbc_rtp+',"SRC_MAC":"'+uac_to_sbc_final.SRC_MAC+'","DST_MAC":"'+uac_to_sbc_final.DST_MAC+'","OUT_ORDER":'+uac_to_sbc_final.OUT_ORDER+',"SSRC_CHG":'+uac_to_sbc_final.SSRC_CHG+',"CODEC_PT":'+uac_to_sbc_final.CODEC_PT+', "CLOCK":'+uac_to_sbc_final.CLOCK+',"CODEC_NAME":"'+uac_to_sbc_final.CODEC_NAME+'","DIR":0,"REPORT_NAME":"'+priv_ip+':'+rtpPorts.uac_sbc.uac_rtp+'","PARTY":0,"TYPE":"HANGUP"}'
 	});
 
@@ -463,7 +463,7 @@ function createhangupreports() {
 			time_sec: Math.floor(finalTime / 1000),
 			time_usec: Math.floor((finalTime % 1000) * 1000) + 100
 		},
-		pause: 50,
+		pause: 100,
 		payload: '{"CORRELATION_ID":"'+a_leg_call_id+'","RTP_SIP_CALL_ID":"'+a_leg_call_id+'","DELTA":'+sbc_to_uac_final.DELTA+',"JITTER":'+sbc_to_uac_final.JITTER+',"REPORT_TS":'+sbc_to_uac_final.REPORT_TS+',"TL_BYTE":'+sbc_to_uac_final.TL_BYTE+',"SKEW":'+sbc_to_uac_final.SKEW+',"TOTAL_PK":'+sbc_to_uac_final.TOTAL_PK+',"EXPECTED_PK":'+sbc_to_uac_final.EXPECTED_PK+',"PACKET_LOSS":'+sbc_to_uac_final.PACKET_LOSS+',"SEQ":'+sbc_to_uac_final.SEQ+',"MAX_JITTER":'+sbc_to_uac_final.MAX_JITTER+',"MAX_DELTA":'+sbc_to_uac_final.MAX_DELTA+',"MAX_SKEW":'+sbc_to_uac_final.MAX_SKEW+',"MEAN_JITTER":'+sbc_to_uac_final.MEAN_JITTER+',"MIN_MOS":'+sbc_to_uac_final.MIN_MOS+', "MEAN_MOS":'+sbc_to_uac_final.MEAN_MOS+', "MOS":'+sbc_to_uac_final.MOS+',"RFACTOR":'+sbc_to_uac_final.RFACTOR+',"MIN_RFACTOR":'+sbc_to_uac_final.MIN_RFACTOR+',"MEAN_RFACTOR":'+sbc_to_uac_final.MEAN_RFACTOR+',"SRC_IP":"'+priv_nat+'", "SRC_PORT":'+rtpPorts.uac_sbc.sbc_rtp+', "DST_IP":"'+priv_ip+'","DST_PORT":'+rtpPorts.uac_sbc.uac_rtp+',"SRC_MAC":"'+sbc_to_uac_final.SRC_MAC+'","DST_MAC":"'+sbc_to_uac_final.DST_MAC+'","OUT_ORDER":'+sbc_to_uac_final.OUT_ORDER+',"SSRC_CHG":'+sbc_to_uac_final.SSRC_CHG+',"CODEC_PT":'+sbc_to_uac_final.CODEC_PT+', "CLOCK":'+sbc_to_uac_final.CLOCK+',"CODEC_NAME":"'+sbc_to_uac_final.CODEC_NAME+'","DIR":1,"REPORT_NAME":"'+priv_nat+':'+rtpPorts.uac_sbc.sbc_rtp+'","PARTY":0,"TYPE":"HANGUP"}'
 	});
 
@@ -483,7 +483,7 @@ function createhangupreports() {
 			time_sec: Math.floor(finalTime / 1000),
 			time_usec: Math.floor((finalTime % 1000) * 1000) + 200
 		},
-		pause: 50,
+		pause: 100,
 		payload: '{"CORRELATION_ID":"'+b_leg_call_id+'","RTP_SIP_CALL_ID":"'+b_leg_call_id+'","DELTA":'+sbc_to_fs_final.DELTA+',"JITTER":'+sbc_to_fs_final.JITTER+',"REPORT_TS":'+sbc_to_fs_final.REPORT_TS+',"TL_BYTE":'+sbc_to_fs_final.TL_BYTE+',"SKEW":'+sbc_to_fs_final.SKEW+',"TOTAL_PK":'+sbc_to_fs_final.TOTAL_PK+',"EXPECTED_PK":'+sbc_to_fs_final.EXPECTED_PK+',"PACKET_LOSS":'+sbc_to_fs_final.PACKET_LOSS+',"SEQ":'+sbc_to_fs_final.SEQ+',"MAX_JITTER":'+sbc_to_fs_final.MAX_JITTER+',"MAX_DELTA":'+sbc_to_fs_final.MAX_DELTA+',"MAX_SKEW":'+sbc_to_fs_final.MAX_SKEW+',"MEAN_JITTER":'+sbc_to_fs_final.MEAN_JITTER+',"MIN_MOS":'+sbc_to_fs_final.MIN_MOS+', "MEAN_MOS":'+sbc_to_fs_final.MEAN_MOS+', "MOS":'+sbc_to_fs_final.MOS+',"RFACTOR":'+sbc_to_fs_final.RFACTOR+',"MIN_RFACTOR":'+sbc_to_fs_final.MIN_RFACTOR+',"MEAN_RFACTOR":'+sbc_to_fs_final.MEAN_RFACTOR+',"SRC_IP":"'+priv_nat+'", "SRC_PORT":'+rtpPorts.sbc_fs.sbc_rtp+', "DST_IP":"'+peer_ip+'","DST_PORT":'+rtpPorts.sbc_fs.fs_rtp+',"SRC_MAC":"'+sbc_to_fs_final.SRC_MAC+'","DST_MAC":"'+sbc_to_fs_final.DST_MAC+'","OUT_ORDER":'+sbc_to_fs_final.OUT_ORDER+',"SSRC_CHG":'+sbc_to_fs_final.SSRC_CHG+',"CODEC_PT":'+sbc_to_fs_final.CODEC_PT+', "CLOCK":'+sbc_to_fs_final.CLOCK+',"CODEC_NAME":"'+sbc_to_fs_final.CODEC_NAME+'","DIR":0,"REPORT_NAME":"'+priv_nat+':'+rtpPorts.sbc_fs.sbc_rtp+'","PARTY":1,"TYPE":"HANGUP"}'
 	});
 
@@ -502,7 +502,7 @@ function createhangupreports() {
 			time_sec: Math.floor(finalTime / 1000),
 			time_usec: Math.floor((finalTime % 1000) * 1000) + 300
 		},
-		pause: 50,
+		pause: 100,
 		payload: '{"CORRELATION_ID":"'+b_leg_call_id+'","RTP_SIP_CALL_ID":"'+b_leg_call_id+'","DELTA":'+fs_to_sbc_final.DELTA+',"JITTER":'+fs_to_sbc_final.JITTER+',"REPORT_TS":'+fs_to_sbc_final.REPORT_TS+',"TL_BYTE":'+fs_to_sbc_final.TL_BYTE+',"SKEW":'+fs_to_sbc_final.SKEW+',"TOTAL_PK":'+fs_to_sbc_final.TOTAL_PK+',"EXPECTED_PK":'+fs_to_sbc_final.EXPECTED_PK+',"PACKET_LOSS":'+fs_to_sbc_final.PACKET_LOSS+',"SEQ":'+fs_to_sbc_final.SEQ+',"MAX_JITTER":'+fs_to_sbc_final.MAX_JITTER+',"MAX_DELTA":'+fs_to_sbc_final.MAX_DELTA+',"MAX_SKEW":'+fs_to_sbc_final.MAX_SKEW+',"MEAN_JITTER":'+fs_to_sbc_final.MEAN_JITTER+',"MIN_MOS":'+fs_to_sbc_final.MIN_MOS+', "MEAN_MOS":'+fs_to_sbc_final.MEAN_MOS+', "MOS":'+fs_to_sbc_final.MOS+',"RFACTOR":'+fs_to_sbc_final.RFACTOR+',"MIN_RFACTOR":'+fs_to_sbc_final.MIN_RFACTOR+',"MEAN_RFACTOR":'+fs_to_sbc_final.MEAN_RFACTOR+',"SRC_IP":"'+peer_ip+'", "SRC_PORT":'+rtpPorts.sbc_fs.fs_rtp+', "DST_IP":"'+priv_nat+'","DST_PORT":'+rtpPorts.sbc_fs.sbc_rtp+',"SRC_MAC":"'+fs_to_sbc_final.SRC_MAC+'","DST_MAC":"'+fs_to_sbc_final.DST_MAC+'","OUT_ORDER":'+fs_to_sbc_final.OUT_ORDER+',"SSRC_CHG":'+fs_to_sbc_final.SSRC_CHG+',"CODEC_PT":'+fs_to_sbc_final.CODEC_PT+', "CLOCK":'+fs_to_sbc_final.CLOCK+',"CODEC_NAME":"'+fs_to_sbc_final.CODEC_NAME+'","DIR":1,"REPORT_NAME":"'+peer_ip+':'+rtpPorts.sbc_fs.fs_rtp+'","PARTY":1,"TYPE":"HANGUP"}'
 	});
 
@@ -522,7 +522,7 @@ function createhangupreports() {
 			time_sec: Math.floor(finalTime / 1000),
 			time_usec: Math.floor((finalTime % 1000) * 1000) + 400
 		},
-		pause: 50,
+		pause: 100,
 		payload: '{"CORRELATION_ID":"'+b_leg_call_id+'","RTP_SIP_CALL_ID":"'+b_leg_call_id+'","DELTA":'+fs_to_app_final.DELTA+',"JITTER":'+fs_to_app_final.JITTER+',"REPORT_TS":'+fs_to_app_final.REPORT_TS+',"TL_BYTE":'+fs_to_app_final.TL_BYTE+',"SKEW":'+fs_to_app_final.SKEW+',"TOTAL_PK":'+fs_to_app_final.TOTAL_PK+',"EXPECTED_PK":'+fs_to_app_final.EXPECTED_PK+',"PACKET_LOSS":'+fs_to_app_final.PACKET_LOSS+',"SEQ":'+fs_to_app_final.SEQ+',"MAX_JITTER":'+fs_to_app_final.MAX_JITTER+',"MAX_DELTA":'+fs_to_app_final.MAX_DELTA+',"MAX_SKEW":'+fs_to_app_final.MAX_SKEW+',"MEAN_JITTER":'+fs_to_app_final.MEAN_JITTER+',"MIN_MOS":'+fs_to_app_final.MIN_MOS+', "MEAN_MOS":'+fs_to_app_final.MEAN_MOS+', "MOS":'+fs_to_app_final.MOS+',"RFACTOR":'+fs_to_app_final.RFACTOR+',"MIN_RFACTOR":'+fs_to_app_final.MIN_RFACTOR+',"MEAN_RFACTOR":'+fs_to_app_final.MEAN_RFACTOR+',"SRC_IP":"'+peer_ip+'", "SRC_PORT":'+rtpPorts.fs_app.fs_rtp+', "DST_IP":"'+app_ip+'","DST_PORT":'+rtpPorts.fs_app.app_rtp+',"SRC_MAC":"'+fs_to_app_final.SRC_MAC+'","DST_MAC":"'+fs_to_app_final.DST_MAC+'","OUT_ORDER":'+fs_to_app_final.OUT_ORDER+',"SSRC_CHG":'+fs_to_app_final.SSRC_CHG+',"CODEC_PT":'+fs_to_app_final.CODEC_PT+', "CLOCK":'+fs_to_app_final.CLOCK+',"CODEC_NAME":"'+fs_to_app_final.CODEC_NAME+'","DIR":0,"REPORT_NAME":"'+peer_ip+':'+rtpPorts.fs_app.fs_rtp+'","PARTY":1,"TYPE":"HANGUP"}'
 	});
 
@@ -541,7 +541,7 @@ function createhangupreports() {
 			time_sec: Math.floor(finalTime / 1000),
 			time_usec: Math.floor((finalTime % 1000) * 1000) + 500
 		},
-		pause: 100,
+		pause: 200,
 		payload: '{"CORRELATION_ID":"'+b_leg_call_id+'","RTP_SIP_CALL_ID":"'+b_leg_call_id+'","DELTA":'+app_to_fs_final.DELTA+',"JITTER":'+app_to_fs_final.JITTER+',"REPORT_TS":'+app_to_fs_final.REPORT_TS+',"TL_BYTE":'+app_to_fs_final.TL_BYTE+',"SKEW":'+app_to_fs_final.SKEW+',"TOTAL_PK":'+app_to_fs_final.TOTAL_PK+',"EXPECTED_PK":'+app_to_fs_final.EXPECTED_PK+',"PACKET_LOSS":'+app_to_fs_final.PACKET_LOSS+',"SEQ":'+app_to_fs_final.SEQ+',"MAX_JITTER":'+app_to_fs_final.MAX_JITTER+',"MAX_DELTA":'+app_to_fs_final.MAX_DELTA+',"MAX_SKEW":'+app_to_fs_final.MAX_SKEW+',"MEAN_JITTER":'+app_to_fs_final.MEAN_JITTER+',"MIN_MOS":'+app_to_fs_final.MIN_MOS+', "MEAN_MOS":'+app_to_fs_final.MEAN_MOS+', "MOS":'+app_to_fs_final.MOS+',"RFACTOR":'+app_to_fs_final.RFACTOR+',"MIN_RFACTOR":'+app_to_fs_final.MIN_RFACTOR+',"MEAN_RFACTOR":'+app_to_fs_final.MEAN_RFACTOR+',"SRC_IP":"'+app_ip+'", "SRC_PORT":'+rtpPorts.fs_app.app_rtp+', "DST_IP":"'+peer_ip+'","DST_PORT":'+rtpPorts.fs_app.fs_rtp+',"SRC_MAC":"'+app_to_fs_final.SRC_MAC+'","DST_MAC":"'+app_to_fs_final.DST_MAC+'","OUT_ORDER":'+app_to_fs_final.OUT_ORDER+',"SSRC_CHG":'+app_to_fs_final.SSRC_CHG+',"CODEC_PT":'+app_to_fs_final.CODEC_PT+', "CLOCK":'+app_to_fs_final.CLOCK+',"CODEC_NAME":"'+app_to_fs_final.CODEC_NAME+'","DIR":1,"REPORT_NAME":"'+app_ip+':'+rtpPorts.fs_app.app_rtp+'","PARTY":1,"TYPE":"HANGUP"}'
 	});
 
@@ -1003,13 +1003,33 @@ var config = {
 			'\r\n'
 		},
 
+		// === ACK SEQUENCE ===
+		// ACK from Caller → App through all hops
+		{
+			rcinfo: {
+				type: 'HEP', version: 3, payload_type: 1,
+				captureId: 2010, capturePass: 'myHep', ip_family: 2,
+				protocol: 17, proto_type: 1, correlation_id: a_leg_call_id,
+				srcIp: '192.168.1.10', dstIp: '192.168.1.11', srcPort: 5060, dstPort: 5060
+			},
+			pause: 400,
+			payload:
+			'ACK sip:9876@sipcapture.org SIP/2.0\r\n' +
+			'Via: SIP/2.0/UDP 192.168.1.10:5060;branch=z9hG4bK-caller-ack;rport\r\n' +
+			'From: <sip:hepgenjs@sipcapture.org>;tag=caller\r\n' +
+			'To: <sip:9876@sipcapture.org>;tag=apptag\r\n' +
+			'Call-ID: ' + a_leg_call_id + '\r\n' +
+			'CSeq: 1 ACK\r\n' +
+			'Content-Length: 0\r\n\r\n'
+		},
+
 		// === Ribbon Log ===
 
 		{
 			rcinfo: {
 				type: 'HEP', version: 3, payload_type: 'JSON',
 				captureId: 2050, capturePass: 'myHep', ip_family: 2,
-				protocol: 17, proto_type: 100, correlation_id: b_leg_call_id,
+				protocol: 17, proto_type: 100, correlation_id: a_leg_call_id,
 				srcIp: '192.168.1.10', dstIp: '192.168.1.11', srcPort: 5060, dstPort: 5060
 			},
 			pause: 250,
@@ -1017,7 +1037,7 @@ var config = {
 			'Acct-Status-Type = Start\r\n' +
 			'Acct-Authentic = 0\r\n' +
 			'NET-Session-Ingress-CallId = "0"\r\n' +
-			'NET-Session-Egress-CallId = "' + b_leg_call_id + '"\r\n' +
+			'NET-Session-Egress-CallId = "' + a_leg_call_id + '"\r\n' +
 			'NET-Session-Generic-Id = "2"\r\n' +
 			'Acct-Multi-Session-Id = "' + Date.now() + '"\r\n' +
 			'NET-Ingress-Signaling-Group = "1"\r\n' +
@@ -1040,26 +1060,6 @@ var config = {
 			'NAS-IP-Address = 134.56.72.218\r\n' +
 			'Acct-Unique-Session-Id = "4d1f78f67a5c582e"\r\n'+
 			'Timestamp = ' + Date.now() + '\r\n'
-		},
-
-		// === ACK SEQUENCE ===
-		// ACK from Caller → App through all hops
-		{
-			rcinfo: {
-				type: 'HEP', version: 3, payload_type: 1,
-				captureId: 2010, capturePass: 'myHep', ip_family: 2,
-				protocol: 17, proto_type: 1, correlation_id: a_leg_call_id,
-				srcIp: '192.168.1.10', dstIp: '192.168.1.11', srcPort: 5060, dstPort: 5060
-			},
-			pause: 400,
-			payload:
-			'ACK sip:9876@sipcapture.org SIP/2.0\r\n' +
-			'Via: SIP/2.0/UDP 192.168.1.10:5060;branch=z9hG4bK-caller-ack;rport\r\n' +
-			'From: <sip:hepgenjs@sipcapture.org>;tag=caller\r\n' +
-			'To: <sip:9876@sipcapture.org>;tag=apptag\r\n' +
-			'Call-ID: ' + a_leg_call_id + '\r\n' +
-			'CSeq: 1 ACK\r\n' +
-			'Content-Length: 0\r\n\r\n'
 		},
 
 		{
@@ -1106,7 +1106,7 @@ var config = {
 				protocol: 17, proto_type: 1, correlation_id: b_leg_call_id,
 				srcIp: '192.168.1.13', dstIp: '192.168.1.14', srcPort: 5060, dstPort: 5070
 			},
-			pause: 400, 
+			pause: 500, 
 			payload:
 			'ACK sip:9876@sipcapture.org SIP/2.0\r\n' +
 			'Via: SIP/2.0/UDP 192.168.1.13:5060;branch=z9hG4bK-fs-ack;rport\r\n' +
@@ -1123,14 +1123,14 @@ var config = {
                                 type: 'HEP', version: 3, payload_type: 'JSON',
                                 captureId: 2010, capturePass: 'myHep', ip_family: 2,
                                 protocol: 17, proto_type: 100,
-                                correlation_id: b_leg_call_id,
-                                srcIp: app_ip, dstIp: pub_ip,
+                                correlation_id: a_leg_call_id,
+                                srcIp: '192.168.1.10', dstIp: '192.168.1.11',
                                 srcPort: rtpPorts.fs_app.app_rtp, dstPort: rtpPorts.fs_app.fs_rtp,
                                 mos: 436,
                                 time_sec: Math.floor(Date.now() / 1000) + 10,
                                 time_usec: 465000
                   	},
-                  	pause: 500, // Longer pause before media starts
+                  	pause: 1000, // Longer pause before media starts
                   	payload: '{"CORRELATION_ID":"' + a_leg_call_id + '",' + '"REPORT_TS":' + (new Date().getTime() / 1000).toFixed(3) + ',' + '"DTMF":"ts:' + (new Date().getTime() / 1000).toFixed(3) + ',tsu:843750,e:1,v:15,d:160,c:1"}'
                 },
 
