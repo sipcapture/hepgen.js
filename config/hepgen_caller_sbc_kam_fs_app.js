@@ -1125,11 +1125,11 @@ var config = {
                                 srcIp: '192.168.1.10', dstIp: '192.168.1.11',
                                 srcPort: rtpPorts.fs_app.app_rtp, dstPort: rtpPorts.fs_app.fs_rtp,
                                 mos: 436,
-				time_sec: Math.floor(Date.now() / 1000) + 3,
+				time_sec: Math.floor(Date.now() / 1000) + 6,
                                 time_usec: Math.floor((Date.now() % 1000) * 1000)
                   	},
                   	pause: 1000, // Longer pause before media starts
-                  	payload: '{"CORRELATION_ID":"' + a_leg_call_id + '",' + '"REPORT_TS":' + (Math.floor(Date.now() / 1000) + 3) + ',' + '"DTMF":"ts:' + (Math.floor(Date.now() / 1000) + 3) + ',tsu:843750,e:1,v:15,d:160,c:1"}'
+                  	payload: '{"CORRELATION_ID":"' + a_leg_call_id + '",' + '"REPORT_TS":' + (Math.floor(Date.now() / 1000) + 6) + ',' + '"DTMF":"ts:' + (Math.floor(Date.now() / 1000) + 6) + ',tsu:843750,e:1,v:15,d:160,c:1"}'
                 },
 
 		// === MEDIA PHASE: Insert RTP reports here ===
