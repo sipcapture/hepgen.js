@@ -135,11 +135,11 @@ function createMediaReports() {
 		app_to_fs: []
 	};
 
-	let duration = Math.floor( 2* Math.random() * 50 )
+	let duration = Math.floor((Math.random() * 10)) + 1 // Never 0, will be 10 times longer
 
-	// Generate 3 periodic reports over ~6 seconds
+	// Generate duration*10 periodic reports every 10 seconds
 	for (let i = 1; i <= duration; i++) {
-		let currentTime = baseTime + (i * 2000); // 2 second intervals
+		let currentTime = baseTime + (i * 10000); // 10 second intervals
 
 		// === LEG 1: UAC ↔ SBC (A-leg) ===
 		// UAC → SBC
@@ -180,6 +180,46 @@ function createMediaReports() {
 			payload: '{"CORRELATION_ID":"'+a_leg_call_id+'","RTP_SIP_CALL_ID":"'+a_leg_call_id+'","DELTA":'+sbc_to_uac_stats.DELTA+',"JITTER":'+sbc_to_uac_stats.JITTER+',"REPORT_TS":'+sbc_to_uac_stats.REPORT_TS+',"TL_BYTE":'+sbc_to_uac_stats.TL_BYTE+',"SKEW":'+sbc_to_uac_stats.SKEW+',"TOTAL_PK":'+sbc_to_uac_stats.TOTAL_PK+',"EXPECTED_PK":'+sbc_to_uac_stats.EXPECTED_PK+',"PACKET_LOSS":'+sbc_to_uac_stats.PACKET_LOSS+',"SEQ":'+sbc_to_uac_stats.SEQ+',"MAX_JITTER":'+sbc_to_uac_stats.MAX_JITTER+',"MAX_DELTA":'+sbc_to_uac_stats.MAX_DELTA+',"MAX_SKEW":'+sbc_to_uac_stats.MAX_SKEW+',"MEAN_JITTER":'+sbc_to_uac_stats.MEAN_JITTER+',"MIN_MOS":'+sbc_to_uac_stats.MIN_MOS+', "MEAN_MOS":'+sbc_to_uac_stats.MEAN_MOS+', "MOS":'+sbc_to_uac_stats.MOS+',"RFACTOR":'+sbc_to_uac_stats.RFACTOR+',"MIN_RFACTOR":'+sbc_to_uac_stats.MIN_RFACTOR+',"MEAN_RFACTOR":'+sbc_to_uac_stats.MEAN_RFACTOR+',"SRC_IP":"'+priv_nat+'", "SRC_PORT":'+rtpPorts.uac_sbc.sbc_rtp+', "DST_IP":"'+priv_ip+'","DST_PORT":'+rtpPorts.uac_sbc.uac_rtp+',"SRC_MAC":"'+sbc_to_uac_stats.SRC_MAC+'","DST_MAC":"'+sbc_to_uac_stats.DST_MAC+'","OUT_ORDER":'+sbc_to_uac_stats.OUT_ORDER+',"SSRC_CHG":'+sbc_to_uac_stats.SSRC_CHG+',"CODEC_PT":'+sbc_to_uac_stats.CODEC_PT+', "CLOCK":'+sbc_to_uac_stats.CLOCK+',"CODEC_NAME":"'+sbc_to_uac_stats.CODEC_NAME+'","DIR":1,"REPORT_NAME":"'+priv_nat+':'+rtpPorts.uac_sbc.sbc_rtp+'","PARTY":0,"TYPE":"PERIODIC"}'
 		});
 
+		// RTCP Stats
+		
+		// UAC -> SBC
+		mediaReports.push({
+			rcinfo: {
+				type: 'HEP', version: 3, payload_type: 'JSON',
+                                captureId: 2010, capturePass: 'myHep', ip_family: 2,
+	                        protocol: 17,
+	                        proto_type: 5,
+	                        srcIp: priv_ip,
+	                        dstIp: priv_nat,
+	                        srcPort: rtpPorts.uac_sbc.uac_rtp,
+	                        dstPort: rtpPorts.uac_sbc.sbc_rtp,
+	                        correlation_id: a_leg_call_id,
+				time_sec: Math.floor(currentTime / 1000),
+				time_usec: Math.floor((currentTime % 1000) * 1000) + 100
+			},
+			pause: 200,
+			payload: '{"CORRELATION_ID":"'+a_leg_call_id + '","RTP_SIP_CALL_ID":"'+a_leg_call_id+'","SR_DELAY":0,"INTERARRIVAL_JITTER":0,"REPORT_TS":'+uac_to_sbc_stats.REPORT_TS+',"TOTAL_PK":'+uac_to_sbc_stats.TOTAL_PK+',"TOTAL_RTCP_PK":14,"CUM_PACKET_LOSS":'+uac_to_sbc_stats.PACKET_LOSS+',"PERCENTAGE_LOSS":0,"MAX_INTERARRIVAL_JITTER":'+uac_to_sbc_stats.MAX_JITTER+150+',"MAX_SR_DELAY":0,"MAX_PERCENTAGE_LOSS":0.391,"MEAN_PERCENTAGE_LOSS":0.055,"MEAN_INTERARRIVAL_JITTER":'+uac_to_sbc_stats.MEAN_JITTER+150+',"MIN_MOS":'+uac_to_sbc_stats.MIN_MOS-1+',"MEAN_MOS":'+uac_to_sbc_stats.MEAN_MOS-1+',"MOS":'+uac_to_sbc_stats.MOS-1+',"RFACTOR":'+uac_to_sbc_stats.RFACTOR+',"MIN_RFACTOR":'+uac_to_sbc_stats.MIN_RFACTOR+',"MEAN_RFACTOR":'+uac_to_sbc_stats.MEAN_RFACTOR+',"SRC_IP":"'+priv_ip+'","SRC_PORT":'+rtpPorts.uac_sbc.uac_rtp+',"DST_IP":"'+priv_nat+'","DST_PORT":'+rtpPorts.uac_sbc.sbc_rtp+',"OCTET_COUNT":208160,"SSRC_CHG":'+uac_to_sbc_stats.SSRC_CHG+',"PKT_TYPE_REPORT":[200,0,0],"HIGH_EXT_SEQ":12656,"SSRC":"0xedc34144","DIR":0,"REPORT_NAME":"'+priv_ip+':'+rtpPorts.uac_sbc.uac_rtp+'","PARTY":0,"IP_QOS":0,"INFO_VLAN":0,"VIDEO":0,"REPORT_START":'+(currentTime/1000)-10000+',"REPORT_END":'+(currentTime/1000)+100+',"TYPE":"PERIODIC","STYPE":"HEPAGENT-RTCP-1.1.107","SOURCE":"RTCP"}'
+		});
+
+		// SBC -> UAC
+		mediaReports.push({
+			rcinfo: {
+				type: 'HEP', version: 3, payload_type: 'JSON',
+                                captureId: 2010, capturePass: 'myHep', ip_family: 2,
+	                        protocol: 17,
+	                        proto_type: 5,
+	                        srcIp: priv_nat,
+	                        dstIp: priv_ip,
+	                        srcPort: rtpPorts.uac_sbc.sbc_rtp,
+	                        dstPort: rtpPorts.uac_sbc.uac_rtp,
+	                        correlation_id: a_leg_call_id,
+				time_sec: Math.floor(currentTime / 1000),
+				time_usec: Math.floor((currentTime % 1000) * 1000) + 100
+			},
+			pause: 200,
+			payload: '{"CORRELATION_ID":"'+a_leg_call_id + '","RTP_SIP_CALL_ID":"'+a_leg_call_id+'","SR_DELAY":0,"INTERARRIVAL_JITTER":0,"REPORT_TS":'+sbc_to_uac_stats.REPORT_TS+',"TOTAL_PK":'+sbc_to_uac_stats.TOTAL_PK+',"TOTAL_RTCP_PK":14,"CUM_PACKET_LOSS":'+sbc_to_uac_stats.PACKET_LOSS+',"PERCENTAGE_LOSS":0,"MAX_INTERARRIVAL_JITTER":'+sbc_to_uac_stats.MAX_JITTER+150+',"MAX_SR_DELAY":0,"MAX_PERCENTAGE_LOSS":0.391,"MEAN_PERCENTAGE_LOSS":0.055,"MEAN_INTERARRIVAL_JITTER":'+sbc_to_uac_stats.MEAN_JITTER+150+',"MIN_MOS":'+sbc_to_uac_stats.MIN_MOS-1+',"MEAN_MOS":'+sbc_to_uac_stats.MEAN_MOS-1+',"MOS":'+sbc_to_uac_stats.MOS-1+',"RFACTOR":'+sbc_to_uac_stats.RFACTOR+',"MIN_RFACTOR":'+sbc_to_uac_stats.MIN_RFACTOR+',"MEAN_RFACTOR":'+sbc_to_uac_stats.MEAN_RFACTOR+',"SRC_IP":"'+priv_nat+'","SRC_PORT":'+rtpPorts.uac_sbc.sbc_rtp+',"DST_IP":"'+priv_ip+'","DST_PORT":'+rtpPorts.uac_sbc.uac_rtp+',"OCTET_COUNT":208160,"SSRC_CHG":'+sbc_to_uac_stats.SSRC_CHG+',"PKT_TYPE_REPORT":[200,0,0],"HIGH_EXT_SEQ":12656,"SSRC":"0xedc34144","DIR":0,"REPORT_NAME":"'+priv_nat+':'+rtpPorts.uac_sbc.sbc_rtp+'","PARTY":0,"IP_QOS":0,"INFO_VLAN":0,"VIDEO":0,"REPORT_START":'+(currentTime/1000)-10000+',"REPORT_END":'+(currentTime/1000)+100+',"TYPE":"PERIODIC","STYPE":"HEPAGENT-RTCP-1.1.107","SOURCE":"RTCP"}'
+		});
+		
 		// === LEG 2: SBC ↔ FreeSWITCH (B-leg part 1) ===
 		// SBC → FreeSWITCH
 		let sbc_to_fs_stats = generateRTPStats({ssrc: ssrcValues.sbc_to_fs}, currentTime, i);
@@ -254,7 +294,7 @@ function createMediaReports() {
 				time_sec: Math.floor(currentTime / 1000),
 				time_usec: Math.floor((currentTime % 1000) * 1000) + 500
 			},
-			pause: i === duration ? 4000 : 2000, // Longer pause before BYE on last report
+			pause: i === duration ? 10000 : 10000, // Longer pause before BYE on last report
 			payload: '{"CORRELATION_ID":"'+b_leg_call_id+'","RTP_SIP_CALL_ID":"'+b_leg_call_id+'","DELTA":'+app_to_fs_stats.DELTA+',"JITTER":'+app_to_fs_stats.JITTER+',"REPORT_TS":'+app_to_fs_stats.REPORT_TS+',"TL_BYTE":'+app_to_fs_stats.TL_BYTE+',"SKEW":'+app_to_fs_stats.SKEW+',"TOTAL_PK":'+app_to_fs_stats.TOTAL_PK+',"EXPECTED_PK":'+app_to_fs_stats.EXPECTED_PK+',"PACKET_LOSS":'+app_to_fs_stats.PACKET_LOSS+',"SEQ":'+app_to_fs_stats.SEQ+',"MAX_JITTER":'+app_to_fs_stats.MAX_JITTER+',"MAX_DELTA":'+app_to_fs_stats.MAX_DELTA+',"MAX_SKEW":'+app_to_fs_stats.MAX_SKEW+',"MEAN_JITTER":'+app_to_fs_stats.MEAN_JITTER+',"MIN_MOS":'+app_to_fs_stats.MIN_MOS+', "MEAN_MOS":'+app_to_fs_stats.MEAN_MOS+', "MOS":'+app_to_fs_stats.MOS+',"RFACTOR":'+app_to_fs_stats.RFACTOR+',"MIN_RFACTOR":'+app_to_fs_stats.MIN_RFACTOR+',"MEAN_RFACTOR":'+app_to_fs_stats.MEAN_RFACTOR+',"SRC_IP":"'+app_ip+'", "SRC_PORT":'+rtpPorts.fs_app.app_rtp+', "DST_IP":"'+peer_ip+'","DST_PORT":'+rtpPorts.fs_app.fs_rtp+',"SRC_MAC":"'+app_to_fs_stats.SRC_MAC+'","DST_MAC":"'+app_to_fs_stats.DST_MAC+'","OUT_ORDER":'+app_to_fs_stats.OUT_ORDER+',"SSRC_CHG":'+app_to_fs_stats.SSRC_CHG+',"CODEC_PT":'+app_to_fs_stats.CODEC_PT+', "CLOCK":'+app_to_fs_stats.CLOCK+',"CODEC_NAME":"'+app_to_fs_stats.CODEC_NAME+'","DIR":1,"REPORT_NAME":"'+app_ip+':'+rtpPorts.fs_app.app_rtp+'","PARTY":1,"TYPE":"PERIODIC"}'
 		});
 	}
@@ -1122,7 +1162,7 @@ var config = {
                                 captureId: 2010, capturePass: 'myHep', ip_family: 2,
                                 protocol: 17, proto_type: 100,
                                 correlation_id: a_leg_call_id,
-                                srcIp: '192.168.1.10', dstIp: '192.168.1.11',
+                                srcIp: priv_ip, dstIp: priv_nat,
                                 srcPort: rtpPorts.fs_app.app_rtp, dstPort: rtpPorts.fs_app.fs_rtp,
                                 mos: 436,
 				time_sec: Math.floor(Date.now() / 1000) + 6,
