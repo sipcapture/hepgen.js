@@ -1115,7 +1115,6 @@ var config = {
                   	pause: 200,
                   	payload: '{"CORRELATION_ID":"' + a_leg_call_id + '",' + '"REPORT_TS":' + (new Date().getTime() / 1000).toFixed(3) + ',' + '"DTMF":"ts:' + (new Date().getTime() / 1000).toFixed(3) + ',tsu:843750,e:1,v:15,d:160,c:1"}'
                 },
-		},
 		{
 			rcinfo: {
 				type: 'HEP', version: 3, payload_type: 1,
