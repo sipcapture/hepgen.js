@@ -4,8 +4,8 @@
   "description": "HEP Message Generator",
   "author": "lorenzo.mangani@gmail.com",
   "dependencies": {
-    "hep-js": "^1.0.20",
-    "parsip": "^1.0.5"
+    "hep-js": "^1.0.24",
+    "parsip": "^1.0.7"
   },
   "config": {
     "unsafe-perm": true
