@@ -62,10 +62,17 @@ var countDown = function(){
 	}
 }
 
+var stampHepTimestamp = function(rcinfo) {
+	var datenow = Date.now();
+	rcinfo.time_sec = Math.floor(datenow / 1000);
+	rcinfo.time_usec = (datenow - (rcinfo.time_sec * 1000)) * 1000;
+};
+
 var sendHEP3 = function(msg,rcinfo){
 	if (rcinfo) {
 		try {
 			if (debug) console.log('Sending HEP3 Packet to '+_config_.HEP_SERVER+':'+_config_.HEP_PORT+'...');
+			stampHepTimestamp(rcinfo);
 			var hep_message = HEPjs.encapsulate(msg,rcinfo);
 			stats.parsed++;
 			if (hep_message) {
@@ -183,20 +190,11 @@ if (message.sleep) {
   sleep( message.sleep );
 }
 
-var hrTime = process.hrtime();
-var datenow = new Date().getTime();
-rcinfo.time_sec = Math.floor( datenow / 1000);
-rcinfo.time_usec = (datenow - (rcinfo.time_sec*1000))*1000;
-
 if (debug) console.log(rcinfo);
 if (message.pause && (message.pause > 10000 || message.pause < 0 )) message.pause = 100;
 if (message.pause && message.pause > 0) {
   pause += message.pause;
   setTimeout(function() {
-      // delayed ts
-      var datenow = new Date().getTime();
-      rcinfo.time_sec = Math.floor( datenow / 1000);
-      rcinfo.time_usec = (datenow - (rcinfo.time_sec*1000))*1000;
       routeOUT(msg,rcinfo);
       process.stdout.write("rcvd: "+stats.rcvd+", parsed: "+stats.parsed+", hepsent: "+stats.hepsent+", err: "+stats.err+", heperr: "+stats.heperr+"\r");
   }, pause);
