@@ -12,6 +12,9 @@ var b_leg_call_id = b2b_call_id;
 var c_leg_call_id = b2b_call_id;
 var d_leg_call_id = generateCallId();
 
+var scenarioMediaBaseTime = Date.now();
+var mediaReportDuration = Math.floor(Math.random() * 10) + 1;
+
 var caller = 'hepgenjs';
 var callee = '9876';
 var domain = 'sipcapture.org';
@@ -116,7 +119,7 @@ var ssrcValues = {
 function createMediaReports() {
 
 	var mediaReports = [];
-	var baseTime = Date.now();
+	var baseTime = scenarioMediaBaseTime;
 
 	// Track MOS values for coherent final reports
 	var mosTracker = {
@@ -128,7 +131,7 @@ function createMediaReports() {
 		app_to_fs: []
 	};
 
-	let duration = Math.floor((Math.random() * 10)) + 1 // Never 0, will be 10 times longer
+	let duration = mediaReportDuration;
 
 	// Generate duration*10 periodic reports every 10 seconds
 	for (let i = 1; i <= duration; i++) {
@@ -210,7 +213,7 @@ function createMediaReports() {
 				time_usec: Math.floor((currentTime % 1000) * 1000) + 100
 			},
 			pause: 200,
-			payload: '{"CORRELATION_ID":"'+a_leg_call_id + '","RTP_SIP_CALL_ID":"'+a_leg_call_id+'","SR_DELAY":0,"INTERARRIVAL_JITTER":0,"REPORT_TS":'+sbc_to_uac_stats.REPORT_TS+',"TOTAL_PK":'+sbc_to_uac_stats.TOTAL_PK+',"TOTAL_RTCP_PK":14,"CUM_PACKET_LOSS":'+sbc_to_uac_stats.PACKET_LOSS+',"PERCENTAGE_LOSS":0,"MAX_INTERARRIVAL_JITTER":'+(sbc_to_uac_stats.MAX_JITTER+150)+',"MAX_SR_DELAY":0,"MAX_PERCENTAGE_LOSS":0.391,"MEAN_PERCENTAGE_LOSS":0.055,"MEAN_INTERARRIVAL_JITTER":'+(sbc_to_uac_stats.MEAN_JITTER+150)+',"MIN_MOS":'+(sbc_to_uac_stats.MIN_MOS-1).toFixed(3)+',"MEAN_MOS":'+(sbc_to_uac_stats.MEAN_MOS-1).toFixed(3)+',"MOS":'+(sbc_to_uac_stats.MOS-1).toFixed(3)+',"RFACTOR":'+sbc_to_uac_stats.RFACTOR+',"MIN_RFACTOR":'+sbc_to_uac_stats.MIN_RFACTOR+',"MEAN_RFACTOR":'+sbc_to_uac_stats.MEAN_RFACTOR+',"SRC_IP":"'+priv_nat+'","SRC_PORT":'+rtpPorts.uac_sbc.sbc_rtp+',"DST_IP":"'+priv_ip+'","DST_PORT":'+rtpPorts.uac_sbc.uac_rtp+',"OCTET_COUNT":208160,"SSRC_CHG":'+sbc_to_uac_stats.SSRC_CHG+',"PKT_TYPE_REPORT":[200,0,0],"HIGH_EXT_SEQ":12656,"SSRC":"0xedc34144","DIR":0,"REPORT_NAME":"'+priv_nat+':'+rtpPorts.uac_sbc.sbc_rtp+'","PARTY":0,"IP_QOS":0,"INFO_VLAN":0,"VIDEO":0,"REPORT_START":'+Math.floor((currentTime/1000)-10000)+',"REPORT_END":'+Math.floor(currentTime/1000)+100+',"TYPE":"PERIODIC","STYPE":"HEPAGENT-RTCP-1.1.107","SOURCE":"RTCP"}'
+			payload: '{"CORRELATION_ID":"'+a_leg_call_id + '","RTP_SIP_CALL_ID":"'+a_leg_call_id+'","SR_DELAY":0,"INTERARRIVAL_JITTER":0,"REPORT_TS":'+sbc_to_uac_stats.REPORT_TS+',"TOTAL_PK":'+sbc_to_uac_stats.TOTAL_PK+',"TOTAL_RTCP_PK":14,"CUM_PACKET_LOSS":'+sbc_to_uac_stats.PACKET_LOSS+',"PERCENTAGE_LOSS":0,"MAX_INTERARRIVAL_JITTER":'+(sbc_to_uac_stats.MAX_JITTER+150)+',"MAX_SR_DELAY":0,"MAX_PERCENTAGE_LOSS":0.391,"MEAN_PERCENTAGE_LOSS":0.055,"MEAN_INTERARRIVAL_JITTER":'+(sbc_to_uac_stats.MEAN_JITTER+150)+',"MIN_MOS":'+(sbc_to_uac_stats.MIN_MOS-1).toFixed(3)+',"MEAN_MOS":'+(sbc_to_uac_stats.MEAN_MOS-1).toFixed(3)+',"MOS":'+(sbc_to_uac_stats.MOS-1).toFixed(3)+',"RFACTOR":'+sbc_to_uac_stats.RFACTOR+',"MIN_RFACTOR":'+sbc_to_uac_stats.MIN_RFACTOR+',"MEAN_RFACTOR":'+sbc_to_uac_stats.MEAN_RFACTOR+',"SRC_IP":"'+priv_nat+'","SRC_PORT":'+rtpPorts.uac_sbc.sbc_rtp+',"DST_IP":"'+priv_ip+'","DST_PORT":'+rtpPorts.uac_sbc.uac_rtp+',"OCTET_COUNT":208160,"SSRC_CHG":'+sbc_to_uac_stats.SSRC_CHG+',"PKT_TYPE_REPORT":[200,0,0],"HIGH_EXT_SEQ":12656,"SSRC":"0xedc34144","DIR":0,"REPORT_NAME":"'+priv_nat+':'+rtpPorts.uac_sbc.sbc_rtp+'","PARTY":0,"IP_QOS":0,"INFO_VLAN":0,"VIDEO":0,"REPORT_START":'+Math.floor((currentTime/1000)-10000)+',"REPORT_END":'+(Math.floor(currentTime/1000) + 100)+',"TYPE":"PERIODIC","STYPE":"HEPAGENT-RTCP-1.1.107","SOURCE":"RTCP"}'
 		});
 		
 		// === LEG 2: SBC ↔ FreeSWITCH (B-leg part 1) ===
@@ -269,7 +272,7 @@ function createMediaReports() {
 				time_usec: Math.floor((currentTime % 1000) * 1000) + 400
 			},
 			pause: 200,
-			payload: '{"CORRELATION_ID":"'+b_leg_call_id+'","RTP_SIP_CALL_ID":"'+b_leg_call_id+'","DELTA":'+fs_to_app_stats.DELTA+',"JITTER":'+fs_to_app_stats.JITTER+',"REPORT_TS":'+fs_to_app_stats.REPORT_TS+',"TL_BYTE":'+fs_to_app_stats.TL_BYTE+',"SKEW":'+fs_to_app_stats.SKEW+',"TOTAL_PK":'+fs_to_app_stats.TOTAL_PK+',"EXPECTED_PK":'+fs_to_app_stats.EXPECTED_PK+',"PACKET_LOSS":'+fs_to_app_stats.PACKET_LOSS+',"SEQ":'+fs_to_app_stats.SEQ+',"MAX_JITTER":'+fs_to_app_stats.MAX_JITTER+',"MAX_DELTA":'+fs_to_app_stats.MAX_DELTA+',"MAX_SKEW":'+fs_to_app_stats.MAX_SKEW+',"MEAN_JITTER":'+fs_to_app_stats.MEAN_JITTER+',"MIN_MOS":'+fs_to_app_stats.MIN_MOS+', "MEAN_MOS":'+fs_to_app_stats.MEAN_MOS+', "MOS":'+fs_to_app_stats.MOS+',"RFACTOR":'+fs_to_app_stats.RFACTOR+',"MIN_RFACTOR":'+fs_to_app_stats.MIN_RFACTOR+',"MEAN_RFACTOR":'+fs_to_app_stats.MEAN_RFACTOR+',"SRC_IP":"'+peer_ip+'", "SRC_PORT":'+rtpPorts.fs_app.fs_rtp+', "DST_IP":"'+app_ip+'","DST_PORT":'+rtpPorts.fs_app.app_rtp+',"SRC_MAC":"'+fs_to_app_stats.SRC_MAC+'","DST_MAC":"'+fs_to_app_stats.DST_MAC+'","OUT_ORDER":'+fs_to_app_stats.OUT_ORDER+',"SSRC_CHG":'+fs_to_app_stats.SSRC_CHG+',"CODEC_PT":'+fs_to_app_stats.CODEC_PT+', "CLOCK":'+fs_to_app_stats.CLOCK+',"CODEC_NAME":"'+fs_to_app_stats.CODEC_NAME+'","DIR":0,"REPORT_NAME":"'+peer_ip+':'+rtpPorts.fs_app.fs_rtp+'","PARTY":1,"TYPE":"PERIODIC"}'
+			payload: '{"CORRELATION_ID":"'+d_leg_call_id+'","RTP_SIP_CALL_ID":"'+d_leg_call_id+'","DELTA":'+fs_to_app_stats.DELTA+',"JITTER":'+fs_to_app_stats.JITTER+',"REPORT_TS":'+fs_to_app_stats.REPORT_TS+',"TL_BYTE":'+fs_to_app_stats.TL_BYTE+',"SKEW":'+fs_to_app_stats.SKEW+',"TOTAL_PK":'+fs_to_app_stats.TOTAL_PK+',"EXPECTED_PK":'+fs_to_app_stats.EXPECTED_PK+',"PACKET_LOSS":'+fs_to_app_stats.PACKET_LOSS+',"SEQ":'+fs_to_app_stats.SEQ+',"MAX_JITTER":'+fs_to_app_stats.MAX_JITTER+',"MAX_DELTA":'+fs_to_app_stats.MAX_DELTA+',"MAX_SKEW":'+fs_to_app_stats.MAX_SKEW+',"MEAN_JITTER":'+fs_to_app_stats.MEAN_JITTER+',"MIN_MOS":'+fs_to_app_stats.MIN_MOS+', "MEAN_MOS":'+fs_to_app_stats.MEAN_MOS+', "MOS":'+fs_to_app_stats.MOS+',"RFACTOR":'+fs_to_app_stats.RFACTOR+',"MIN_RFACTOR":'+fs_to_app_stats.MIN_RFACTOR+',"MEAN_RFACTOR":'+fs_to_app_stats.MEAN_RFACTOR+',"SRC_IP":"'+peer_ip+'", "SRC_PORT":'+rtpPorts.fs_app.fs_rtp+', "DST_IP":"'+app_ip+'","DST_PORT":'+rtpPorts.fs_app.app_rtp+',"SRC_MAC":"'+fs_to_app_stats.SRC_MAC+'","DST_MAC":"'+fs_to_app_stats.DST_MAC+'","OUT_ORDER":'+fs_to_app_stats.OUT_ORDER+',"SSRC_CHG":'+fs_to_app_stats.SSRC_CHG+',"CODEC_PT":'+fs_to_app_stats.CODEC_PT+', "CLOCK":'+fs_to_app_stats.CLOCK+',"CODEC_NAME":"'+fs_to_app_stats.CODEC_NAME+'","DIR":0,"REPORT_NAME":"'+peer_ip+':'+rtpPorts.fs_app.fs_rtp+'","PARTY":1,"TYPE":"PERIODIC"}'
 		});
 
 		// App → FreeSWITCH
@@ -287,8 +290,8 @@ function createMediaReports() {
 				time_sec: Math.floor(currentTime / 1000),
 				time_usec: Math.floor((currentTime % 1000) * 1000) + 500
 			},
-			pause: i === duration ? 10000 : 10000, // Longer pause before BYE on last report
-			payload: '{"CORRELATION_ID":"'+b_leg_call_id+'","RTP_SIP_CALL_ID":"'+b_leg_call_id+'","DELTA":'+app_to_fs_stats.DELTA+',"JITTER":'+app_to_fs_stats.JITTER+',"REPORT_TS":'+app_to_fs_stats.REPORT_TS+',"TL_BYTE":'+app_to_fs_stats.TL_BYTE+',"SKEW":'+app_to_fs_stats.SKEW+',"TOTAL_PK":'+app_to_fs_stats.TOTAL_PK+',"EXPECTED_PK":'+app_to_fs_stats.EXPECTED_PK+',"PACKET_LOSS":'+app_to_fs_stats.PACKET_LOSS+',"SEQ":'+app_to_fs_stats.SEQ+',"MAX_JITTER":'+app_to_fs_stats.MAX_JITTER+',"MAX_DELTA":'+app_to_fs_stats.MAX_DELTA+',"MAX_SKEW":'+app_to_fs_stats.MAX_SKEW+',"MEAN_JITTER":'+app_to_fs_stats.MEAN_JITTER+',"MIN_MOS":'+app_to_fs_stats.MIN_MOS+', "MEAN_MOS":'+app_to_fs_stats.MEAN_MOS+', "MOS":'+app_to_fs_stats.MOS+',"RFACTOR":'+app_to_fs_stats.RFACTOR+',"MIN_RFACTOR":'+app_to_fs_stats.MIN_RFACTOR+',"MEAN_RFACTOR":'+app_to_fs_stats.MEAN_RFACTOR+',"SRC_IP":"'+app_ip+'", "SRC_PORT":'+rtpPorts.fs_app.app_rtp+', "DST_IP":"'+peer_ip+'","DST_PORT":'+rtpPorts.fs_app.fs_rtp+',"SRC_MAC":"'+app_to_fs_stats.SRC_MAC+'","DST_MAC":"'+app_to_fs_stats.DST_MAC+'","OUT_ORDER":'+app_to_fs_stats.OUT_ORDER+',"SSRC_CHG":'+app_to_fs_stats.SSRC_CHG+',"CODEC_PT":'+app_to_fs_stats.CODEC_PT+', "CLOCK":'+app_to_fs_stats.CLOCK+',"CODEC_NAME":"'+app_to_fs_stats.CODEC_NAME+'","DIR":1,"REPORT_NAME":"'+app_ip+':'+rtpPorts.fs_app.app_rtp+'","PARTY":1,"TYPE":"PERIODIC"}'
+			pause: i === duration ? 10000 : 200, // Longer pause before BYE on last report
+			payload: '{"CORRELATION_ID":"'+d_leg_call_id+'","RTP_SIP_CALL_ID":"'+d_leg_call_id+'","DELTA":'+app_to_fs_stats.DELTA+',"JITTER":'+app_to_fs_stats.JITTER+',"REPORT_TS":'+app_to_fs_stats.REPORT_TS+',"TL_BYTE":'+app_to_fs_stats.TL_BYTE+',"SKEW":'+app_to_fs_stats.SKEW+',"TOTAL_PK":'+app_to_fs_stats.TOTAL_PK+',"EXPECTED_PK":'+app_to_fs_stats.EXPECTED_PK+',"PACKET_LOSS":'+app_to_fs_stats.PACKET_LOSS+',"SEQ":'+app_to_fs_stats.SEQ+',"MAX_JITTER":'+app_to_fs_stats.MAX_JITTER+',"MAX_DELTA":'+app_to_fs_stats.MAX_DELTA+',"MAX_SKEW":'+app_to_fs_stats.MAX_SKEW+',"MEAN_JITTER":'+app_to_fs_stats.MEAN_JITTER+',"MIN_MOS":'+app_to_fs_stats.MIN_MOS+', "MEAN_MOS":'+app_to_fs_stats.MEAN_MOS+', "MOS":'+app_to_fs_stats.MOS+',"RFACTOR":'+app_to_fs_stats.RFACTOR+',"MIN_RFACTOR":'+app_to_fs_stats.MIN_RFACTOR+',"MEAN_RFACTOR":'+app_to_fs_stats.MEAN_RFACTOR+',"SRC_IP":"'+app_ip+'", "SRC_PORT":'+rtpPorts.fs_app.app_rtp+', "DST_IP":"'+peer_ip+'","DST_PORT":'+rtpPorts.fs_app.fs_rtp+',"SRC_MAC":"'+app_to_fs_stats.SRC_MAC+'","DST_MAC":"'+app_to_fs_stats.DST_MAC+'","OUT_ORDER":'+app_to_fs_stats.OUT_ORDER+',"SSRC_CHG":'+app_to_fs_stats.SSRC_CHG+',"CODEC_PT":'+app_to_fs_stats.CODEC_PT+', "CLOCK":'+app_to_fs_stats.CLOCK+',"CODEC_NAME":"'+app_to_fs_stats.CODEC_NAME+'","DIR":1,"REPORT_NAME":"'+app_ip+':'+rtpPorts.fs_app.app_rtp+'","PARTY":1,"TYPE":"PERIODIC"}'
 		});
 	}
 	return mediaReports;
@@ -300,10 +303,10 @@ function avgMOS(mosArray) {
 }
 
 
-function createfinalreports() {
+function createFinalReports() {
 
 	var mediaReports = [];
-	var baseTime = Date.now();
+	var baseTime = scenarioMediaBaseTime;
 
 	// Track MOS values for coherent final reports
 	var mosTracker = {
@@ -315,7 +318,7 @@ function createfinalreports() {
 		app_to_fs: []
 	};
 
-	let finalTime = baseTime + 7000; // 7 seconds total call
+	let finalTime = baseTime + (mediaReportDuration * 10000);
 
 	// === FINAL REPORTS (proto_type: 34) for all 6 streams ===
 
@@ -397,7 +400,7 @@ function createfinalreports() {
 				time_usec: Math.floor((baseTime % 1000) * 1000) + 100
 			},
 			pause: 200,
-			payload: '{"CORRELATION_ID":"'+a_leg_call_id + '","RTP_SIP_CALL_ID":"'+a_leg_call_id+'","SR_DELAY":0,"INTERARRIVAL_JITTER":0,"REPORT_TS":'+sbc_to_uac_final.REPORT_TS+',"TOTAL_PK":'+sbc_to_uac_final.TOTAL_PK+',"TOTAL_RTCP_PK":14,"CUM_PACKET_LOSS":'+sbc_to_uac_final.PACKET_LOSS+',"PERCENTAGE_LOSS":0,"MAX_INTERARRIVAL_JITTER":'+(sbc_to_uac_final.MAX_JITTER+150)+',"MAX_SR_DELAY":0,"MAX_PERCENTAGE_LOSS":0.391,"MEAN_PERCENTAGE_LOSS":0.055,"MEAN_INTERARRIVAL_JITTER":'+(sbc_to_uac_final.MEAN_JITTER+150)+',"MIN_MOS":'+(sbc_to_uac_final.MIN_MOS-1).toFixed(3)+',"MEAN_MOS":'+(sbc_to_uac_final.MEAN_MOS-1).toFixed(3)+',"MOS":'+(sbc_to_uac_final.MOS-1).toFixed(3)+',"RFACTOR":'+sbc_to_uac_final.RFACTOR+',"MIN_RFACTOR":'+sbc_to_uac_final.MIN_RFACTOR+',"MEAN_RFACTOR":'+sbc_to_uac_final.MEAN_RFACTOR+',"SRC_IP":"'+priv_nat+'","SRC_PORT":'+rtpPorts.uac_sbc.sbc_rtp+',"DST_IP":"'+priv_ip+'","DST_PORT":'+rtpPorts.uac_sbc.uac_rtp+',"OCTET_COUNT":208160,"SSRC_CHG":'+sbc_to_uac_final.SSRC_CHG+',"PKT_TYPE_REPORT":[200,0,0],"HIGH_EXT_SEQ":12656,"SSRC":"0xedc34144","DIR":0,"REPORT_NAME":"'+priv_nat+':'+rtpPorts.uac_sbc.sbc_rtp+'","PARTY":0,"IP_QOS":0,"INFO_VLAN":0,"VIDEO":0,"REPORT_START":'+Math.floor((baseTime/1000)-10000)+',"REPORT_END":'+Math.floor(baseTime/1000)+100+',"TYPE":"HANGUP","STYPE":"HEPAGENT-RTCP-1.1.107","SOURCE":"RTCP"}'
+			payload: '{"CORRELATION_ID":"'+a_leg_call_id + '","RTP_SIP_CALL_ID":"'+a_leg_call_id+'","SR_DELAY":0,"INTERARRIVAL_JITTER":0,"REPORT_TS":'+sbc_to_uac_final.REPORT_TS+',"TOTAL_PK":'+sbc_to_uac_final.TOTAL_PK+',"TOTAL_RTCP_PK":14,"CUM_PACKET_LOSS":'+sbc_to_uac_final.PACKET_LOSS+',"PERCENTAGE_LOSS":0,"MAX_INTERARRIVAL_JITTER":'+(sbc_to_uac_final.MAX_JITTER+150)+',"MAX_SR_DELAY":0,"MAX_PERCENTAGE_LOSS":0.391,"MEAN_PERCENTAGE_LOSS":0.055,"MEAN_INTERARRIVAL_JITTER":'+(sbc_to_uac_final.MEAN_JITTER+150)+',"MIN_MOS":'+(sbc_to_uac_final.MIN_MOS-1).toFixed(3)+',"MEAN_MOS":'+(sbc_to_uac_final.MEAN_MOS-1).toFixed(3)+',"MOS":'+(sbc_to_uac_final.MOS-1).toFixed(3)+',"RFACTOR":'+sbc_to_uac_final.RFACTOR+',"MIN_RFACTOR":'+sbc_to_uac_final.MIN_RFACTOR+',"MEAN_RFACTOR":'+sbc_to_uac_final.MEAN_RFACTOR+',"SRC_IP":"'+priv_nat+'","SRC_PORT":'+rtpPorts.uac_sbc.sbc_rtp+',"DST_IP":"'+priv_ip+'","DST_PORT":'+rtpPorts.uac_sbc.uac_rtp+',"OCTET_COUNT":208160,"SSRC_CHG":'+sbc_to_uac_final.SSRC_CHG+',"PKT_TYPE_REPORT":[200,0,0],"HIGH_EXT_SEQ":12656,"SSRC":"0xedc34144","DIR":0,"REPORT_NAME":"'+priv_nat+':'+rtpPorts.uac_sbc.sbc_rtp+'","PARTY":0,"IP_QOS":0,"INFO_VLAN":0,"VIDEO":0,"REPORT_START":'+Math.floor((baseTime/1000)-10000)+',"REPORT_END":'+(Math.floor(baseTime/1000) + 100)+',"TYPE":"HANGUP","STYPE":"HEPAGENT-RTCP-1.1.107","SOURCE":"RTCP"}'
 		});
 
 	// LEG 2 FINAL: SBC ↔ FreeSWITCH
@@ -456,7 +459,7 @@ function createfinalreports() {
 			time_usec: Math.floor((finalTime % 1000) * 1000) + 400
 		},
 		pause: 100,
-		payload: '{"CORRELATION_ID":"'+b_leg_call_id+'","RTP_SIP_CALL_ID":"'+b_leg_call_id+'","DELTA":'+fs_to_app_final.DELTA+',"JITTER":'+fs_to_app_final.JITTER+',"REPORT_TS":'+fs_to_app_final.REPORT_TS+',"TL_BYTE":'+fs_to_app_final.TL_BYTE+',"SKEW":'+fs_to_app_final.SKEW+',"TOTAL_PK":'+fs_to_app_final.TOTAL_PK+',"EXPECTED_PK":'+fs_to_app_final.EXPECTED_PK+',"PACKET_LOSS":'+fs_to_app_final.PACKET_LOSS+',"SEQ":'+fs_to_app_final.SEQ+',"MAX_JITTER":'+fs_to_app_final.MAX_JITTER+',"MAX_DELTA":'+fs_to_app_final.MAX_DELTA+',"MAX_SKEW":'+fs_to_app_final.MAX_SKEW+',"MEAN_JITTER":'+fs_to_app_final.MEAN_JITTER+',"MIN_MOS":'+fs_to_app_final.MIN_MOS+',"MEAN_MOS":'+fs_to_app_final.MEAN_MOS+',"MOS":'+fs_to_app_final.MOS+',"RFACTOR":'+fs_to_app_final.RFACTOR+',"MIN_RFACTOR":'+fs_to_app_final.MIN_RFACTOR+',"MEAN_RFACTOR":'+fs_to_app_final.MEAN_RFACTOR+',"SRC_IP":"'+peer_ip+'", "SRC_PORT":'+rtpPorts.fs_app.fs_rtp+', "DST_IP":"'+app_ip+'","DST_PORT":'+rtpPorts.fs_app.app_rtp+',"SRC_MAC":"'+fs_to_app_final.SRC_MAC+'","DST_MAC":"'+fs_to_app_final.DST_MAC+'","OUT_ORDER":'+fs_to_app_final.OUT_ORDER+',"SSRC_CHG":'+fs_to_app_final.SSRC_CHG+',"CODEC_PT":'+fs_to_app_final.CODEC_PT+', "CLOCK":'+fs_to_app_final.CLOCK+',"CODEC_NAME":"'+fs_to_app_final.CODEC_NAME+'","DIR":0,"REPORT_NAME":"'+peer_ip+':'+rtpPorts.fs_app.fs_rtp+'","PARTY":1,"TYPE":"FINAL"}'
+		payload: '{"CORRELATION_ID":"'+d_leg_call_id+'","RTP_SIP_CALL_ID":"'+d_leg_call_id+'","DELTA":'+fs_to_app_final.DELTA+',"JITTER":'+fs_to_app_final.JITTER+',"REPORT_TS":'+fs_to_app_final.REPORT_TS+',"TL_BYTE":'+fs_to_app_final.TL_BYTE+',"SKEW":'+fs_to_app_final.SKEW+',"TOTAL_PK":'+fs_to_app_final.TOTAL_PK+',"EXPECTED_PK":'+fs_to_app_final.EXPECTED_PK+',"PACKET_LOSS":'+fs_to_app_final.PACKET_LOSS+',"SEQ":'+fs_to_app_final.SEQ+',"MAX_JITTER":'+fs_to_app_final.MAX_JITTER+',"MAX_DELTA":'+fs_to_app_final.MAX_DELTA+',"MAX_SKEW":'+fs_to_app_final.MAX_SKEW+',"MEAN_JITTER":'+fs_to_app_final.MEAN_JITTER+',"MIN_MOS":'+fs_to_app_final.MIN_MOS+',"MEAN_MOS":'+fs_to_app_final.MEAN_MOS+',"MOS":'+fs_to_app_final.MOS+',"RFACTOR":'+fs_to_app_final.RFACTOR+',"MIN_RFACTOR":'+fs_to_app_final.MIN_RFACTOR+',"MEAN_RFACTOR":'+fs_to_app_final.MEAN_RFACTOR+',"SRC_IP":"'+peer_ip+'", "SRC_PORT":'+rtpPorts.fs_app.fs_rtp+', "DST_IP":"'+app_ip+'","DST_PORT":'+rtpPorts.fs_app.app_rtp+',"SRC_MAC":"'+fs_to_app_final.SRC_MAC+'","DST_MAC":"'+fs_to_app_final.DST_MAC+'","OUT_ORDER":'+fs_to_app_final.OUT_ORDER+',"SSRC_CHG":'+fs_to_app_final.SSRC_CHG+',"CODEC_PT":'+fs_to_app_final.CODEC_PT+', "CLOCK":'+fs_to_app_final.CLOCK+',"CODEC_NAME":"'+fs_to_app_final.CODEC_NAME+'","DIR":0,"REPORT_NAME":"'+peer_ip+':'+rtpPorts.fs_app.fs_rtp+'","PARTY":1,"TYPE":"FINAL"}'
 	});
 
 	let app_to_fs_final = generateRTPStats({ssrc: ssrcValues.app_to_fs}, finalTime, 4);
@@ -475,17 +478,17 @@ function createfinalreports() {
 			time_usec: Math.floor((finalTime % 1000) * 1000) + 500
 		},
 		pause: 1000,
-		payload: '{"CORRELATION_ID":"'+b_leg_call_id+'","RTP_SIP_CALL_ID":"'+b_leg_call_id+'","DELTA":'+app_to_fs_final.DELTA+',"JITTER":'+app_to_fs_final.JITTER+',"REPORT_TS":'+app_to_fs_final.REPORT_TS+',"TL_BYTE":'+app_to_fs_final.TL_BYTE+',"SKEW":'+app_to_fs_final.SKEW+',"TOTAL_PK":'+app_to_fs_final.TOTAL_PK+',"EXPECTED_PK":'+app_to_fs_final.EXPECTED_PK+',"PACKET_LOSS":'+app_to_fs_final.PACKET_LOSS+',"SEQ":'+app_to_fs_final.SEQ+',"MAX_JITTER":'+app_to_fs_final.MAX_JITTER+',"MAX_DELTA":'+app_to_fs_final.MAX_DELTA+',"MAX_SKEW":'+app_to_fs_final.MAX_SKEW+',"MEAN_JITTER":'+app_to_fs_final.MEAN_JITTER+',"MIN_MOS":'+app_to_fs_final.MIN_MOS+',"MEAN_MOS":'+app_to_fs_final.MEAN_MOS+',"MOS":'+app_to_fs_final.MOS+',"RFACTOR":'+app_to_fs_final.RFACTOR+',"MIN_RFACTOR":'+app_to_fs_final.MIN_RFACTOR+',"MEAN_RFACTOR":'+app_to_fs_final.MEAN_RFACTOR+',"SRC_IP":"'+app_ip+'", "SRC_PORT":'+rtpPorts.fs_app.app_rtp+', "DST_IP":"'+peer_ip+'","DST_PORT":'+rtpPorts.fs_app.fs_rtp+',"SRC_MAC":"'+app_to_fs_final.SRC_MAC+'","DST_MAC":"'+app_to_fs_final.DST_MAC+'","OUT_ORDER":'+app_to_fs_final.OUT_ORDER+',"SSRC_CHG":'+app_to_fs_final.SSRC_CHG+',"CODEC_PT":'+app_to_fs_final.CODEC_PT+', "CLOCK":'+app_to_fs_final.CLOCK+',"CODEC_NAME":"'+app_to_fs_final.CODEC_NAME+'","DIR":1,"REPORT_NAME":"'+app_ip+':'+rtpPorts.fs_app.app_rtp+'","PARTY":1,"TYPE":"FINAL"}'
+		payload: '{"CORRELATION_ID":"'+d_leg_call_id+'","RTP_SIP_CALL_ID":"'+d_leg_call_id+'","DELTA":'+app_to_fs_final.DELTA+',"JITTER":'+app_to_fs_final.JITTER+',"REPORT_TS":'+app_to_fs_final.REPORT_TS+',"TL_BYTE":'+app_to_fs_final.TL_BYTE+',"SKEW":'+app_to_fs_final.SKEW+',"TOTAL_PK":'+app_to_fs_final.TOTAL_PK+',"EXPECTED_PK":'+app_to_fs_final.EXPECTED_PK+',"PACKET_LOSS":'+app_to_fs_final.PACKET_LOSS+',"SEQ":'+app_to_fs_final.SEQ+',"MAX_JITTER":'+app_to_fs_final.MAX_JITTER+',"MAX_DELTA":'+app_to_fs_final.MAX_DELTA+',"MAX_SKEW":'+app_to_fs_final.MAX_SKEW+',"MEAN_JITTER":'+app_to_fs_final.MEAN_JITTER+',"MIN_MOS":'+app_to_fs_final.MIN_MOS+',"MEAN_MOS":'+app_to_fs_final.MEAN_MOS+',"MOS":'+app_to_fs_final.MOS+',"RFACTOR":'+app_to_fs_final.RFACTOR+',"MIN_RFACTOR":'+app_to_fs_final.MIN_RFACTOR+',"MEAN_RFACTOR":'+app_to_fs_final.MEAN_RFACTOR+',"SRC_IP":"'+app_ip+'", "SRC_PORT":'+rtpPorts.fs_app.app_rtp+', "DST_IP":"'+peer_ip+'","DST_PORT":'+rtpPorts.fs_app.fs_rtp+',"SRC_MAC":"'+app_to_fs_final.SRC_MAC+'","DST_MAC":"'+app_to_fs_final.DST_MAC+'","OUT_ORDER":'+app_to_fs_final.OUT_ORDER+',"SSRC_CHG":'+app_to_fs_final.SSRC_CHG+',"CODEC_PT":'+app_to_fs_final.CODEC_PT+', "CLOCK":'+app_to_fs_final.CLOCK+',"CODEC_NAME":"'+app_to_fs_final.CODEC_NAME+'","DIR":1,"REPORT_NAME":"'+app_ip+':'+rtpPorts.fs_app.app_rtp+'","PARTY":1,"TYPE":"FINAL"}'
 	});
 
 	return mediaReports;
 }
 
 // generate Hangup-reports
-function createhangupreports() {
+function createHangupReports() {
 
 	var mediaReports = [];
-	var baseTime = Date.now();
+	var baseTime = scenarioMediaBaseTime;
 
 	// Track MOS values for coherent final reports
 	var mosTracker = {
@@ -497,7 +500,7 @@ function createhangupreports() {
 		app_to_fs: []
 	};
 
-	let finalTime = baseTime + 7000; // 7 seconds total call
+	let finalTime = baseTime + (mediaReportDuration * 10000);
 
 	// === FINAL REPORTS (proto_type: 34) for all 6 streams ===
 
@@ -596,7 +599,7 @@ function createhangupreports() {
 			time_usec: Math.floor((finalTime % 1000) * 1000) + 400
 		},
 		pause: 100,
-		payload: '{"CORRELATION_ID":"'+b_leg_call_id+'","RTP_SIP_CALL_ID":"'+b_leg_call_id+'","DELTA":'+fs_to_app_final.DELTA+',"JITTER":'+fs_to_app_final.JITTER+',"REPORT_TS":'+fs_to_app_final.REPORT_TS+',"TL_BYTE":'+fs_to_app_final.TL_BYTE+',"SKEW":'+fs_to_app_final.SKEW+',"TOTAL_PK":'+fs_to_app_final.TOTAL_PK+',"EXPECTED_PK":'+fs_to_app_final.EXPECTED_PK+',"PACKET_LOSS":'+fs_to_app_final.PACKET_LOSS+',"SEQ":'+fs_to_app_final.SEQ+',"MAX_JITTER":'+fs_to_app_final.MAX_JITTER+',"MAX_DELTA":'+fs_to_app_final.MAX_DELTA+',"MAX_SKEW":'+fs_to_app_final.MAX_SKEW+',"MEAN_JITTER":'+fs_to_app_final.MEAN_JITTER+',"MIN_MOS":'+fs_to_app_final.MIN_MOS+', "MEAN_MOS":'+fs_to_app_final.MEAN_MOS+', "MOS":'+fs_to_app_final.MOS+',"RFACTOR":'+fs_to_app_final.RFACTOR+',"MIN_RFACTOR":'+fs_to_app_final.MIN_RFACTOR+',"MEAN_RFACTOR":'+fs_to_app_final.MEAN_RFACTOR+',"SRC_IP":"'+peer_ip+'", "SRC_PORT":'+rtpPorts.fs_app.fs_rtp+', "DST_IP":"'+app_ip+'","DST_PORT":'+rtpPorts.fs_app.app_rtp+',"SRC_MAC":"'+fs_to_app_final.SRC_MAC+'","DST_MAC":"'+fs_to_app_final.DST_MAC+'","OUT_ORDER":'+fs_to_app_final.OUT_ORDER+',"SSRC_CHG":'+fs_to_app_final.SSRC_CHG+',"CODEC_PT":'+fs_to_app_final.CODEC_PT+', "CLOCK":'+fs_to_app_final.CLOCK+',"CODEC_NAME":"'+fs_to_app_final.CODEC_NAME+'","DIR":0,"REPORT_NAME":"'+peer_ip+':'+rtpPorts.fs_app.fs_rtp+'","PARTY":1,"TYPE":"HANGUP"}'
+		payload: '{"CORRELATION_ID":"'+d_leg_call_id+'","RTP_SIP_CALL_ID":"'+d_leg_call_id+'","DELTA":'+fs_to_app_final.DELTA+',"JITTER":'+fs_to_app_final.JITTER+',"REPORT_TS":'+fs_to_app_final.REPORT_TS+',"TL_BYTE":'+fs_to_app_final.TL_BYTE+',"SKEW":'+fs_to_app_final.SKEW+',"TOTAL_PK":'+fs_to_app_final.TOTAL_PK+',"EXPECTED_PK":'+fs_to_app_final.EXPECTED_PK+',"PACKET_LOSS":'+fs_to_app_final.PACKET_LOSS+',"SEQ":'+fs_to_app_final.SEQ+',"MAX_JITTER":'+fs_to_app_final.MAX_JITTER+',"MAX_DELTA":'+fs_to_app_final.MAX_DELTA+',"MAX_SKEW":'+fs_to_app_final.MAX_SKEW+',"MEAN_JITTER":'+fs_to_app_final.MEAN_JITTER+',"MIN_MOS":'+fs_to_app_final.MIN_MOS+', "MEAN_MOS":'+fs_to_app_final.MEAN_MOS+', "MOS":'+fs_to_app_final.MOS+',"RFACTOR":'+fs_to_app_final.RFACTOR+',"MIN_RFACTOR":'+fs_to_app_final.MIN_RFACTOR+',"MEAN_RFACTOR":'+fs_to_app_final.MEAN_RFACTOR+',"SRC_IP":"'+peer_ip+'", "SRC_PORT":'+rtpPorts.fs_app.fs_rtp+', "DST_IP":"'+app_ip+'","DST_PORT":'+rtpPorts.fs_app.app_rtp+',"SRC_MAC":"'+fs_to_app_final.SRC_MAC+'","DST_MAC":"'+fs_to_app_final.DST_MAC+'","OUT_ORDER":'+fs_to_app_final.OUT_ORDER+',"SSRC_CHG":'+fs_to_app_final.SSRC_CHG+',"CODEC_PT":'+fs_to_app_final.CODEC_PT+', "CLOCK":'+fs_to_app_final.CLOCK+',"CODEC_NAME":"'+fs_to_app_final.CODEC_NAME+'","DIR":0,"REPORT_NAME":"'+peer_ip+':'+rtpPorts.fs_app.fs_rtp+'","PARTY":1,"TYPE":"HANGUP"}'
 	});
 
 	let app_to_fs_final = generateRTPStats({ssrc: ssrcValues.app_to_fs}, finalTime, 4);
@@ -615,7 +618,7 @@ function createhangupreports() {
 			time_usec: Math.floor((finalTime % 1000) * 1000) + 500
 		},
 		pause: 200,
-		payload: '{"CORRELATION_ID":"'+b_leg_call_id+'","RTP_SIP_CALL_ID":"'+b_leg_call_id+'","DELTA":'+app_to_fs_final.DELTA+',"JITTER":'+app_to_fs_final.JITTER+',"REPORT_TS":'+app_to_fs_final.REPORT_TS+',"TL_BYTE":'+app_to_fs_final.TL_BYTE+',"SKEW":'+app_to_fs_final.SKEW+',"TOTAL_PK":'+app_to_fs_final.TOTAL_PK+',"EXPECTED_PK":'+app_to_fs_final.EXPECTED_PK+',"PACKET_LOSS":'+app_to_fs_final.PACKET_LOSS+',"SEQ":'+app_to_fs_final.SEQ+',"MAX_JITTER":'+app_to_fs_final.MAX_JITTER+',"MAX_DELTA":'+app_to_fs_final.MAX_DELTA+',"MAX_SKEW":'+app_to_fs_final.MAX_SKEW+',"MEAN_JITTER":'+app_to_fs_final.MEAN_JITTER+',"MIN_MOS":'+app_to_fs_final.MIN_MOS+', "MEAN_MOS":'+app_to_fs_final.MEAN_MOS+', "MOS":'+app_to_fs_final.MOS+',"RFACTOR":'+app_to_fs_final.RFACTOR+',"MIN_RFACTOR":'+app_to_fs_final.MIN_RFACTOR+',"MEAN_RFACTOR":'+app_to_fs_final.MEAN_RFACTOR+',"SRC_IP":"'+app_ip+'", "SRC_PORT":'+rtpPorts.fs_app.app_rtp+', "DST_IP":"'+peer_ip+'","DST_PORT":'+rtpPorts.fs_app.fs_rtp+',"SRC_MAC":"'+app_to_fs_final.SRC_MAC+'","DST_MAC":"'+app_to_fs_final.DST_MAC+'","OUT_ORDER":'+app_to_fs_final.OUT_ORDER+',"SSRC_CHG":'+app_to_fs_final.SSRC_CHG+',"CODEC_PT":'+app_to_fs_final.CODEC_PT+', "CLOCK":'+app_to_fs_final.CLOCK+',"CODEC_NAME":"'+app_to_fs_final.CODEC_NAME+'","DIR":1,"REPORT_NAME":"'+app_ip+':'+rtpPorts.fs_app.app_rtp+'","PARTY":1,"TYPE":"HANGUP"}'
+		payload: '{"CORRELATION_ID":"'+d_leg_call_id+'","RTP_SIP_CALL_ID":"'+d_leg_call_id+'","DELTA":'+app_to_fs_final.DELTA+',"JITTER":'+app_to_fs_final.JITTER+',"REPORT_TS":'+app_to_fs_final.REPORT_TS+',"TL_BYTE":'+app_to_fs_final.TL_BYTE+',"SKEW":'+app_to_fs_final.SKEW+',"TOTAL_PK":'+app_to_fs_final.TOTAL_PK+',"EXPECTED_PK":'+app_to_fs_final.EXPECTED_PK+',"PACKET_LOSS":'+app_to_fs_final.PACKET_LOSS+',"SEQ":'+app_to_fs_final.SEQ+',"MAX_JITTER":'+app_to_fs_final.MAX_JITTER+',"MAX_DELTA":'+app_to_fs_final.MAX_DELTA+',"MAX_SKEW":'+app_to_fs_final.MAX_SKEW+',"MEAN_JITTER":'+app_to_fs_final.MEAN_JITTER+',"MIN_MOS":'+app_to_fs_final.MIN_MOS+', "MEAN_MOS":'+app_to_fs_final.MEAN_MOS+', "MOS":'+app_to_fs_final.MOS+',"RFACTOR":'+app_to_fs_final.RFACTOR+',"MIN_RFACTOR":'+app_to_fs_final.MIN_RFACTOR+',"MEAN_RFACTOR":'+app_to_fs_final.MEAN_RFACTOR+',"SRC_IP":"'+app_ip+'", "SRC_PORT":'+rtpPorts.fs_app.app_rtp+', "DST_IP":"'+peer_ip+'","DST_PORT":'+rtpPorts.fs_app.fs_rtp+',"SRC_MAC":"'+app_to_fs_final.SRC_MAC+'","DST_MAC":"'+app_to_fs_final.DST_MAC+'","OUT_ORDER":'+app_to_fs_final.OUT_ORDER+',"SSRC_CHG":'+app_to_fs_final.SSRC_CHG+',"CODEC_PT":'+app_to_fs_final.CODEC_PT+', "CLOCK":'+app_to_fs_final.CLOCK+',"CODEC_NAME":"'+app_to_fs_final.CODEC_NAME+'","DIR":1,"REPORT_NAME":"'+app_ip+':'+rtpPorts.fs_app.app_rtp+'","PARTY":1,"TYPE":"HANGUP"}'
 	});
 
 	return mediaReports;
@@ -1196,15 +1199,15 @@ var config = {
                                 type: 'HEP', version: 3, payload_type: 'JSON',
                                 captureId: 2010, capturePass: 'myHep', ip_family: 2,
                                 protocol: 17, proto_type: 100,
-                                correlation_id: a_leg_call_id,
-                                srcIp: priv_ip, dstIp: priv_nat,
+                                correlation_id: d_leg_call_id,
+                                srcIp: app_ip, dstIp: peer_ip,
                                 srcPort: rtpPorts.fs_app.app_rtp, dstPort: rtpPorts.fs_app.fs_rtp,
                                 mos: 436,
 				time_sec: Math.floor(Date.now() / 1000) + 6,
                                 time_usec: Math.floor((Date.now() % 1000) * 1000)
                   	},
                   	pause: 1000, // Longer pause before media starts
-                  	payload: '{"CORRELATION_ID":"' + a_leg_call_id + '",' + '"REPORT_TS":' + (Math.floor(Date.now() / 1000) + 6) + ',' + '"DTMF":"ts:' + (Math.floor(Date.now() / 1000) + 6) + ',tsu:843750,e:1,v:15,d:160,c:1","SRC_IP":"'+priv_ip+'","SRC_PORT":'+rtpPorts.fs_app.app_rtp+',"DST_IP":"'+priv_nat+'","DST_PORT":'+rtpPorts.fs_app.fs_rtp+',"CODEC_PT":0,"CODEC_NAME":"telephone-event","PARTY":1,"STYPE":"HEPAGENT-DTMF","TYPE":"PERIODIC"}'
+                  	payload: '{"CORRELATION_ID":"' + d_leg_call_id + '",' + '"REPORT_TS":' + (Math.floor(Date.now() / 1000) + 6) + ',' + '"DTMF":"ts:' + (Math.floor(Date.now() / 1000) + 6) + ',tsu:843750,e:1,v:15,d:160,c:1","SRC_IP":"'+app_ip+'","SRC_PORT":'+rtpPorts.fs_app.app_rtp+',"DST_IP":"'+peer_ip+'","DST_PORT":'+rtpPorts.fs_app.fs_rtp+',"CODEC_PT":0,"CODEC_NAME":"telephone-event","PARTY":1,"STYPE":"HEPAGENT-DTMF","TYPE":"PERIODIC"}'
                 },
 
 		// === MEDIA PHASE: Insert RTP reports here ===
@@ -1362,8 +1365,8 @@ var config = {
 			'CSeq: 2 BYE\r\n' +
 			'Content-Length: 0\r\n\r\n'
 		},
-		...createhangupreports(),
-		...createfinalreports(),
+		...createHangupReports(),
+		...createFinalReports(),
 		// === RTP SUMMARY REPORTS (proto_type: 35) ===
 		// A-leg Summary Report - Outbound (DIR=0)
 		{
